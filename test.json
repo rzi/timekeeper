@@ -1,6 +1,4 @@
     [  
-        {"nbOfItems":2
-        },
         {
         "id": 1,
         "name": "MLT",
@@ -12,6 +10,5 @@
         "name": "JKU",
         "active": true,
         "setTime": 5
-
         }
     ]
