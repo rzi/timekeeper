@@ -1,14 +1,1 @@
-    [  
-        {
-        "id": 1,
-        "name": "MLT",
-        "active": true,
-        "setTime": 10
-        },
-        {
-        "id": 2,
-        "name": "JKU",
-        "active": true,
-        "setTime": 5
-        }
-    ]
+[{"id":1,"name":"q","active":true,"setTime":"1"},{"id":2,"name":"d","active":true,"setTime":"2"},{"id":3,"name":"e","active":true,"setTime":"3"}]
