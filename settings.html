@@ -21,9 +21,18 @@
       <label for="addP">Presenter name</label>
       <input id="addName" type="text" name="addName" /><br />
       <label for="addTime">Presentation time</label>
-      <input id="addTime"  type="text" name="addTime" /><br />
+      <input
+        id="addTime"
+        type="time"
+        name="addTime"
+        value="00:05:00"
+        min="00:00:10"
+        max="23:59:00"
+      /><br />
       <button id="btnAddP" type="submit">Add</button>
     </div>
+    <br />
+    <button onclick="btnExit()">Exit settings</button>
     <script src="./renderer.js"></script>
     <script src="./settings.js"></script>
   </body>

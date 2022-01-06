@@ -23,8 +23,8 @@ function createWindow1() {
 
 function createWindow2() {
   window2 = new BrowserWindow({
-    width: 1000,
-    height: 600,
+    width: 450,
+    height: 250,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true,
@@ -37,6 +37,7 @@ function createWindow2() {
   window2.on("closed", function () {
     window2 = null;
   });
+  // window2.hide();
   return window2;
 }
 
@@ -56,6 +57,7 @@ function createWindow3() {
   window3.on("closed", function () {
     window3 = null;
   });
+  window3.hide();
   return window3;
 }
 // This method will be called when Electron has finished
@@ -64,7 +66,7 @@ function createWindow3() {
 app.on("ready", () => {
   window1 = createWindow1();
   window2 = createWindow2();
-  window2 = createWindow3();
+  window3 = createWindow3();
 
   ipcMain.on("nameMsg", (event, arg) => {
     console.log("name inside main process is: ", arg); // this comes form within window 1 -> and into the mainProcess

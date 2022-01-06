@@ -23,8 +23,6 @@ btnAddP.addEventListener("click", function () {
 readTextFile("./test.json", function (text) {
   var data = JSON.parse(text);
   console.log(`dane: ${JSON.stringify(data)}`);
-  // document.getElementById("numberOfPresenters").value = 5;
-  // console.log(`wartość ${selectElement.value}`);
   const nbOfItems = data.length;
   console.log(`data0 ${nbOfItems}`);
   createPresenters(parseInt(nbOfItems), data);
@@ -36,6 +34,7 @@ function createPresenters(index, data) {
     var t = document.createTextNode(`id: ${data[i].name}`); // Create a text node
     para.id = String(data[i].id);
     para.appendChild(t); // Append the text to <p>
+
     var t2 = document.createTextNode(` setTime: ${data[i].setTime}`); // Create a text node
     para.appendChild(t2); // Append the text to <p>
     document.getElementById("presenters").appendChild(para); // Append <p> to <div> with id="myDIV"
@@ -81,4 +80,12 @@ function writeToJson() {
     if (err) throw err;
     console.log("Saved!");
   });
+}
+
+function btnExit() {
+  if (copyData.length) {
+    location.href = "index.html";
+  } else {
+    alert("Add presenter");
+  }
 }
