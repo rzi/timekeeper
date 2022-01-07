@@ -10,13 +10,24 @@ button {
 div{
     padding-top: 10px   ;
 }
-progress{
 
-    height: 50px;
-}
 #label {
     text-align: center;
     line-height: 30px;
-    color: white;
-  }
+    color: black;
+}
+
+progress{
+  text-align:center;
+
+  width:200px;
+}
+progress:before {
+  content: 'Value is ' attr(value);
+  position:relative;
+  top:5px;
+}
+.unique:before {
+  content: attr(data-label);
+}
 /* Add styles here to customize the appearance of your app */
