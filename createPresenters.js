@@ -25,8 +25,15 @@ function createPresenters(index, data) {
     var t3 = document.createTextNode(` Result: `);
     para2.appendChild(t3);
 
+    var s1= document.createElement("span");
+    s1.id= "S" + String(data[i].id);
+    para2.appendChild(s1);
+
     var t4 = document.createTextNode(` time spent: `);
     para2.appendChild(t4);
+    var sa1= document.createElement("span");
+    sa1.id= "Sa" + String(data[i].id);
+    para2.appendChild(sa1);
 
     var t5 = document.createTextNode(` minutes. `);
     para2.appendChild(t5);

@@ -27,17 +27,22 @@ readText.readText("./test.json", function (text) {
 
 ipcRenderer.on("nameReply", (event, arg) => {
   console.log(` name reply arg ${JSON.stringify(arg)}`); // why/what is not right..
-});
-
+})
 let btnSettings = document.getElementById("btnSettings");
 btnSettings.addEventListener("click", function () {
   window.location.href = "./settings.html";
 });
-
 ipcRenderer.on("forWin1", function (event, arg) {
   console.log(`from win1  ${arg}`);
-  results.push({ id: arg[2], timeSpent: arg[0], resultProcent: arg[1] });
+  var id =arg[2];
+  var timeSpent= arg[0];
+  var resultProcent= arg[1];
+  var resultLen =results.length;
+  console.log(`resultLen ${resultLen}`);
+  results[id] ={ "id": `${id}`, "timeSpent": `${timeSpent}`, "resultProcent": `${resultProcent}`} ;
   console.log(`tab: ${JSON.stringify(results)}`);
+  updateResults();
+
 });
 
 var timer = setInterval(currentTime1, 1000);
@@ -52,4 +57,18 @@ function currentTime1() {
     ? (seconds = "0" + dateTime.getSeconds())
     : (seconds = dateTime.getSeconds());
   time.innerHTML = dateTime.getHours() + ":" + minutes + ":" + seconds;
+}
+function updateResults(){
+  var resultsLen =results.length;
+  console.log(`resultLen 1  ${resultsLen}`);
+  for( i=0; i<resultsLen ;i++){
+    var index = "S"+String(i+1) 
+    console.log(`index   ${index}`);
+    console.log(`results[i]   ${results[i].timeSpent}`);
+    document.getElementById(index).innerHTML=results[i].resultProcent+"%";
+    var indexa = "Sa"+String(i+1) 
+    console.log(`indexa   ${indexa}`);
+    console.log(`results[i]a   ${results[i].timeSpent}`);
+    document.getElementById(indexa).innerHTML=results[i].timeSpent;
+  }
 }
