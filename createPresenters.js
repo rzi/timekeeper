@@ -19,11 +19,24 @@ function createPresenters(index, data) {
     btn.addEventListener("click", function () {
       btnFn(btn.id);
     });
+
+    var para2 = document.createElement("p"); // Create a <p> node
+    para2.id = "R" + String(data[i].id);
+    var t3 = document.createTextNode(` Result: `);
+    para2.appendChild(t3);
+
+    var t4 = document.createTextNode(` time spent: `);
+    para2.appendChild(t4);
+
+    var t5 = document.createTextNode(` minutes. `);
+    para2.appendChild(t5);
+
     var nb = "div" + i;
     console.log(`div ${nb}`);
     document.getElementById("presenters").appendChild(div);
-    document.getElementById(nb).appendChild(para); // Append <p> to <div> with id="myDIV"
+    document.getElementById(nb).appendChild(para);
     document.getElementById(nb).appendChild(btn);
+    document.getElementById(nb).appendChild(para2);
   }
   createListenerforP();
 }

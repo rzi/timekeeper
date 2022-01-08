@@ -5,6 +5,7 @@
 }
 button {
     margin-left: 20px;
+    margin-right: 20px;
    
 }
 div{
@@ -23,7 +24,7 @@ progress{
   width:200px;
 }
 progress:before {
-  content: 'Value is ' attr(value);
+  content: 'Value is ' attr(data-label) " %";
   position:relative;
   top:5px;
 }

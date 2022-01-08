@@ -73,4 +73,9 @@ app.on("ready", () => {
     event.sender.send("nameReply", { not_right: false }); // sends back/replies to window 1 - "event" is a reference to this chanel.
     window2.webContents.send("forWin2", arg); // sends the stuff from Window1 to Window2.
   });
+  ipcMain.on("nameMsg2", (event, arg) => {
+    console.log("name2 inside main process is: ", arg); // this comes form within window 1 -> and into the mainProcess
+    event.sender.send("nameReply", { not_right: false }); // sends back/replies to window 1 - "event" is a reference to this chanel.
+    window1.webContents.send("forWin1", arg); // sends the stuff from Window1 to Window2.
+  });
 });
