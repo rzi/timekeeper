@@ -4,31 +4,35 @@
     display: flex;
 }
 button {
-    margin-left: 20px;
-    margin-right: 20px;
-   
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 24px; 
 }
-div{
-    padding-top: 10px   ;
+#main {
+  display: block;
 }
-
-#label {
-    text-align: center;
-    line-height: 30px;
-    color: black;
+#progress {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap-reverse;
 }
-
 progress{
   text-align:center;
-
-  width:200px;
+  /* width:200px; */
+  height: 48px;
+  line-height: 48px; 
 }
 progress:before {
   content: 'Value is ' attr(data-label) " %";
   position:relative;
-  top:5px;
+  /* top:5px; */
 }
 .unique:before {
   content: attr(data-label);
 }
-/* Add styles here to customize the appearance of your app */
+.presenters{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

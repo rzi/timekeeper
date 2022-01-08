@@ -1,14 +1,14 @@
 const ipcRenderer = require("electron").ipcRenderer;
 
-function createPresenters(index, data) {
-  for (i = 0; i < index; i++) {
+function createPresenters(data) {
+  for (i = 0; i < data.length; i++) {
     var div = document.createElement("div");
     div.id = "div" + i;
     div.className = "div";
-    var para = document.createElement("p"); // Create a <p> node
+    var para = document.createElement("p");
     para.id = String(data[i].id);
-    var t = document.createTextNode(`id: ${data[i].name}`); // Create a text node
-    para.appendChild(t); // Append the text to <p>
+    var t = document.createTextNode(`Presenter: ${data[i].name}`);
+    para.appendChild(t);
 
     var t2 = document.createTextNode(` setTime: ${data[i].setTime}`); // Create a text node
     para.appendChild(t2); // Append the text to <p>
@@ -25,14 +25,14 @@ function createPresenters(index, data) {
     var t3 = document.createTextNode(` Result: `);
     para2.appendChild(t3);
 
-    var s1= document.createElement("span");
-    s1.id= "S" + String(data[i].id);
+    var s1 = document.createElement("span");
+    s1.id = "S" + String(data[i].id);
     para2.appendChild(s1);
 
     var t4 = document.createTextNode(` time spent: `);
     para2.appendChild(t4);
-    var sa1= document.createElement("span");
-    sa1.id= "Sa" + String(data[i].id);
+    var sa1 = document.createElement("span");
+    sa1.id = "Sa" + String(data[i].id);
     para2.appendChild(sa1);
 
     var t5 = document.createTextNode(` minutes. `);

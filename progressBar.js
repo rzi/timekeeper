@@ -5,16 +5,12 @@ showName = document.getElementById("presenterName");
 showResult = document.getElementById("showResult");
 progress = document.getElementById("presenter");
 btnNext = document.getElementById("btnNext");
-let item;
-let presenterData;
+let item, id, procent, presenterData, setTime;
 let timeInSec = 0;
-let id, procent;
-let setTime;
 
 ipcRenderer.on("forWin2", function (event, arg) {
   console.log(`from win2 ${arg}`);
   item = parseInt(arg);
-
   readText.readText("./test.json", function (text) {
     var data = JSON.parse(text);
     console.log(`data ${JSON.stringify(data[arg])}`);
@@ -23,7 +19,6 @@ ipcRenderer.on("forWin2", function (event, arg) {
   });
 });
 console.log("I'm Window2");
-
 function getSeconds(time) {
   var ts = time.split(":");
   return Date.UTC(1970, 0, 1, ts[0], ts[1], ts[2]) / 1000;
@@ -52,7 +47,6 @@ btnNext.addEventListener("click", (event) => {
   ipcRenderer.send("nameMsg2", array);
   clearInterval(id);
 });
-
 ipcRenderer.on("nameReply", (event, arg) => {
   console.log(` name reply arg ${JSON.stringify(arg)}`); // why/what is not right..
 });

@@ -11,13 +11,14 @@
     <title>ProgressBar</title>
   </head>
   <body>
-    <div>
-      <label for="presenter">Presenter: <span id="presenterName"></span></label>
-      <progress id="presenter" value="32" max="100" data-label="0"></progress>
-      <button id="btnNext">Next</button>
-      <p id="showResult"></p>
+    <div class="main">
+      <div class="progress">
+        Presenter: <span id="presenterName"></span>
+        <progress id="presenter" value="0" max="100" data-label="0"></progress>
+        <button id="btnNext" class="progress">Next</button>
+        <!-- <p id="showResult"></p> -->
+      </div>
     </div>
-
     <!-- You can also require other files to run in this process -->
     <script src="./renderer.js"></script>
     <script src="./progressBar.js"></script>

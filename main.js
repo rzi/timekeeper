@@ -25,6 +25,7 @@ function createWindow2() {
   window2 = new BrowserWindow({
     width: 450,
     height: 250,
+    alwaysOnTop: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true,
@@ -37,7 +38,6 @@ function createWindow2() {
   window2.on("closed", function () {
     window2 = null;
   });
-  // window2.hide();
   return window2;
 }
 

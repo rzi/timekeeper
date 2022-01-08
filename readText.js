@@ -9,5 +9,4 @@ function readText(file, callback) {
   };
   rawFile.send(null);
 }
-
 exports.readText = readText;
