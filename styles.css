@@ -2,16 +2,20 @@
 
 .div{
     display: flex;
+    align-items: baseline;
 }
 button {
     margin-left: 10px;
     margin-right: 10px;
     height: 24px; 
+    
 }
-#main {
-  display: block;
+.main {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
-#progress {
+.progress {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,6 +26,7 @@ progress{
   /* width:200px; */
   height: 48px;
   line-height: 48px; 
+  margin-left: 5px;
 }
 progress:before {
   content: 'Value is ' attr(data-label) " %";
@@ -31,8 +36,8 @@ progress:before {
 .unique:before {
   content: attr(data-label);
 }
-.presenters{
-  display: flex;
+#presenters{
+  display: block;
   justify-content: center;
   align-items: center;
 }
