@@ -46,6 +46,7 @@ btnNext.addEventListener("click", (event) => {
   let array = [timeInSec, procent, item];
   ipcRenderer.send("nameMsg2", array);
   clearInterval(id);
+  timeInSec = 0;
 });
 ipcRenderer.on("nameReply", (event, arg) => {
   console.log(` name reply arg ${JSON.stringify(arg)}`); // why/what is not right..

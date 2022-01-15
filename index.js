@@ -41,8 +41,16 @@ ipcRenderer.on("forWin1", function (event, arg) {
     timeSpent: `${timeSpent}`,
     resultProcent: `${resultProcent}`,
   };
-  console.log(`tab: ${JSON.stringify(results)}`);
+
   updateResults();
+
+  if (id + 1 <= results.length) {
+    console.log(` id1  ${id} len ${results.length}`);
+    nextAction(id + 1);
+  } else {
+    console.log(` id2  ${id} len ${results.length}`);
+    alert("koniec");
+  }
 });
 var timer = setInterval(currentTime1, 1000);
 function currentTime1() {
@@ -70,4 +78,7 @@ function updateResults() {
     console.log(`results[i]a   ${results[i].timeSpent}`);
     document.getElementById(indexa).innerHTML = results[i].timeSpent;
   }
+}
+function nextAction(id) {
+  ipcRenderer.send("nameMsg", id);
 }
