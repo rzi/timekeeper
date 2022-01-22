@@ -34,8 +34,6 @@ ipcRenderer.on("forWin1", function (event, arg) {
   var id = arg[2];
   var timeSpent = arg[0];
   var resultProcent = arg[1];
-  // var resultLen = results.length;
-  // console.log(`resultLen ${resultLen}`);
   results[id] = {
     id: `${id}`,
     timeSpent: `${timeSpent}`,
@@ -45,13 +43,14 @@ ipcRenderer.on("forWin1", function (event, arg) {
   updateResults();
   var nextStep = id + 1;
   console.log(`nextStep ${nextStep}`);
-  if (id + 1 <= results.length) {
-    console.log(` id1  ${id} len ${results.length}`);
-    nextAction(id + 1);
-  } else {
-    console.log(` id2  ${id} len ${results.length}`);
-    alert("koniec");
-  }
+  nextAction(id);
+  // if (id + 1 < results.length) {
+  //   console.log(` id1  ${id} len ${results.length}`);
+  //   nextAction(id + 1);
+  // } else {
+  //   console.log(` id2  ${id} len ${results.length}`);
+  //   alert("koniec");
+  // }
 });
 var timer = setInterval(currentTime1, 1000);
 function currentTime1() {
@@ -71,7 +70,7 @@ function updateResults() {
   console.log(`resultLen update  ${resultsLen}`);
   for (i = 0; i < resultsLen; i++) {
     var index = "S" + String(i);
-    console.log(`i  ${i}`);
+    // console.log(`i  ${i}`);
     console.log(`i ${i}  timespent   ${results[i].timeSpent}`);
 
     if (i < resultsLen)
@@ -84,5 +83,10 @@ function updateResults() {
   }
 }
 function nextAction(id) {
-  ipcRenderer.send("nameMsg", id);
+  console.log(`before fend next id ${id}, result.len ${results.length}`)
+  if (!results.length==id+1) {
+    ipcRenderer.send("nameMsg", id+1);
+    console.log(`sent   action ${id+1}`)
+  }
+
 }
