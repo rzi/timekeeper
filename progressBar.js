@@ -5,7 +5,7 @@ showName = document.getElementById("presenterName");
 showResult = document.getElementById("showResult");
 progress = document.getElementById("presenter");
 btnNext = document.getElementById("btnNext");
-let item, id, procent, presenterData, setTime;
+let item, id, procent, presenterData, setTime, presenterDataLen;
 let timeInSec = 0;
 
 ipcRenderer.on("forWin2", function (event, arg) {
@@ -13,7 +13,9 @@ ipcRenderer.on("forWin2", function (event, arg) {
   item = parseInt(arg);
   readText.readText("./test.json", function (text) {
     var data = JSON.parse(text);
+    presenterDataLen = Object.keys(data).length;
     console.log(`data ${JSON.stringify(data[arg])}`);
+    console.log(`dataL ${presenterDataLen}`);
     presenterData = data[arg];
     StartTimer();
   });
@@ -44,7 +46,8 @@ btnNext.addEventListener("click", (event) => {
   console.log(`btnNext ${JSON.stringify(id)}`);
   console.log(`time ${timeInSec}`);
   let array = [timeInSec, procent, item];
-  ipcRenderer.send("nameMsg2", array);
+  console.log(` id ${id} presenterData len ${presenterDataLen}`);
+  if (id <= presenterDataLen) ipcRenderer.send("nameMsg2", array);
   clearInterval(id);
   timeInSec = 0;
 });
