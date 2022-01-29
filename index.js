@@ -83,10 +83,9 @@ function updateResults() {
   }
 }
 function nextAction(id) {
-  console.log(`before fend next id ${id}, result.len ${results.length}`)
-  if (!results.length==id+1) {
-    ipcRenderer.send("nameMsg", id+1);
-    console.log(`sent   action ${id+1}`)
+  console.log(`before id ${id}, result.len ${results.length}`);
+  if (presenters.length > id + 1) {
+    ipcRenderer.send("nameMsg", id + 1);
+    console.log(`sent   action ${id + 1}`);
   }
-
 }
