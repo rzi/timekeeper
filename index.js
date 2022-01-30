@@ -29,6 +29,10 @@ let btnSettings = document.getElementById("btnSettings");
 btnSettings.addEventListener("click", function () {
   window.location.href = "./settings.html";
 });
+let btnShow = document.getElementById("btnShow");
+btnShow.addEventListener("click", function () {
+  ipcRenderer.send("showProgress", "showProgress");
+});
 ipcRenderer.on("forWin1", function (event, arg) {
   console.log(`from win1  ${arg}`);
   var id = arg[2];
