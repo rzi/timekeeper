@@ -17,6 +17,7 @@ ipcRenderer.on("forWin2", function (event, arg) {
     console.log(`data ${JSON.stringify(data[arg])}`);
     console.log(`dataL ${presenterDataLen}`);
     presenterData = data[arg];
+    timeInSec = 0;
     StartTimer();
   });
 });
@@ -43,13 +44,12 @@ function frame() {
   console.log(`time ${parseInt(timeInSec)}`);
 }
 btnNext.addEventListener("click", (event) => {
-  console.log(`btnNext ${JSON.stringify(id)}`);
+  console.log(`btnNext ${JSON.stringify(item)}`);
   console.log(`time ${timeInSec}`);
   let array = [timeInSec, procent, item];
-  console.log(` id ${id} presenterData len ${presenterDataLen}`);
-  if (id <= presenterDataLen) ipcRenderer.send("nameMsg2", array);
+  console.log(` id ${item} presenterData len ${presenterDataLen}`);
+  if (item <= presenterDataLen) ipcRenderer.send("nameMsg2", array);
   clearInterval(id);
-  timeInSec = 0;
 });
 ipcRenderer.on("nameReply", (event, arg) => {
   console.log(` name reply arg ${JSON.stringify(arg)}`); // why/what is not right..
