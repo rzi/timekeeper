@@ -18,6 +18,7 @@ ipcRenderer.on("forWin2", function (event, arg) {
     console.log(`dataL ${presenterDataLen}`);
     presenterData = data[arg];
     timeInSec = 0;
+    clearInterval(id);
     StartTimer();
   });
 });
