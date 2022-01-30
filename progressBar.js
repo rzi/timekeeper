@@ -48,7 +48,7 @@ btnNext.addEventListener("click", (event) => {
   console.log(`btnNext ${JSON.stringify(item)}`);
   console.log(`time ${timeInSec}`);
   let array = [timeInSec, procent, item];
-  console.log(` id ${item} presenterData len ${presenterDataLen}`);
+  console.log(` id ${item} presenterData len ${presenterDataLen} arry ${array}`);
   if (item <= presenterDataLen) ipcRenderer.send("nameMsg2", array);
   clearInterval(id);
 });

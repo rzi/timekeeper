@@ -9,7 +9,7 @@ let copyData = [];
 btnAddP.addEventListener("click", function () {
   console.log("btn");
   console.log(`copyData: ${JSON.stringify(copyData)}`);
-  var nbOfObj = copyData.length + 1;
+  var nbOfObj = copyData.length ;
   console.log(`copyDataLenght: ${nbOfObj}`);
   const addName = document.getElementById("addName").value;
   const setTime = document.getElementById("addTime").value;
