@@ -5,22 +5,34 @@ showName = document.getElementById("presenterName");
 showResult = document.getElementById("showResult");
 progress = document.getElementById("presenter");
 btnNext = document.getElementById("btnNext");
-let item, id, procent, presenterData, setTime, presenterDataLen;
+let item = null,
+  id,
+  procent,
+  presenterData,
+  setTime,
+  presenterDataLen;
 let timeInSec = 0;
 
 ipcRenderer.on("forWin2", function (event, arg) {
   console.log(`from win2 ${arg}`);
-  item = parseInt(arg);
-  readText.readText("./test.json", function (text) {
-    var data = JSON.parse(text);
-    presenterDataLen = Object.keys(data).length;
-    console.log(`data ${JSON.stringify(data[arg])}`);
-    console.log(`dataL ${presenterDataLen}`);
-    presenterData = data[arg];
-    timeInSec = 0;
+  console.log(`arg ${parseInt(arg)} item ${item} id ${id}`);
+  if (parseInt(arg) == item) {
+    var tempAray = [timeInSec, procent, item];
+    ipcRenderer.send("stop", tempAray);
     clearInterval(id);
-    StartTimer();
-  });
+  } else {
+    item = parseInt(arg);
+    readText.readText("./test.json", function (text) {
+      var data = JSON.parse(text);
+      presenterDataLen = Object.keys(data).length;
+      console.log(`data ${JSON.stringify(data[arg])}`);
+      console.log(`dataL ${presenterDataLen}`);
+      presenterData = data[arg];
+      timeInSec = 0;
+      clearInterval(id);
+      StartTimer();
+    });
+  }
 });
 console.log("I'm Window2");
 function getSeconds(time) {
@@ -48,7 +60,9 @@ btnNext.addEventListener("click", (event) => {
   console.log(`btnNext ${JSON.stringify(item)}`);
   console.log(`time ${timeInSec}`);
   let array = [timeInSec, procent, item];
-  console.log(` id ${item} presenterData len ${presenterDataLen} arry ${array}`);
+  console.log(
+    ` id ${item} presenterData len ${presenterDataLen} arry ${array}`
+  );
   if (item <= presenterDataLen) ipcRenderer.send("nameMsg2", array);
   clearInterval(id);
 });

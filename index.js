@@ -33,6 +33,19 @@ let btnShow = document.getElementById("btnShow");
 btnShow.addEventListener("click", function () {
   ipcRenderer.send("showProgress", "showProgress");
 });
+ipcRenderer.on("forWin1Stop", function (event, arg) {
+  console.log(`stop`);
+  var id = arg[2];
+  var timeSpent = arg[0];
+  var resultProcent = arg[1];
+  results[id] = {
+    id: `${id}`,
+    timeSpent: `${timeSpent}`,
+    resultProcent: `${resultProcent}`,
+  };
+  updateResults();
+});
+
 ipcRenderer.on("forWin1", function (event, arg) {
   console.log(`from win1  ${arg}`);
   var id = arg[2];
