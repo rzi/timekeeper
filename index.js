@@ -56,18 +56,10 @@ ipcRenderer.on("forWin1", function (event, arg) {
     timeSpent: `${timeSpent}`,
     resultProcent: `${resultProcent}`,
   };
-
   updateResults();
   var nextStep = id + 1;
   console.log(`nextStep ${nextStep}`);
   nextAction(id);
-  // if (id + 1 < results.length) {
-  //   console.log(` id1  ${id} len ${results.length}`);
-  //   nextAction(id + 1);
-  // } else {
-  //   console.log(` id2  ${id} len ${results.length}`);
-  //   alert("koniec");
-  // }
 });
 var timer = setInterval(currentTime1, 1000);
 function currentTime1() {
