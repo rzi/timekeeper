@@ -81,7 +81,6 @@ function writeToJson() {
     console.log("Saved!");
   });
 }
-
 function btnExit() {
   if (copyData.length) {
     location.href = "index.html";

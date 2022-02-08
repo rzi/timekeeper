@@ -45,7 +45,6 @@ ipcRenderer.on("forWin1Stop", function (event, arg) {
   };
   updateResults();
 });
-
 ipcRenderer.on("forWin1", function (event, arg) {
   console.log(`from win1  ${arg}`);
   var id = arg[2];

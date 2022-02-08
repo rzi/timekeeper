@@ -45,10 +45,10 @@ function createPresenters(data) {
     document.getElementById(nb).appendChild(btn);
     document.getElementById(nb).appendChild(para2);
   }
-  createListenerforP();
+  createListenerforP(data);
 }
 
-function createListenerforP() {
+function createListenerforP(data) {
   const p_array = document.getElementsByTagName("p");
   const count = p_array.length;
   console.log(`count ${count}`);
@@ -57,13 +57,14 @@ function createListenerforP() {
     const p = p_array[i];
     p.addEventListener("click", function (e) {
       if (e.target && e.target.nodeName == "P" && e.target.id.length) {
-        console.log("Remove item ", e.target.id.replace("post-"));
+        console.log("Reset item ", e.target.id.replace("post-"));
         var pId = e.target.id;
-        for (let i = 0; i < copyData.length; i++) {
-          const el = copyData[i];
+        for (let i = 0; i < data.length; i++) {
+          const el = data[i];
           if (el.id == e.target.id) {
-            copyData.splice(i, 1);
-            writeToJson();
+            data.splice(i, 1);
+            console.log(`data ${JSON.stringify(data)}`)
+            // writeToJson();
           }
         }
         location.reload();
