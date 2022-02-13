@@ -20,6 +20,7 @@ ipcRenderer.on("forWin2", function (event, arg) {
     var tempAray = [timeInSec, procent, item];
     ipcRenderer.send("stop", tempAray);
     clearInterval(id);
+    item=null;
   } else {
     item = parseInt(arg);
     readText.readText("./test.json", function (text) {
