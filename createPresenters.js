@@ -15,7 +15,7 @@ function createPresenters(data) {
 
     let btn = document.createElement("button");
     btn.id = i;
-    btn.innerHTML = "Start";
+    btn.innerHTML = "Start/Stop";
     btn.addEventListener("click", function () {
       btnFn(btn.id);
     });

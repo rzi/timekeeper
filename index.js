@@ -74,19 +74,14 @@ function currentTime1() {
   time.innerHTML = dateTime.getHours() + ":" + minutes + ":" + seconds;
 }
 function updateResults(id) {
-  //var resultsLen = results.length;
-  //console.log(`resultLen update  ${resultsLen}`);
   console.log(` results: ${results[id].id} , ${results[id].timeSpent}, ${results[id].resultProcent} `)
-  //for (i = 0; i < resultsLen; i++) {
-    var index = "S" + String(id);
-    // console.log(`i  ${i}`);
-    console.log(`i ${id}  timespent   ${results[id].timeSpent}`);
-    document.getElementById(index).innerHTML = results[id].resultProcent + "%";
-    var indexa = "Sa" + String(id);
-    console.log(`indexa   ${indexa}`);
-    console.log(`results[i]a   ${results[id].timeSpent}`);
-    document.getElementById(indexa).innerHTML = results[id].timeSpent;
-  
+  var index = "S" + String(id);
+  console.log(`i ${id}  timespent   ${results[id].timeSpent}`);
+  document.getElementById(index).innerHTML = results[id].resultProcent + "%";
+  var indexa = "Sa" + String(id);
+  console.log(`indexa   ${indexa}`);
+  console.log(`results[i]a   ${results[id].timeSpent}`);
+  document.getElementById(indexa).innerHTML = results[id].timeSpent;
 }
 function nextAction(id) {
   console.log(`before id ${id}, result.len ${results.length}`);
