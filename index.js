@@ -43,7 +43,7 @@ ipcRenderer.on("forWin1Stop", function (event, arg) {
     timeSpent: `${timeSpent}`,
     resultProcent: `${resultProcent}`,
   };
-  updateResults();
+  updateResults(id);
 });
 ipcRenderer.on("forWin1", function (event, arg) {
   console.log(`from win1  ${arg}`);
@@ -55,7 +55,7 @@ ipcRenderer.on("forWin1", function (event, arg) {
     timeSpent: `${timeSpent}`,
     resultProcent: `${resultProcent}`,
   };
-  updateResults();
+  updateResults(id);
   var nextStep = id + 1;
   console.log(`nextStep ${nextStep}`);
   nextAction(id);
@@ -73,22 +73,20 @@ function currentTime1() {
     : (seconds = dateTime.getSeconds());
   time.innerHTML = dateTime.getHours() + ":" + minutes + ":" + seconds;
 }
-function updateResults() {
-  var resultsLen = results.length;
-  console.log(`resultLen update  ${resultsLen}`);
-  for (i = 0; i < resultsLen; i++) {
-    var index = "S" + String(i);
+function updateResults(id) {
+  //var resultsLen = results.length;
+  //console.log(`resultLen update  ${resultsLen}`);
+  console.log(` results: ${results[id].id} , ${results[id].timeSpent}, ${results[id].resultProcent} `)
+  //for (i = 0; i < resultsLen; i++) {
+    var index = "S" + String(id);
     // console.log(`i  ${i}`);
-    console.log(`i ${i}  timespent   ${results[i].timeSpent}`);
-
-    if (i < resultsLen)
-      document.getElementById(index).innerHTML = results[i].resultProcent + "%";
-    var indexa = "Sa" + String(i);
+    console.log(`i ${id}  timespent   ${results[id].timeSpent}`);
+    document.getElementById(index).innerHTML = results[id].resultProcent + "%";
+    var indexa = "Sa" + String(id);
     console.log(`indexa   ${indexa}`);
-    console.log(`results[i]a   ${results[i].timeSpent}`);
-    if (i < resultsLen)
-      document.getElementById(indexa).innerHTML = results[i].timeSpent;
-  }
+    console.log(`results[i]a   ${results[id].timeSpent}`);
+    document.getElementById(indexa).innerHTML = results[id].timeSpent;
+  
 }
 function nextAction(id) {
   console.log(`before id ${id}, result.len ${results.length}`);
