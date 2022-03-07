@@ -74,10 +74,13 @@ function currentTime1() {
   time.innerHTML = dateTime.getHours() + ":" + minutes + ":" + seconds;
 }
 function updateResults(id) {
-  console.log(` results: ${results[id].id} , ${results[id].timeSpent}, ${results[id].resultProcent} `)
+  console.log(
+    ` results: ${results[id].id} , ${results[id].timeSpent}, ${results[id].resultProcent} `
+  );
   var index = "S" + String(id);
   console.log(`i ${id}  timespent   ${results[id].timeSpent}`);
   document.getElementById(index).innerHTML = results[id].resultProcent + "%";
+
   var indexa = "Sa" + String(id);
   console.log(`indexa   ${indexa}`);
   console.log(`results[i]a   ${results[id].timeSpent}`);

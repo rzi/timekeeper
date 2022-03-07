@@ -20,7 +20,7 @@ ipcRenderer.on("forWin2", function (event, arg) {
     var tempAray = [timeInSec, procent, item];
     ipcRenderer.send("stop", tempAray);
     clearInterval(id);
-    item=null;
+    item = null;
   } else {
     item = parseInt(arg);
     readText.readText("./test.json", function (text) {
@@ -64,8 +64,12 @@ btnNext.addEventListener("click", (event) => {
   console.log(
     ` id ${item} presenterData len ${presenterDataLen} arry ${array}`
   );
-  if (item <= presenterDataLen) ipcRenderer.send("nameMsg2", array);
-  clearInterval(id);
+  if (item <= presenterDataLen && item != null) {
+    ipcRenderer.send("nameMsg2", array);
+    clearInterval(id);
+  } else {
+    progress.value = 0;
+  }
 });
 ipcRenderer.on("nameReply", (event, arg) => {
   console.log(` name reply arg ${JSON.stringify(arg)}`); // why/what is not right..
