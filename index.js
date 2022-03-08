@@ -80,7 +80,6 @@ function updateResults(id) {
   var index = "S" + String(id);
   console.log(`i ${id}  timespent   ${results[id].timeSpent}`);
   document.getElementById(index).innerHTML = results[id].resultProcent + "%";
-
   var indexa = "Sa" + String(id);
   console.log(`indexa   ${indexa}`);
   console.log(`results[i]a   ${results[id].timeSpent}`);

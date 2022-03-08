@@ -20,7 +20,6 @@ function createWindow1() {
   });
   return window1;
 }
-
 function createWindow2() {
   window2 = new BrowserWindow({
     width: 450,
@@ -40,7 +39,6 @@ function createWindow2() {
   });
   return window2;
 }
-
 function createWindow3() {
   window3 = new BrowserWindow({
     width: 1000,
@@ -67,7 +65,6 @@ app.on("ready", () => {
   window1 = createWindow1();
   window2 = createWindow2();
   window3 = createWindow3();
-
   ipcMain.on("nameMsg", (event, arg) => {
     console.log("name inside main process is: ", arg); // this comes form within window 1 -> and into the mainProcess
     event.sender.send("nameReply", { not_right: false }); // sends back/replies to window 1 - "event" is a reference to this chanel.

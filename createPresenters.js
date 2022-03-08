@@ -1,5 +1,4 @@
 const ipcRenderer = require("electron").ipcRenderer;
-
 function createPresenters(data) {
   for (i = 0; i < data.length; i++) {
     var div = document.createElement("div");
@@ -47,7 +46,6 @@ function createPresenters(data) {
   }
   createListenerforP(data);
 }
-
 function createListenerforP(data) {
   const p_array = document.getElementsByTagName("p");
   const count = p_array.length;
@@ -63,7 +61,7 @@ function createListenerforP(data) {
           const el = data[i];
           if (el.id == e.target.id) {
             data.splice(i, 1);
-            console.log(`data ${JSON.stringify(data)}`)
+            console.log(`data ${JSON.stringify(data)}`);
             // writeToJson();
           }
         }

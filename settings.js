@@ -9,7 +9,7 @@ let copyData = [];
 btnAddP.addEventListener("click", function () {
   console.log("btn");
   console.log(`copyData: ${JSON.stringify(copyData)}`);
-  var nbOfObj = copyData.length ;
+  var nbOfObj = copyData.length;
   console.log(`copyDataLenght: ${nbOfObj}`);
   const addName = document.getElementById("addName").value;
   const setTime = document.getElementById("addTime").value;
@@ -34,7 +34,6 @@ function createPresenters(index, data) {
     var t = document.createTextNode(`id: ${data[i].name}`); // Create a text node
     para.id = String(data[i].id);
     para.appendChild(t); // Append the text to <p>
-
     var t2 = document.createTextNode(` setTime: ${data[i].setTime}`); // Create a text node
     para.appendChild(t2); // Append the text to <p>
     document.getElementById("presenters").appendChild(para); // Append <p> to <div> with id="myDIV"
