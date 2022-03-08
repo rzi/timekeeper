@@ -11,8 +11,28 @@
     <title>Timekeeper</title>
   </head>
   <body>
-    <h2>Timekeeper 2.0</h2>
-    Today is <span id="date"></span> <span id="time">.</span>
+    <nav>
+      <div>
+        <h2>Timekeeper 2.0</h2>
+      Today is <span id="date"></span> <span id="time">.</span>
+      </div>
+      <button class="hamburger" aria-expanded="false">
+        <span class="sr-only">Otwórz/zamknij menu</span>
+        <span class="hamburger__box">
+          <span class="hamburger__inner"></span>
+        </span>
+      </button>
+      <div class="navigation">
+        <ul class="navigation__list">
+          <li class="navigation__item"><a href="">Lorem</a></li>
+          <li class="navigation__item"><a href="">Ipsum</a></li>
+          <li class="navigation__item"><a href="">Dolor</a></li>
+          <li class="navigation__item"><a href="">Sit</a></li>
+        </ul>
+      </div>
+    </nav>
+
+
     <div id="presenters"></div>
     <br /><br /><br />
     <button type="button" id="btnSettings">Go to settings</button>
