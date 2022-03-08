@@ -4,13 +4,14 @@ const path = require("path");
 
 function createWindow1() {
   window1 = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 600,
+    height: 500,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
+      devTools: false
     },
   });
   window1.loadURL(`file://${__dirname}/index.html`);
@@ -22,14 +23,15 @@ function createWindow1() {
 }
 function createWindow2() {
   window2 = new BrowserWindow({
-    width: 450,
-    height: 250,
+    width: 400,
+    height: 100,
     alwaysOnTop: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
+      devTools: false
     },
   });
   window2.loadURL(`file://${__dirname}/progressBar.html`);
@@ -48,6 +50,7 @@ function createWindow3() {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
+      devTools: false
     },
   });
   window3.loadURL(`file://${__dirname}/settings.html`);
