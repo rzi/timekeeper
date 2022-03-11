@@ -15,8 +15,9 @@ function createWindow1() {
       enableRemoteModule: true,
       devTools: false,
       frame: false,
-      autoHideMenuBar: true,
-      titleBarStyle: "customButtonsOnHover",
+      //autoHideMenuBar: true,
+      //titleBarStyle: "customButtonsOnHover",
+      titleBarStyle: 'hidden' 
     },
   });
   window1.loadURL(`file://${__dirname}/index.html`);
