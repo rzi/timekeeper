@@ -5,7 +5,7 @@ const path = require("path");
 function createWindow1() {
   window1 = new BrowserWindow({
     width: 600,
-    height: 500,
+    // height: 500,
     x: 0,
     y: 0,
     webPreferences: {
@@ -13,7 +13,10 @@ function createWindow1() {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
-      // devTools: false
+      devTools: false,
+      frame: false,
+      autoHideMenuBar: true,
+      titleBarStyle: "customButtonsOnHover",
     },
   });
   window1.loadURL(`file://${__dirname}/index.html`);
@@ -70,6 +73,7 @@ function createWindow3() {
 // Some APIs can only be used after this event occurs.
 app.on("ready", () => {
   window1 = createWindow1();
+  window1.setMenuBarVisibility(false);
   window2 = createWindow2();
   window3 = createWindow3();
   ipcMain.on("nameMsg", (event, arg) => {
