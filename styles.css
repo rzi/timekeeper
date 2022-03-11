@@ -180,12 +180,8 @@ body {
   white-space: nowrap;
   width: 1px;
 }
-
-nav{
+.header{
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+}
 
-}
-h2 {
-  text-align: left;
-}

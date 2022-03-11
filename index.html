@@ -12,31 +12,43 @@
   </head>
   <body>
     <nav>
-      <div>
-        <h2>Timekeeper 2.0</h2>
-      Today is <span id="date"></span> <span id="time">.</span>
+      <div class="header">
+        <div class="MenuButton">
+          <button class="hamburger" aria-expanded="false">
+            <span class="sr-only">Otwórz/zamknij menu</span>
+            <span class="hamburger__box">
+              <span class="hamburger__inner"></span>
+            </span>
+          </button>
+        </div>
+
+        <div class="title">
+          <h2>Timekeeper 2.0</h2>
+        </div>
       </div>
-      <button class="hamburger" aria-expanded="false">
-        <span class="sr-only">Otwórz/zamknij menu</span>
-        <span class="hamburger__box">
-          <span class="hamburger__inner"></span>
-        </span>
-      </button>
+      <h3>Today is <span id="date"></span> <span id="time">.</span></h3>
       <div class="navigation">
         <ul class="navigation__list">
-          <li class="navigation__item"><a href="">Lorem</a></li>
-          <li class="navigation__item"><a href="">Ipsum</a></li>
-          <li class="navigation__item"><a href="">Dolor</a></li>
-          <li class="navigation__item"><a href="">Sit</a></li>
+          <li class="navigation__item">
+            <a href="./index.html">Home</a>
+          </li>
+          <li class="navigation__item">
+            <a href="./settings.html">Go to settings</a>
+          </li>
+          <li class="navigation__item">
+            <a href="" id="btnShow">Show progress bar</a>
+          </li>
+          <li class="navigation__item">
+            <a href="" id="btnExit">Exit</a>
+          </li>
         </ul>
       </div>
     </nav>
 
-
     <div id="presenters"></div>
     <br /><br /><br />
     <button type="button" id="btnSettings">Go to settings</button>
-    <button type="button" id="btnShow">Show progress bar</button>
+    <!-- <button type="button" id="btnShow">Show progress bar</button> -->
     <!-- You can also require other files to run in this process -->
     <script src="./renderer.js"></script>
     <script src="./index.js"></script>

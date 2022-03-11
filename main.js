@@ -6,14 +6,14 @@ function createWindow1() {
   window1 = new BrowserWindow({
     width: 600,
     height: 500,
-    x:0,
-    y:0,
+    x: 0,
+    y: 0,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
-      devTools: false
+      // devTools: false
     },
   });
   window1.loadURL(`file://${__dirname}/index.html`);
@@ -27,15 +27,15 @@ function createWindow2() {
   window2 = new BrowserWindow({
     width: 400,
     height: 100,
-    x:600,
-    y:600,
+    x: 600,
+    y: 600,
     alwaysOnTop: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
-      devTools: false
+      // devTools: false
     },
   });
   window2.loadURL(`file://${__dirname}/progressBar.html`);
@@ -54,7 +54,7 @@ function createWindow3() {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
-      devTools: false
+      // devTools: false
     },
   });
   window3.loadURL(`file://${__dirname}/settings.html`);
@@ -95,5 +95,10 @@ app.on("ready", () => {
     } else {
       window2.show();
     }
+  });
+  ipcMain.on("Exit", (event, arg) => {
+    console.log("Exit ", arg); // this comes form within window 1 -> and into the mainProcess
+    event.sender.send("nameReply", { not_right: false }); // sends back/replies to window 1 - "event" is a reference to this chanel.
+    app.quit();
   });
 });

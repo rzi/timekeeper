@@ -2,6 +2,7 @@ const ipcRenderer = require("electron").ipcRenderer;
 const readText = require("./readText");
 const createPresenters = require("./createPresenters");
 const fs = require("fs");
+const { remote } = require("electron");
 let today = document.getElementById("date");
 let time = document.getElementById("time");
 
@@ -32,6 +33,11 @@ btnSettings.addEventListener("click", function () {
 let btnShow = document.getElementById("btnShow");
 btnShow.addEventListener("click", function () {
   ipcRenderer.send("showProgress", "showProgress");
+});
+let btnExit = document.getElementById("btnExit");
+btnExit.addEventListener("click", function () {
+  // Close app
+  ipcRenderer.send("Exit", "exit");
 });
 ipcRenderer.on("forWin1Stop", function (event, arg) {
   console.log(`stop`);
@@ -92,13 +98,16 @@ function nextAction(id) {
     console.log(`sent   action ${id + 1}`);
   }
 }
-const hamburger = document.querySelector('.hamburger');
-const nav = document.querySelector('.navigation');
+const hamburger = document.querySelector(".hamburger");
+const nav = document.querySelector(".navigation");
 
 const handleClick = () => {
-  hamburger.classList.toggle('hamburger--active');
-  hamburger.setAttribute('aria-expanded', hamburger.classList.contains('hamburger--active'));
-  nav.classList.toggle('navigation--active');
-}
+  hamburger.classList.toggle("hamburger--active");
+  hamburger.setAttribute(
+    "aria-expanded",
+    hamburger.classList.contains("hamburger--active")
+  );
+  nav.classList.toggle("navigation--active");
+};
 
-hamburger.addEventListener('click', handleClick);
+hamburger.addEventListener("click", handleClick);
