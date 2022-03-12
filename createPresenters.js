@@ -12,9 +12,10 @@ function createPresenters(data) {
     var t2 = document.createTextNode(` setTime: ${data[i].setTime}`); // Create a text node
     para.appendChild(t2); // Append the text to <p>
 
-    let btn = document.createElement("button");
+    let btn = document.createElement("image");
     btn.id = i;
-    btn.innerHTML = "Start/Stop";
+    // btn.innerHTML = "Start/Stop";
+    btn.innerHTML = "<img src= ./photos/button_img1.png>";
     btn.addEventListener("click", function () {
       btnFn(btn.id);
     });

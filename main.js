@@ -8,16 +8,17 @@ function createWindow1() {
     // height: 500,
     x: 0,
     y: 0,
+    maximizable: false,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
-      devTools: false,
-      frame: false,
+      devTools: true,
+      //frame: false,
       //autoHideMenuBar: true,
       //titleBarStyle: "customButtonsOnHover",
-      titleBarStyle: 'hidden' 
+      //titleBarStyle: "hidden",
     },
   });
   window1.loadURL(`file://${__dirname}/index.html`);
@@ -30,20 +31,27 @@ function createWindow1() {
 function createWindow2() {
   window2 = new BrowserWindow({
     width: 400,
-    height: 100,
+    height: 120,
     x: 600,
     y: 600,
     alwaysOnTop: true,
+    maximizable: false,
+    transparent: true,
+    autoHideMenuBar: true,
+
+    titleBarOverlay: true,
+
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
-      // devTools: false
+      devTools: false,
     },
   });
   window2.loadURL(`file://${__dirname}/progressBar.html`);
   window2.webContents.openDevTools();
+
   window2.on("closed", function () {
     window2 = null;
   });
@@ -74,8 +82,10 @@ function createWindow3() {
 // Some APIs can only be used after this event occurs.
 app.on("ready", () => {
   window1 = createWindow1();
-  window1.setMenuBarVisibility(false);
+  //window1.setMenuBarVisibility(false);
   window2 = createWindow2();
+  window2.setMenuBarVisibility(false);
+
   window3 = createWindow3();
   ipcMain.on("nameMsg", (event, arg) => {
     console.log("name inside main process is: ", arg); // this comes form within window 1 -> and into the mainProcess

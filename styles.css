@@ -1,8 +1,13 @@
 /* styles.css */
-
+image{
+  margin-left: 10px;
+  margin-right: 10px;
+  /* height: 24px;  */
+}
 .div{
     display: flex;
-    align-items: baseline;
+    align-items: center;
+    /* padding-left: 20px; */
 }
 button {
     margin-left: 10px;
@@ -75,8 +80,9 @@ html {
 }
 
 body {
-  background-color: lightgrey;
+  /* background-color: lightgrey; */
   padding: 0px;
+  -webkit-app-region: drag;
 }
 
 .hamburger {
