@@ -15,10 +15,7 @@ function createWindow1() {
       contextIsolation: false,
       enableRemoteModule: true,
       devTools: true,
-      //frame: false,
-      //autoHideMenuBar: true,
-      //titleBarStyle: "customButtonsOnHover",
-      //titleBarStyle: "hidden",
+
     },
   });
   window1.loadURL(`file://${__dirname}/index.html`);
@@ -36,7 +33,7 @@ function createWindow2() {
     y: 600,
     alwaysOnTop: true,
     maximizable: false,
-    transparent: true,
+    // transparent: true,
     autoHideMenuBar: true,
 
     titleBarOverlay: true,

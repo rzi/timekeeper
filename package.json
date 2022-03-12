@@ -4,7 +4,9 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build" :
+      "electron-builder -mwl"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -14,8 +16,8 @@
     "tutorial",
     "demo"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "author": "RZI",
+  "license": "MIT",
   "devDependencies": {
     "electron": "^16.0.5"
   }
