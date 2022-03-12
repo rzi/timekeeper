@@ -4,7 +4,7 @@ const path = require("path");
 
 function createWindow1() {
   window1 = new BrowserWindow({
-    width: 600,
+    width: 650,
     // height: 500,
     x: 0,
     y: 0,
@@ -29,8 +29,8 @@ function createWindow2() {
   window2 = new BrowserWindow({
     width: 400,
     height: 120,
-    x: 600,
-    y: 600,
+    x: 850,
+    y: 800,
     alwaysOnTop: true,
     maximizable: false,
     // transparent: true,

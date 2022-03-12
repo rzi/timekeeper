@@ -6,23 +6,23 @@ function createPresenters(data) {
     div.className = "div";
     var para = document.createElement("p");
     para.id = String(data[i].id);
-    var t = document.createTextNode(`Presenter: ${data[i].name}`);
+    var t = document.createTextNode(`Presenter: ${data[i].name} `);
     para.appendChild(t);
 
-    var t2 = document.createTextNode(` setTime: ${data[i].setTime}`); // Create a text node
+    var t2 = document.createTextNode(` setTime: ${data[i].setTime} `); // Create a text node
     para.appendChild(t2); // Append the text to <p>
 
     let btn = document.createElement("image");
     btn.id = i;
     // btn.innerHTML = "Start/Stop";
-    btn.innerHTML = "<img src= ./photos/button_img1.png>";
+    btn.innerHTML = "<img src= ./photos/button_img2.png>";
     btn.addEventListener("click", function () {
       btnFn(btn.id);
     });
 
     var para2 = document.createElement("p"); // Create a <p> node
     para2.id = "R" + String(data[i].id);
-    var t3 = document.createTextNode(` Result: `);
+    var t3 = document.createTextNode(`   Result: `);
     para2.appendChild(t3);
 
     var s1 = document.createElement("span");
@@ -41,8 +41,8 @@ function createPresenters(data) {
     var nb = "div" + i;
     console.log(`div ${nb}`);
     document.getElementById("presenters").appendChild(div);
-    document.getElementById(nb).appendChild(para);
     document.getElementById(nb).appendChild(btn);
+    document.getElementById(nb).appendChild(para);
     document.getElementById(nb).appendChild(para2);
   }
   createListenerforP(data);
