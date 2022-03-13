@@ -6,10 +6,10 @@ function createPresenters(data) {
     div.className = "div";
     var para = document.createElement("p");
     para.id = String(data[i].id);
-    var t = document.createTextNode(`Presenter: ${data[i].name} `);
+    var t = document.createTextNode(`Presenter: ${data[i].name}, `);
     para.appendChild(t);
 
-    var t2 = document.createTextNode(` setTime: ${data[i].setTime} `); // Create a text node
+    var t2 = document.createTextNode(` set time: ${data[i].setTime}. \xa0  `); // Create a text node
     para.appendChild(t2); // Append the text to <p>
 
     let btn = document.createElement("image");
@@ -24,6 +24,7 @@ function createPresenters(data) {
 
     var para2 = document.createElement("p"); // Create a <p> node
     para2.id = "R" + String(data[i].id);
+    para2.style.visibility = "hidden";
     var t3 = document.createTextNode(`   Result: `);
     para2.appendChild(t3);
 
@@ -74,20 +75,23 @@ function createListenerforP(data) {
   }
 }
 function btnFn(btn) {
-  var id= Number(btn)+1;
+  var id = Number(btn) + 1;
   console.log(`id:${id}`);
-  var img = document.getElementsByTagName('img')[id].getAttribute('name');
-  console.log (`image ${img}`)
+  var img = document.getElementsByTagName("img")[id].getAttribute("name");
+  console.log(`image ${img}`);
+  var images = document.getElementsByTagName("image");
 
-  var images =document.getElementsByTagName("image")
-  // console.log(`images ${images[btn].innerHTML} src: ${images[btn].getAttribute("src")} src2: ${images[btn].src} `)
   if (img == `play`) {
-    console.log(`jestem w if `)
-    images[btn].innerHTML = `<img name = "stop" src= ./photos/button_img3-red.png>`;
-  }else{
-    console.log(`jestem w else `)
-    images[btn].innerHTML = `<img name = "play"  src= ./photos/button_img2-green.png>`;
-  };
+    console.log(`jestem w if `);
+    images[
+      btn
+    ].innerHTML = `<img name = "stop" src= ./photos/button_img3a-red.png>`;
+  } else {
+    console.log(`jestem w else `);
+    images[
+      btn
+    ].innerHTML = `<img name = "play"  src= ./photos/button_img2a-green.png>`;
+  }
   ipcRenderer.send("nameMsg", btn);
 }
 exports.createPresenters = createPresenters;

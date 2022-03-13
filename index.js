@@ -64,7 +64,9 @@ ipcRenderer.on("forWin1", function (event, arg) {
   updateResults(id);
   var nextStep = id + 1;
   console.log(`nextStep ${nextStep}`);
+
   nextAction(id);
+  changeImage(id);
 });
 var timer = setInterval(currentTime1, 1000);
 function currentTime1() {
@@ -85,6 +87,7 @@ function updateResults(id) {
   );
   var index = "S" + String(id);
   console.log(`i ${id}  timespent   ${results[id].timeSpent}`);
+  document.getElementById(`R${id}`).style.visibility = "visible";
   document.getElementById(index).innerHTML = results[id].resultProcent + "%";
   var indexa = "Sa" + String(id);
   console.log(`indexa   ${indexa}`);
@@ -93,9 +96,9 @@ function updateResults(id) {
 }
 function nextAction(id) {
   console.log(`before id ${id}, result.len ${results.length}`);
-  if (presenters.length > id + 1) {
-    ipcRenderer.send("nameMsg", id + 1);
-    console.log(`sent   action ${id + 1}`);
+  var nextId = Number(id) + 1;
+  if (presenters.length > nextId) {
+    ipcRenderer.send("nameMsg", nextId);
   }
 }
 const hamburger = document.querySelector(".hamburger");
@@ -111,3 +114,25 @@ const handleClick = () => {
 };
 
 hamburger.addEventListener("click", handleClick);
+
+function changeImage(id) {
+  var img = document.getElementsByTagName("img")[id + 1].getAttribute("name");
+  var images = document.getElementsByTagName("image");
+  console.log(`image ${images} id ${id} img ${img}`);
+  var nextId = Number(id) + 1;
+  if (img == `play`) {
+    console.log(`jestem w if `);
+    images[
+      id
+    ].innerHTML = `<img name = "stop" src= ./photos/button_img3a-red.png>`;
+  } else if (img == `stop`) {
+    console.log(`jestem w else `);
+    images[
+      id
+    ].innerHTML = `<img name = "play"  src= ./photos/button_img2a-green.png>`;
+    if (presenters.length > nextId)
+      images[
+        nextId
+      ].innerHTML = `<img name = "stop" src= ./photos/button_img3a-red.png>`;
+  }
+}

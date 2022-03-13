@@ -13,8 +13,15 @@ button {
     margin-left: 10px;
     margin-right: 10px;
     height: 24px; 
+    background-color: #219BFD;
+    color: white;
+    border: none;
+    width: 70px;
     
 }
+h2{
+  font-family: 'Arial Rounded MT Bold', sans-serif;
+}                                              
 .main {
   display: flex;
   justify-content: flex-start;
@@ -76,7 +83,7 @@ progress:before {
   margin-bottom: 5px;
 }
 #btnExit2{
-  background-color: #3DCD58;
+  background-color: #3dcd58;
   border: none;
   color: white;
   font-size: large;
@@ -88,7 +95,7 @@ html {
   box-sizing: border-box;
 }
 #addName{
-  margin-left: 14px;
+  margin-left: 11px;
 }
 *,
 *::before,
@@ -97,9 +104,9 @@ html {
 }
 
 body {
-  /* background-color: lightgrey; */
   padding: 0px;
   -webkit-app-region: drag;
+  font-family: 'Arial Rounded MT Bold', sans-serif;                                              
 }
 
 .hamburger {
