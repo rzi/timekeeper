@@ -9,7 +9,7 @@ function createPresenters(data) {
     var t = document.createTextNode(`Presenter: ${data[i].name}, `);
     para.appendChild(t);
 
-    var t2 = document.createTextNode(` set time: ${data[i].setTime}. \xa0  `); // Create a text node
+    var t2 = document.createTextNode(` set time: ${data[i].setTime} \xa0  `); // Create a text node
     para.appendChild(t2); // Append the text to <p>
 
     let btn = document.createElement("image");

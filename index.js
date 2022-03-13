@@ -89,7 +89,7 @@ function updateResults(id) {
   var indexa = "Sa" + String(id);
   console.log(`indexa   ${indexa}`);
   console.log(`results[i]a   ${results[id].timeSpent}`);
-  document.getElementById(indexa).innerHTML = results[id].timeSpent;
+  document.getElementById(indexa).innerHTML = Number((results[id].timeSpent)/60).toFixed(1);
 }
 function nextAction(id) {
   console.log(`before id ${id}, result.len ${results.length}`);

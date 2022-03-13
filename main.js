@@ -4,7 +4,7 @@ const path = require("path");
 
 function createWindow1() {
   window1 = new BrowserWindow({
-    width: 650,
+    width: 700,
     // height: 500,
     x: 0,
     y: 0,
@@ -26,9 +26,9 @@ function createWindow1() {
 }
 function createWindow2() {
   window2 = new BrowserWindow({
-    width: 400,
-    height: 120,
-    x: 850,
+    width: 500,
+    height: 100,
+    x: 900,
     y: 800,
     alwaysOnTop: true,
     maximizable: false,
@@ -73,6 +73,26 @@ function createWindow3() {
   window3.hide();
   return window3;
 }
+function createWindow4() {
+  window4 = new BrowserWindow({
+    width: 1000,
+    height: 600,
+    webPreferences: {
+      preload: path.join(__dirname, "preload.js"),
+      nodeIntegration: true,
+      contextIsolation: false,
+      enableRemoteModule: true,
+      // devTools: false
+    },
+  });
+  window4.loadURL(`file://${__dirname}/results.html`);
+  window4.webContents.openDevTools();
+  window4.on("closed", function () {
+    window4 = null;
+  });
+  window4.hide();
+  return window4;
+}
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -83,6 +103,7 @@ app.on("ready", () => {
   // window2.setMenuBarVisibility(false);
 
   window3 = createWindow3();
+  window4 = createWindow4();
   ipcMain.on("nameMsg", (event, arg) => {
     console.log("name inside main process is: ", arg); // this comes form within window 1 -> and into the mainProcess
     event.sender.send("nameReply", { not_right: false }); // sends back/replies to window 1 - "event" is a reference to this chanel.

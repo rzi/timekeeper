@@ -11,7 +11,8 @@ let item = null,
   presenterData,
   setTime,
   presenterDataLen,
-  elapsedTime;
+  timeoutMyOswego,
+  dirCount;
 let timeInSec = 0;
 var seconds;
 var temp;
@@ -23,6 +24,7 @@ ipcRenderer.on("forWin2", function (event, arg) {
     var tempAray = [timeInSec, procent, item];
     ipcRenderer.send("stop", tempAray);
     clearInterval(id);
+    clearTimeout(timeoutMyOswego);
     item = null;
   } else {
     item = parseInt(arg);
@@ -34,9 +36,12 @@ ipcRenderer.on("forWin2", function (event, arg) {
       presenterData = data[arg];
       timeInSec = 0;
       clearInterval(id);
+      clearTimeout(timeoutMyOswego);
       StartTimer();
-      // document.getElementById("setTime").innerHTML = presenterData.setTime;
       document.getElementById("countdown").innerHTML = presenterData.setTime;
+      console.log(`presenterData.setTime ${presenterData.setTime}`)
+      dirCount="down"
+      document.getElementById("countdown").style.color='black'
       countdown();
     });
   }
@@ -72,15 +77,15 @@ btnNext.addEventListener("click", (event) => {
   );
   if (item <= presenterDataLen && item != null) {
     ipcRenderer.send("nameMsg2", array);
-    clearInterval(id);
+    clearInterval(id);    
   } else {
     progress.value = 0;
   }
+  clearTimeout(timeoutMyOswego);
 });
 ipcRenderer.on("nameReply", (event, arg) => {
   console.log(` name reply arg ${JSON.stringify(arg)}`); // why/what is not right..
 });
-
 function countdown() {
   time = document.getElementById("countdown").innerHTML;
   timeArray = time.split(":");
@@ -95,24 +100,27 @@ function countdown() {
     timeArray = time.split(":");
     seconds = timeToSeconds(timeArray);
   }
-  seconds = seconds - 1;
+  if (dirCount=="down") {
+    seconds = seconds - 1
+  } else {
+    seconds=seconds+1; 
+    dirCount="up";
+  }
   console.log(`seconds2 ${seconds}`);
   temp = document.getElementById("countdown");
   temp.innerHTML = secondsToTime(seconds);
-  var timeoutMyOswego = setTimeout(countdown, 1000);
+   timeoutMyOswego = setTimeout(countdown, 1000);
   if (secondsToTime(seconds) == "00:00:00") {
-    clearTimeout(timeoutMyOswego); //stop timer
-    console.log('Time"s UP');
+    dirCount="up"
+    temp.style.color="red"
   }
 }
-
 function timeToSeconds(timeArray) {
-  var hours = 60 * timeArray[0] * 1;
-  var minutes = timeArray[1] * 1;
-  var seconds = hours + minutes * 60 + timeArray[2] * 1;
+  var hours = 60 *60* Number(timeArray[0]);
+  var minutes = 60 * Number(timeArray[1]) ;
+  var seconds = hours + minutes  + Number(timeArray[2]);
   return seconds;
 }
-
 function secondsToTime(secs) {
   var hours = Math.floor(secs / (60 * 60));
   hours = hours < 10 ? "0" + hours : hours;
@@ -124,5 +132,4 @@ function secondsToTime(secs) {
   seconds = seconds < 10 ? "0" + seconds : seconds;
   console.log(`time2: ${hours + ":" + minutes + ":" + seconds}`);
   return hours + ":" + minutes + ":" + seconds;
-  //hours + ':' +
 }
