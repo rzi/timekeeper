@@ -14,8 +14,10 @@ function createPresenters(data) {
 
     let btn = document.createElement("image");
     btn.id = i;
+    // btn.name ="play"
     // btn.innerHTML = "Start/Stop";
-    btn.innerHTML = "<img src= ./photos/button_img2.png>";
+    btn.innerHTML = `<img name= 'play'  src= ./photos/button_img2.png>`;
+    // = "<img src= ./photos/button_img2.png>";
     btn.addEventListener("click", function () {
       btnFn(btn.id);
     });
@@ -72,7 +74,20 @@ function createListenerforP(data) {
   }
 }
 function btnFn(btn) {
-  console.log(`btn ${btn}`);
+  var id= Number(btn)+1;
+  console.log(`id:${id}`);
+  var img = document.getElementsByTagName('img')[id].getAttribute('name');
+  console.log (`image ${img}`)
+
+  var images =document.getElementsByTagName("image")
+  // console.log(`images ${images[btn].innerHTML} src: ${images[btn].getAttribute("src")} src2: ${images[btn].src} `)
+  if (img == `play`) {
+    console.log(`jestem w if `)
+    images[btn].innerHTML = `<img name = "stop" src= ./photos/button_img3.png>`;
+  }else{
+    console.log(`jestem w else `)
+    images[btn].innerHTML = `<img name = "play"  src= ./photos/button_img2.png>`;
+  };
   ipcRenderer.send("nameMsg", btn);
 }
 exports.createPresenters = createPresenters;
