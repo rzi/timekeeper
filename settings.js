@@ -31,10 +31,10 @@ readTextFile("./test.json", function (text) {
 function createPresenters(index, data) {
   for (i = 0; i < index; i++) {
     var para = document.createElement("p"); // Create a <p> node
-    var t = document.createTextNode(`id: ${data[i].name}`); // Create a text node
+    var t = document.createTextNode(`Presenter name: ${data[i].name},`); // Create a text node
     para.id = String(data[i].id);
     para.appendChild(t); // Append the text to <p>
-    var t2 = document.createTextNode(` setTime: ${data[i].setTime}`); // Create a text node
+    var t2 = document.createTextNode(` time: ${data[i].setTime}`); // Create a text node
     para.appendChild(t2); // Append the text to <p>
     document.getElementById("presenters").appendChild(para); // Append <p> to <div> with id="myDIV"
   }

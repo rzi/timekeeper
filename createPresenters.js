@@ -83,10 +83,10 @@ function btnFn(btn) {
   // console.log(`images ${images[btn].innerHTML} src: ${images[btn].getAttribute("src")} src2: ${images[btn].src} `)
   if (img == `play`) {
     console.log(`jestem w if `)
-    images[btn].innerHTML = `<img name = "stop" src= ./photos/button_img3.png>`;
+    images[btn].innerHTML = `<img name = "stop" src= ./photos/button_img3-red.png>`;
   }else{
     console.log(`jestem w else `)
-    images[btn].innerHTML = `<img name = "play"  src= ./photos/button_img2.png>`;
+    images[btn].innerHTML = `<img name = "play"  src= ./photos/button_img2-green.png>`;
   };
   ipcRenderer.send("nameMsg", btn);
 }

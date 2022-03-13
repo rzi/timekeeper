@@ -63,16 +63,33 @@ progress:before {
   border-width: 3px;
   border-style: solid;
   border-color: #3DCD58;
+ 
 
 }
-h3{
+#today{
   padding-left: 20px;
 }
-
+#btnAddP{
+  margin-top: 5px;
+}
+#addName{
+  margin-bottom: 5px;
+}
+#btnExit2{
+  background-color: #3DCD58;
+  border: none;
+  color: white;
+  font-size: large;
+}
+#addPresenter {
+padding-left: 20px;
+}
 html {
   box-sizing: border-box;
 }
-
+#addName{
+  margin-left: 14px;
+}
 *,
 *::before,
 *::after {

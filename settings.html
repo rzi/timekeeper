@@ -10,15 +10,29 @@
     <link href="./styles.css" rel="stylesheet" />
     <title>Settings</title>
   </head>
-  <body>
-    <h1>Settings of main parameters:</h1>
-    <!-- <div>
-      Number of presenters <input id="numberOfPresenters" type="number" />
-    </div> -->
-    <div id="presenters"></div>
+  <body class="main1">
+    <div class="header">
+      <div class="main_header" id="green_banner">
+        <span></span>
+        <div class="appImage">
+          <img
+            src="./photos/SE_logo_white_.jpg"
+            alt="support@Schneider"
+            role="presentation"
+          />
+        </div>
+      </div>
+      <div class="title">
+        <h2>Settings</h2>
+      </div>
+      <div class="MenuButton">
+        <button id ="btnExit2" onclick="btnExit()">X</button>
+      </div>
+    </div>
+  
     <div id="addPresenter">
-      <p>Add presenter:</p>
-      <label for="addP">Presenter name</label>
+      <h3>Add presenters:</h3>
+      <label for="addName">Presenter name</label>
       <input id="addName" type="text" name="addName" /><br />
       <label for="addTime">Presentation time</label>
       <input
@@ -31,8 +45,9 @@
       /><br />
       <button id="btnAddP" type="submit">Add</button>
     </div>
+    <h3 id="today">List of presenters</h3>
+    <div id="presenters"></div>
     <br />
-    <button onclick="btnExit()">Exit settings</button>
     <script src="./renderer.js"></script>
     <script src="./settings.js"></script>
   </body>
