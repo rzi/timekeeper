@@ -97,6 +97,9 @@ html {
 #addName{
   margin-left: 11px;
 }
+#countdown{
+  margin-left: 5px;
+}
 *,
 *::before,
 *::after {

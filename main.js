@@ -15,7 +15,6 @@ function createWindow1() {
       contextIsolation: false,
       enableRemoteModule: true,
       devTools: true,
-
     },
   });
   window1.loadURL(`file://${__dirname}/index.html`);
@@ -34,16 +33,16 @@ function createWindow2() {
     alwaysOnTop: true,
     maximizable: false,
     // transparent: true,
-    autoHideMenuBar: true,
+    //autoHideMenuBar: true,
 
-    titleBarOverlay: true,
+    // titleBarOverlay: true,
 
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
-      devTools: false,
+      devTools: true,
     },
   });
   window2.loadURL(`file://${__dirname}/progressBar.html`);
@@ -81,7 +80,7 @@ app.on("ready", () => {
   window1 = createWindow1();
   //window1.setMenuBarVisibility(false);
   window2 = createWindow2();
-  window2.setMenuBarVisibility(false);
+  // window2.setMenuBarVisibility(false);
 
   window3 = createWindow3();
   ipcMain.on("nameMsg", (event, arg) => {

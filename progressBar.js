@@ -10,8 +10,11 @@ let item = null,
   procent,
   presenterData,
   setTime,
-  presenterDataLen;
+  presenterDataLen,
+  elapsedTime;
 let timeInSec = 0;
+var seconds;
+var temp;
 
 ipcRenderer.on("forWin2", function (event, arg) {
   console.log(`from win2 ${arg}`);
@@ -32,6 +35,9 @@ ipcRenderer.on("forWin2", function (event, arg) {
       timeInSec = 0;
       clearInterval(id);
       StartTimer();
+      // document.getElementById("setTime").innerHTML = presenterData.setTime;
+      document.getElementById("countdown").innerHTML = presenterData.setTime;
+      countdown();
     });
   }
 });
@@ -74,3 +80,49 @@ btnNext.addEventListener("click", (event) => {
 ipcRenderer.on("nameReply", (event, arg) => {
   console.log(` name reply arg ${JSON.stringify(arg)}`); // why/what is not right..
 });
+
+function countdown() {
+  time = document.getElementById("countdown").innerHTML;
+  timeArray = time.split(":");
+  console.log(`timeArray ${timeArray}`);
+  seconds = Number(timeToSeconds(timeArray));
+  console.log(`seconds ${seconds}`);
+  if (seconds == "") {
+    temp = document.getElementById("countdown");
+    var GivenTime = document.getElementById("countdown").innerHTML;
+    temp.innerHTML = GivenTime;
+    time = document.getElementById("countdown").innerHTML;
+    timeArray = time.split(":");
+    seconds = timeToSeconds(timeArray);
+  }
+  seconds = seconds - 1;
+  console.log(`seconds2 ${seconds}`);
+  temp = document.getElementById("countdown");
+  temp.innerHTML = secondsToTime(seconds);
+  var timeoutMyOswego = setTimeout(countdown, 1000);
+  if (secondsToTime(seconds) == "00:00:00") {
+    clearTimeout(timeoutMyOswego); //stop timer
+    console.log('Time"s UP');
+  }
+}
+
+function timeToSeconds(timeArray) {
+  var hours = 60 * timeArray[0] * 1;
+  var minutes = timeArray[1] * 1;
+  var seconds = hours + minutes * 60 + timeArray[2] * 1;
+  return seconds;
+}
+
+function secondsToTime(secs) {
+  var hours = Math.floor(secs / (60 * 60));
+  hours = hours < 10 ? "0" + hours : hours;
+  var divisor_for_minutes = secs % (60 * 60);
+  var minutes = Math.floor(divisor_for_minutes / 60);
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  var divisor_for_seconds = divisor_for_minutes % 60;
+  var seconds = Math.ceil(divisor_for_seconds);
+  seconds = seconds < 10 ? "0" + seconds : seconds;
+  console.log(`time2: ${hours + ":" + minutes + ":" + seconds}`);
+  return hours + ":" + minutes + ":" + seconds;
+  //hours + ':' +
+}

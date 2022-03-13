@@ -62,9 +62,6 @@ ipcRenderer.on("forWin1", function (event, arg) {
     resultProcent: `${resultProcent}`,
   };
   updateResults(id);
-  var nextStep = id + 1;
-  console.log(`nextStep ${nextStep}`);
-
   nextAction(id);
   changeImage(id);
 });
