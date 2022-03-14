@@ -5,8 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build" :
-      "electron-builder -mwl"
+    "build": "electron-builder -mwl",
+    "build2" :"electron-builder -w"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -19,6 +19,7 @@
   "author": "RZI",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^16.0.5"
+    "electron": "^16.0.5",
+    "electron-builder": "^22.14.13"
   }
 }
