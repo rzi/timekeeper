@@ -5,7 +5,21 @@ let selectElement = document.getElementById("numberOfPresenters");
 let btnAddP = document.getElementById("btnAddP");
 let p = document.getElementsByTagName("p");
 let copyData = [];
-
+if (!fs.existsSync("./test.json")) {
+  fs.writeFile('test.json', '[{"id":0,"name":"test","active":true,"setTime":"00:02:00"}]', function (err) {
+    if (err) throw err;
+    console.log('File is created successfully.');
+  });
+}else{
+  readTextFile("./test.json", function (text) {
+    var data = JSON.parse(text);
+    console.log(`dane: ${JSON.stringify(data)}`);
+    const nbOfItems = data.length;
+    console.log(`data0 ${nbOfItems}`);
+    createPresenters(parseInt(nbOfItems), data);
+    copyData = [...data];
+  });
+}
 btnAddP.addEventListener("click", function () {
   console.log("btn");
   console.log(`copyData: ${JSON.stringify(copyData)}`);
@@ -20,14 +34,7 @@ btnAddP.addEventListener("click", function () {
   //refresh
   location.reload();
 });
-readTextFile("./test.json", function (text) {
-  var data = JSON.parse(text);
-  console.log(`dane: ${JSON.stringify(data)}`);
-  const nbOfItems = data.length;
-  console.log(`data0 ${nbOfItems}`);
-  createPresenters(parseInt(nbOfItems), data);
-  copyData = [...data];
-});
+
 function createPresenters(index, data) {
   for (i = 0; i < index; i++) {
     var para = document.createElement("p"); // Create a <p> node

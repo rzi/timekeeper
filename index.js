@@ -13,7 +13,7 @@ let name = document.getElementById("name");
 // check if presenters are set?
 if (!fs.existsSync("./test.json")) {
   window.location = "settings.html";
-}
+}//else{
 readText.readText("./test.json", function (text) {
   var data = JSON.parse(text);
   console.log(`dane: ${JSON.stringify(data)}`);
@@ -23,6 +23,7 @@ readText.readText("./test.json", function (text) {
   console.log(`nb of presenters ${presenters.length}`);
   createPresenters.createPresenters(presenters);
 });
+//}
 ipcRenderer.on("nameReply", (event, arg) => {
   console.log(` name reply arg ${JSON.stringify(arg)}`); // why/what is not right..
 });
