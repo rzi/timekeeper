@@ -133,6 +133,7 @@ body {
 .hamburger--active {
   /* -webkit-transform: translatex(350px);
   transform: translatex(350px); */
+  
 }
 
 .hamburger__box {

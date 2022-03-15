@@ -24,6 +24,15 @@ readText.readText("./test.json", function (text) {
   createPresenters.createPresenters(presenters);
 });
 //}
+
+// 
+if (!fs.existsSync("./results.txt")) {
+  fs.writeFile('results.txt', '', function (err) {
+    if (err) throw err;
+    console.log('File is created successfully.');
+  });
+}
+
 ipcRenderer.on("nameReply", (event, arg) => {
   console.log(` name reply arg ${JSON.stringify(arg)}`); // why/what is not right..
 });
@@ -91,6 +100,10 @@ function updateResults(id) {
   console.log(`indexa   ${indexa}`);
   console.log(`results[i]a   ${results[id].timeSpent}`);
   document.getElementById(indexa).innerHTML = Number((results[id].timeSpent)/60).toFixed(1);
+  fs.appendFile('results.txt', `${new Date().toISOString().slice(0, 19)} name:${presenters[id].name} setTime:${presenters[id].setTime} T:${results[id].timeSpent} %:${results[id].resultProcent }\n `, function (err) {
+    if (err) throw err;
+    console.log('Saved!');
+  });
 }
 function nextAction(id) {
   console.log(`before id ${id}, result.len ${results.length}`);

@@ -27,7 +27,7 @@ function createWindow1() {
 function createWindow2() {
   window2 = new BrowserWindow({
     width: 500,
-    height: 150,
+    height: 200,
     x: 900,
     y: 800,
     alwaysOnTop: true,
@@ -42,7 +42,7 @@ function createWindow2() {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
-      devTools: true,
+      devTools: false,
     },
   });
   window2.loadURL(`file://${__dirname}/progressBar.html`);
