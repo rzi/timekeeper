@@ -26,48 +26,62 @@ fs.readFile("results.txt", (e, data) => {
 });
 
 fs.readFile("./results.txt", "utf-8", (err, file) => {
-  const lines = file.split("\n");
-  const cell1 = file.split(",");
-  var mybody = document.getElementsByTagName("body")[0];
-  mytable = document.createElement("table");
-  mytablebody = document.createElement("tbody");
-  for (i = 0; i < lines.length; i++) {
-    //tabela
+    var theadData = [
+         "Name",
+         "Category",
+         "Years"];
+    const tbodyData = ['Simon Ugorji', 'Web Developer', '2',
+        'John Doe', 'App Developer', '3',
+         'Cherish Junior', 'Full Stack Developer', '4']
+    ;
+    const tableClass = "table";
+    //increment
+    var t;
+    //create table with classlist
+    var table = document.createElement("table");
+    table.setAttribute("class", tableClass);
+    //create table head
+    var thead = document.createElement("thead");
+    //create table head table row
+    var theadTr = document.createElement("tr");
+    //Loop through the table head dataset provided
+    for(t = 0; t <= Object.keys(theadData).length; t++){
+        //create table head > table row >  table data
+        var td = document.createElement("td");
+        //set inner text to be a single value from the loop
+        td.innerText = theadData[t];
+        //set class
+        // td.setAttribute("class", theadData[t]);
+        //append each of the table data to the thead row
+        theadTr.appendChild(td);
+        }
+        //append thead row to thead
+        thead.appendChild(theadTr);
+        /**** TBODY ****/
+        var tbody = document.createElement("tbody");
+        //Init table body object
+        var tbodyTd =  {};
+        //create table body table data
+        var td; 
 
-    mycurrent_row = document.createElement("tr");
-    for (j = 0; j < cell1.length; j++) {
-      mycurrent_cell = document.createElement("td");
-      mycurrent_cell.style.border = "1px solid red";
-      currenttext = document.createTextNode(cell1[j]);
-      mycurrent_cell.appendChild(currenttext);
-      mycurrent_row.appendChild(mycurrent_cell);
-    }
-
-    mytablebody.appendChild(mycurrent_row);
-    mytable.appendChild(mytablebody);
-    mybody.appendChild(mytable);
-  }
+            //for each record, create a table row
+            var tbodyTr = document.createElement("tr");
+            //loop through the dataset again to create all table data that we need
+                for(var a = 0; a <= Object.keys(tbodyData).length; ++a){
+                    //add a new table data property to the table body object
+                   tbodyTd[a]  = document.createElement("td");
+                   // set the inner text of the table data within our object
+                   tbodyTd[a].innerText = tbodyData[a];
+                    //append single table data to table row
+                    tbodyTr.appendChild(tbodyTd[a]);
+                }
+                //after table data set loop, to create the table data we need,
+                //append that data to table body table row    
+                tbody.appendChild(tbodyTr);
+        
+            //append table head to table
+            table.appendChild(thead);
+            //append table body to table
+            table.appendChild(tbody);
+            document.querySelector('#table').appendChild(table);
 });
-
-// var mybody = document.getElementsByTagName("body")[0];
-// mytable = document.createElement("table");
-// mytablebody = document.createElement("tbody");
-// for(var row = 0; row < 2; row++) {
-//     mycurrent_row=document.createElement("tr");
-//     for(var col = 0; col < 2; col++) {
-//         mycurrent_cell = document.createElement("td");
-//         currenttext = document.createTextNode("cell is: " + row + col);
-//         mycurrent_cell.appendChild(currenttext);
-//         mycurrent_row.appendChild(mycurrent_cell);
-//         // set the cell background color
-//         // if the column is 0. If the column is 1 hide the cell
-//         if (col === 0) {
-//             mycurrent_cell.style.background = "rgb(255,0,0)";
-//         } else {
-//             mycurrent_cell.style.display = "none";
-//         }
-//     }
-//     mytablebody.appendChild(mycurrent_row);
-// }
-// mytable.appendChild(mytablebody);
-// mybody.appendChild(mytable);
