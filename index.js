@@ -13,7 +13,7 @@ let name = document.getElementById("name");
 // check if presenters are set?
 if (!fs.existsSync("./test.json")) {
   window.location = "settings.html";
-}//else{
+} //else{
 readText.readText("./test.json", function (text) {
   var data = JSON.parse(text);
   console.log(`dane: ${JSON.stringify(data)}`);
@@ -25,11 +25,11 @@ readText.readText("./test.json", function (text) {
 });
 //}
 
-// 
+//
 if (!fs.existsSync("./results.txt")) {
-  fs.writeFile('results.txt', '', function (err) {
+  fs.writeFile("results.txt", "", function (err) {
     if (err) throw err;
-    console.log('File is created successfully.');
+    console.log("File is created successfully.");
   });
 }
 
@@ -99,10 +99,19 @@ function updateResults(id) {
   var indexa = "Sa" + String(id);
   console.log(`indexa   ${indexa}`);
   console.log(`results[i]a   ${results[id].timeSpent}`);
-  document.getElementById(indexa).innerHTML = Number((results[id].timeSpent)/60).toFixed(1);
-  fs.appendFile('results.txt', `${new Date().toISOString().slice(0, 19)} name:${presenters[id].name} setTime:${presenters[id].setTime} T:${results[id].timeSpent} %:${results[id].resultProcent }\n `, function (err) {
+  document.getElementById(indexa).innerHTML = Number(
+    results[id].timeSpent / 60
+  ).toFixed(1);
+  var record = [];
+  record.push(new Date().toISOString().slice(0, 19));
+  record.push(presenters[id].name);
+  record.push(presenters[id].setTime);
+  record.push(results[id].timeSpent);
+  record.push(results[id].resultProcent);
+
+  fs.appendFile("results.txt", `${record}\n`, function (err) {
     if (err) throw err;
-    console.log('Saved!');
+    console.log("Saved!");
   });
 }
 function nextAction(id) {

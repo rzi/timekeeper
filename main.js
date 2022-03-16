@@ -56,7 +56,7 @@ function createWindow2() {
 function createWindow3() {
   window3 = new BrowserWindow({
     width: 1000,
-    height: 600,
+    // height: 600,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true,
@@ -76,7 +76,7 @@ function createWindow3() {
 function createWindow4() {
   window4 = new BrowserWindow({
     width: 1000,
-    height: 600,
+    // height: 600,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true,
