@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron .",
     "build": "electron-builder -mwl",
-    "build2": "electron-builder -w"
+    "build2" :"electron-builder -w"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
