@@ -109,10 +109,18 @@ function updateResults(id) {
   record.push(results[id].timeSpent);
   record.push(results[id].resultProcent);
 
-  fs.appendFile("results.txt", `${record}\n`, function (err) {
-    if (err) throw err;
-    console.log("Saved!");
+  var data = fs.readFileSync('./results.txt').toString().split("\n");
+  data.splice(0, 0, record );
+  var text = data.join("\n");
+
+  fs.writeFile('./results.txt', text, function (err) {
+    if (err) return err;
   });
+
+  // fs.appendFile("results.txt", `${record}\n`, function (err) {
+  //   if (err) throw err;
+  //   console.log("Saved!");
+  // });
 }
 function nextAction(id) {
   console.log(`before id ${id}, result.len ${results.length}`);

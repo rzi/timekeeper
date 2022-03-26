@@ -18,7 +18,7 @@ const handleClick = () => {
 
 hamburger.addEventListener("click", handleClick);
 //table
-var paginationNb = 5;
+var paginationNb = 8;
 var currentPage = 1;
 var pag;
 
@@ -54,9 +54,7 @@ function loadTable() {
     var theadData = ["Date", "Presenter", "Set time", "Result", "%"];
     const tableClass = "table";
     var t;
-
     var table = document.createElement("table");
-
     table.setAttribute("class", tableClass);
     table .setAttribute("id", "myTableId");
     var thead = document.createElement("thead");
@@ -71,18 +69,16 @@ function loadTable() {
     var tbodyTd = {};
     var td;
     var rows = file.split("\n");
+    var rowsLen=rows.length;
+    console.log(`rowsLen ${rowsLen}`)
     pag = parseInt(rows.length / paginationNb);
-    console.log(` panination ${currentPage} / ${pag}`);
+    console.log(`panination ${currentPage} / ${pag}`);
     document.getElementById(
       "pagination"
     ).innerHTML = ` ${currentPage} / ${pag} `;
-    for (
-      var a = currentPage * paginationNb;
-      a < currentPage * paginationNb + paginationNb;
-      a++
-    ) {
+    for (var a = 0;a <  paginationNb;a++) {
       var tbodyTr = document.createElement("tr");
-      var myRow = rows[a];
+      var myRow = rows[(currentPage-1)*paginationNb+a];
       for (var j = 0; j <= 4; j++) {
         console.log(`myRow ${myRow}`);
         myCol = myRow.toString().split(",");
@@ -101,7 +97,6 @@ function loadTable() {
     document.querySelector("#table").appendChild(table);
   });
 }
-
 function delTable() {
   var el = document.getElementById('table');
   while( el.hasChildNodes() ){
