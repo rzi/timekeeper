@@ -31,7 +31,7 @@ function clickPrev() {
     document.getElementById(
       "pagination"
     ).innerHTML = ` ${currentPage} / ${pag} `;
-    document.getElementById("table").remove();
+
     delTable();
     loadTable();
   }
@@ -43,7 +43,7 @@ function clickNext() {
     document.getElementById(
       "pagination"
     ).innerHTML = ` ${currentPage} / ${pag} `;
-    document.getElementById("table").remove();
+
     delTable();
     loadTable();
   }
@@ -58,6 +58,7 @@ function loadTable() {
     var table = document.createElement("table");
 
     table.setAttribute("class", tableClass);
+    table .setAttribute("id", "myTableId");
     var thead = document.createElement("thead");
     var theadTr = document.createElement("tr");
     for (t = 0; t < theadData.length; t++) {
@@ -102,6 +103,8 @@ function loadTable() {
 }
 
 function delTable() {
-  var element = document.getElementById("table");
-  element.classList.remove("table");
+  var el = document.getElementById('table');
+  while( el.hasChildNodes() ){
+      el.removeChild(el.lastChild);
+  }
 }
