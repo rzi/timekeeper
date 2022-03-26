@@ -53,17 +53,21 @@ fs.readFile("./results.txt", "utf-8", (err, file) => {
   var tbody = document.createElement("tbody");
   var tbodyTd = {};
   var td;
-  var file2 = file.toString().split("\n");
-  var file3 = file2.toString().split(",");
-  for (var a = 0; a <= file2.length; ++a) {
+  var rows = file.split("\n");
+  // var file3 = file2.toString().split(",");
+  // console.log(`file2 ${file2}`);
+  // console.log(`file3 ${file3}`);
+  for (var a = 0; a < rows.length - 1; a++) {
     var tbodyTr = document.createElement("tr");
+    var myRow = rows[a];
     for (var j = 0; j <= 4; j++) {
-      console.log(`file2 ${file2[1].split(",")}`);
+      console.log(`myRow ${myRow}`);
+      myCol = myRow.toString().split(",");
       tbodyTd[a] = document.createElement("td");
       if (j == 0) {
-        tbodyTd[a].innerText = file3[j].replace("T", " ");
+        tbodyTd[a].innerText = myCol[j].replace("T", " ");
       } else {
-        tbodyTd[a].innerText = file3[j];
+        tbodyTd[a].innerText = myCol[j];
       }
       tbodyTr.appendChild(tbodyTd[a]);
     }
