@@ -13,31 +13,9 @@ const handleClick = () => {
 };
 
 hamburger.addEventListener("click", handleClick);
-
-//read results
-// fs.readFile("results.txt", (e, data) => {
-//   if (e) throw e;
-//   console.log(data);
-//   var para = document.createElement("p"); // Create a <p> node
-//   var t = document.createTextNode(`${data}`); // Create a text node
-//   para.id = "paragraph";
-//   para.appendChild(t); // Append the text to <p>
-//   document.getElementById("results").appendChild(para);
-// });
-
+//table
 fs.readFile("./results.txt", "utf-8", (err, file) => {
   var theadData = ["Date", "Presenter", "Set time", "Result", "%"];
-  const tbodyData = [
-    "Simon Ugorji",
-    "Web Developer",
-    "2",
-    "John Doe",
-    "App Developer",
-    "3",
-    "Cherish Junior",
-    "Full Stack Developer",
-    "4",
-  ];
   const tableClass = "table";
   var t;
   var table = document.createElement("table");
@@ -54,9 +32,6 @@ fs.readFile("./results.txt", "utf-8", (err, file) => {
   var tbodyTd = {};
   var td;
   var rows = file.split("\n");
-  // var file3 = file2.toString().split(",");
-  // console.log(`file2 ${file2}`);
-  // console.log(`file3 ${file3}`);
   for (var a = 0; a < rows.length - 1; a++) {
     var tbodyTr = document.createElement("tr");
     var myRow = rows[a];
