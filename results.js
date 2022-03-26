@@ -2,6 +2,10 @@ const fs = require("fs");
 
 const hamburger = document.querySelector(".hamburger");
 const nav = document.querySelector(".navigation");
+const btnPrev = document.getElementById("btnPrev");
+const btnNext = document.getElementById("btnNext");
+btnPrev.addEventListener("click", clickPrev);
+btnNext.addEventListener("click", clickNext);
 
 const handleClick = () => {
   hamburger.classList.toggle("hamburger--active");
@@ -14,41 +18,90 @@ const handleClick = () => {
 
 hamburger.addEventListener("click", handleClick);
 //table
-fs.readFile("./results.txt", "utf-8", (err, file) => {
-  var theadData = ["Date", "Presenter", "Set time", "Result", "%"];
-  const tableClass = "table";
-  var t;
-  var table = document.createElement("table");
-  table.setAttribute("class", tableClass);
-  var thead = document.createElement("thead");
-  var theadTr = document.createElement("tr");
-  for (t = 0; t < theadData.length; t++) {
-    var td = document.createElement("td");
-    td.innerText = theadData[t];
-    theadTr.appendChild(td);
+var paginationNb = 5;
+var currentPage = 1;
+var pag;
+
+loadTable();
+
+function clickPrev() {
+  if (currentPage > 1) {
+    currentPage--;
+    console.log(`currentPage ${currentPage}`);
+    document.getElementById(
+      "pagination"
+    ).innerHTML = ` ${currentPage} / ${pag} `;
+    document.getElementById("table").remove();
+    delTable();
+    loadTable();
   }
-  thead.appendChild(theadTr);
-  var tbody = document.createElement("tbody");
-  var tbodyTd = {};
-  var td;
-  var rows = file.split("\n");
-  for (var a = 0; a < rows.length - 1; a++) {
-    var tbodyTr = document.createElement("tr");
-    var myRow = rows[a];
-    for (var j = 0; j <= 4; j++) {
-      console.log(`myRow ${myRow}`);
-      myCol = myRow.toString().split(",");
-      tbodyTd[a] = document.createElement("td");
-      if (j == 0) {
-        tbodyTd[a].innerText = myCol[j].replace("T", " ");
-      } else {
-        tbodyTd[a].innerText = myCol[j];
-      }
-      tbodyTr.appendChild(tbodyTd[a]);
+}
+function clickNext() {
+  if (currentPage < pag) {
+    currentPage++;
+    console.log(`currentPage ${currentPage}`);
+    document.getElementById(
+      "pagination"
+    ).innerHTML = ` ${currentPage} / ${pag} `;
+    document.getElementById("table").remove();
+    delTable();
+    loadTable();
+  }
+}
+
+function loadTable() {
+  fs.readFile("./results.txt", "utf-8", (err, file) => {
+    var theadData = ["Date", "Presenter", "Set time", "Result", "%"];
+    const tableClass = "table";
+    var t;
+
+    var table = document.createElement("table");
+
+    table.setAttribute("class", tableClass);
+    var thead = document.createElement("thead");
+    var theadTr = document.createElement("tr");
+    for (t = 0; t < theadData.length; t++) {
+      var td = document.createElement("td");
+      td.innerText = theadData[t];
+      theadTr.appendChild(td);
     }
-    tbody.appendChild(tbodyTr);
-  }
-  table.appendChild(thead);
-  table.appendChild(tbody);
-  document.querySelector("#table").appendChild(table);
-});
+    thead.appendChild(theadTr);
+    var tbody = document.createElement("tbody");
+    var tbodyTd = {};
+    var td;
+    var rows = file.split("\n");
+    pag = parseInt(rows.length / paginationNb);
+    console.log(` panination ${currentPage} / ${pag}`);
+    document.getElementById(
+      "pagination"
+    ).innerHTML = ` ${currentPage} / ${pag} `;
+    for (
+      var a = currentPage * paginationNb;
+      a < currentPage * paginationNb + paginationNb;
+      a++
+    ) {
+      var tbodyTr = document.createElement("tr");
+      var myRow = rows[a];
+      for (var j = 0; j <= 4; j++) {
+        console.log(`myRow ${myRow}`);
+        myCol = myRow.toString().split(",");
+        tbodyTd[a] = document.createElement("td");
+        if (j == 0) {
+          tbodyTd[a].innerText = myCol[j].replace("T", " ");
+        } else {
+          tbodyTd[a].innerText = myCol[j];
+        }
+        tbodyTr.appendChild(tbodyTd[a]);
+      }
+      tbody.appendChild(tbodyTr);
+    }
+    table.appendChild(thead);
+    table.appendChild(tbody);
+    document.querySelector("#table").appendChild(table);
+  });
+}
+
+function delTable() {
+  var element = document.getElementById("table");
+  element.classList.remove("table");
+}
