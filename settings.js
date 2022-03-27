@@ -7,11 +7,11 @@ let btnAddP = document.getElementById("btnAddP");
 let p = document.getElementsByTagName("p");
 let copyData = [];
 
-const absolutePath = path.resolve("./", "test.json");
+const absolutePath = path.resolve("./", "presenters.json");
 
 if (!fs.existsSync(absolutePath)) {
   fs.writeFile(
-    "test.json",
+    "presenters.json",
     '[{"id":0,"name":"test","active":true,"setTime":"00:02:00"}]',
     function (err) {
       if (err) throw err;

@@ -9,7 +9,7 @@ let time = document.getElementById("time");
 
 presenters = [];
 results = [];
-const absolutePath = path.resolve("./", "test.json");
+const absolutePath = path.resolve("./", "presenters.json");
 const absolutePathResults = path.resolve("./", "results.txt");
 
 let name = document.getElementById("name");

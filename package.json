@@ -18,8 +18,8 @@
   },
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder -mwl",
-    "build2" :"electron-builder -w"
+    "build-all": "electron-builder -mwl",
+    "build-w" :"electron-builder -w"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
