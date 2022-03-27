@@ -47,7 +47,6 @@ btnAddP.addEventListener("click", function () {
   //refresh
   location.reload();
 });
-
 function createPresenters(index, data) {
   for (i = 0; i < index; i++) {
     var para = document.createElement("p"); // Create a <p> node
