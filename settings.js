@@ -12,7 +12,7 @@ const absolutePath = path.resolve("./", "presenters.json");
 if (!fs.existsSync(absolutePath)) {
   fs.writeFile(
     "presenters.json",
-    '[\n{"id":0,"name":"test","active":true,"setTime":"00:02:00"}\n]', //
+    '[{"id":0,"name":"Presenter1 ","active":true,"setTime":"00:01:00"},{"id":1,"name":"Presenter2 ","active":true,"setTime":"00:02:00"},{"id":2,"name":"Presenter3 ","active":true,"setTime":"00:03:00"}]',
     function (err) {
       if (err) throw err;
       console.log("File is created successfully.");

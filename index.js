@@ -27,7 +27,6 @@ readText.readText(absolutePath, function (text) {
   createPresenters.createPresenters(presenters);
 });
 //}
-
 if (!fs.existsSync(absolutePathResults)) {
   fs.writeFile(absolutePathResults, "", function (err) {
     if (err) throw err;
