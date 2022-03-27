@@ -25,14 +25,12 @@ readText.readText("./test.json", function (text) {
 });
 //}
 
-//
 if (!fs.existsSync("./results.txt")) {
   fs.writeFile("results.txt", "", function (err) {
     if (err) throw err;
     console.log("File is created successfully.");
   });
 }
-
 ipcRenderer.on("nameReply", (event, arg) => {
   console.log(` name reply arg ${JSON.stringify(arg)}`); // why/what is not right..
 });
@@ -78,15 +76,9 @@ ipcRenderer.on("forWin1", function (event, arg) {
 var timer = setInterval(currentTime1, 1000);
 function currentTime1() {
   var dateTime = new Date();
-  today.innerHTML = dateTime.toLocaleDateString();
-  var minutes, seconds;
-  dateTime.getMinutes() < 10
-    ? (minutes = "0" + dateTime.getMinutes())
-    : (minutes = dateTime.getMinutes());
-  dateTime.getSeconds() < 10
-    ? (seconds = "0" + dateTime.getSeconds())
-    : (seconds = dateTime.getSeconds());
-  time.innerHTML = dateTime.getHours() + ":" + minutes + ":" + seconds;
+  today.innerHTML = dateTime.toLocaleString("pl-PL", {
+    timeZone: "Europe/Warsaw",
+  });
 }
 function updateResults(id) {
   console.log(
@@ -103,24 +95,21 @@ function updateResults(id) {
     results[id].timeSpent / 60
   ).toFixed(1);
   var record = [];
-  record.push(new Date().toISOString().slice(0, 19));
+  record.push(
+    new Date()
+      .toLocaleString("pl-PL", { timeZone: "Europe/Warsaw" })
+      .slice(0, 20)
+  );
   record.push(presenters[id].name);
   record.push(presenters[id].setTime);
   record.push(results[id].timeSpent);
   record.push(results[id].resultProcent);
-
-  var data = fs.readFileSync('./results.txt').toString().split("\n");
-  data.splice(0, 0, record );
+  var data = fs.readFileSync("./results.txt").toString().split("\n");
+  data.splice(0, 0, record);
   var text = data.join("\n");
-
-  fs.writeFile('./results.txt', text, function (err) {
+  fs.writeFile("./results.txt", text, function (err) {
     if (err) return err;
   });
-
-  // fs.appendFile("results.txt", `${record}\n`, function (err) {
-  //   if (err) throw err;
-  //   console.log("Saved!");
-  // });
 }
 function nextAction(id) {
   console.log(`before id ${id}, result.len ${results.length}`);
@@ -131,7 +120,6 @@ function nextAction(id) {
 }
 const hamburger = document.querySelector(".hamburger");
 const nav = document.querySelector(".navigation");
-
 const handleClick = () => {
   hamburger.classList.toggle("hamburger--active");
   hamburger.setAttribute(
@@ -140,9 +128,7 @@ const handleClick = () => {
   );
   nav.classList.toggle("navigation--active");
 };
-
 hamburger.addEventListener("click", handleClick);
-
 function changeImage(id) {
   var img = document.getElementsByTagName("img")[id + 1].getAttribute("name");
   var images = document.getElementsByTagName("image");
