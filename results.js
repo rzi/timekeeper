@@ -43,7 +43,14 @@ function clickNext() {
 }
 function loadTable() {
   fs.readFile("./results.txt", "utf-8", (err, file) => {
-    var theadData = ["Date", "Time", "Presenter", "Set time", "Result", "%"];
+    var theadData = [
+      "Date",
+      "Time",
+      "Presenter",
+      "Set time",
+      "Result [min]",
+      "%",
+    ];
     const tableClass = "table";
     var t;
     var table = document.createElement("table");
@@ -75,8 +82,8 @@ function loadTable() {
         console.log(`myRow ${myRow}`);
         myCol = myRow.toString().split(",");
         tbodyTd[a] = document.createElement("td");
-        if (j == 0) {
-          tbodyTd[a].innerText = myCol[j].replace("T", " ");
+        if (j == 4) {
+          tbodyTd[a].innerText = (myCol[j] / 60).toFixed(1);
         } else {
           tbodyTd[a].innerText = myCol[j];
         }
