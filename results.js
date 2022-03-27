@@ -61,29 +61,35 @@ function loadTable() {
     var rows = file.split("\n");
     var rowsLen = rows.length;
     console.log(`rowsLen ${rowsLen}`);
-    pag = parseInt(rows.length / paginationNb);
+    if (rowsLen<paginationNb) paginationNb=rowsLen;
+    console.log(`paginationNb=${paginationNb}`)
+    pag = Math.ceil(rowsLen / paginationNb);
     console.log(`panination ${currentPage} / ${pag}`);
     document.getElementById(
       "pagination"
     ).innerHTML = ` ${currentPage} / ${pag} `;
-    for (var a = 0; a < paginationNb; a++) {
+    for (var a = 0; a <= paginationNb-1; a++) {
+      console.log(`LoopPaginationNb=${paginationNb}`)
       var tbodyTr = document.createElement("tr");
+      console.log(`rows ${(currentPage - 1) * paginationNb + a}`)
       var myRow = rows[(currentPage - 1) * paginationNb + a];
-      for (var j = 0; j <= 5; j++) {
-        console.log(`myRow ${myRow}`);
-        myCol = myRow.toString().split(",");
-        tbodyTd[a] = document.createElement("td");
-        if (j == 4) {
-          tbodyTd[a].innerText = (myCol[j] / 60).toFixed(1);
-        } else {
-          tbodyTd[a].innerText = myCol[j];
+      if (!(myRow==undefined )) {
+        for (var j = 0; j < 6; j++) {
+          console.log(`myRowA ${myRow} j=${j} a=${a}`);
+          myCol = myRow.toString().split(",");
+          if (myCol[j]==""  || myCol[j]==undefined) {
+          }else{
+            tbodyTd[a] = document.createElement("td");
+            if (j == 4) {
+              tbodyTd[a].innerText = Number((myCol[j]) / 60).toFixed(1);
+            } else if (j == 5){
+              tbodyTd[a].innerText = myCol[j] + "%";
+            } else {
+              tbodyTd[a].innerText = myCol[j];
+            }
+            tbodyTr.appendChild(tbodyTd[a]);
+          }
         }
-        if (j == 5) {
-          tbodyTd[a].innerText = myCol[j] + "%";
-        } else {
-          tbodyTd[a].innerText = myCol[j];
-        }
-        tbodyTr.appendChild(tbodyTd[a]);
       }
       tbody.appendChild(tbodyTr);
     }
