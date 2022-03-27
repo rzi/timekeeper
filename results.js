@@ -49,7 +49,7 @@ function loadTable() {
       "Presenter",
       "Set time",
       "Result [min]",
-      "%",
+      "Result [%]",
     ];
     const tableClass = "table";
     var t;
@@ -84,6 +84,11 @@ function loadTable() {
         tbodyTd[a] = document.createElement("td");
         if (j == 4) {
           tbodyTd[a].innerText = (myCol[j] / 60).toFixed(1);
+        } else {
+          tbodyTd[a].innerText = myCol[j];
+        }
+        if (j == 5) {
+          tbodyTd[a].innerText = myCol[j] + "%";
         } else {
           tbodyTd[a].innerText = myCol[j];
         }

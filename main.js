@@ -100,7 +100,7 @@ app.on("ready", () => {
   window1 = createWindow1();
   //window1.setMenuBarVisibility(false);
   window2 = createWindow2();
-  // window2.setMenuBarVisibility(false);
+  window2.setMenuBarVisibility(false);
 
   window3 = createWindow3();
   window4 = createWindow4();

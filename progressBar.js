@@ -18,8 +18,6 @@ var seconds;
 var temp;
 
 ipcRenderer.on("forWin2", function (event, arg) {
-  console.log(`from win2 ${arg}`);
-  console.log(`arg ${parseInt(arg)} item ${item} id ${id}`);
   if (parseInt(arg) == item) {
     var tempAray = [timeInSec, procent, item];
     ipcRenderer.send("stop", tempAray);
@@ -31,17 +29,15 @@ ipcRenderer.on("forWin2", function (event, arg) {
     readText.readText("./test.json", function (text) {
       var data = JSON.parse(text);
       presenterDataLen = Object.keys(data).length;
-      console.log(`data ${JSON.stringify(data[arg])}`);
-      console.log(`dataL ${presenterDataLen}`);
       presenterData = data[arg];
       timeInSec = 0;
       clearInterval(id);
       clearTimeout(timeoutMyOswego);
       StartTimer();
       document.getElementById("countdown").innerHTML = presenterData.setTime;
-      console.log(`presenterData.setTime ${presenterData.setTime}`)
-      dirCount="down"
-      document.getElementById("countdown").style.color='black'
+      console.log(`presenterData.setTime ${presenterData.setTime}`);
+      dirCount = "down";
+      document.getElementById("countdown").style.color = "black";
       countdown();
     });
   }
@@ -54,7 +50,6 @@ function getSeconds(time) {
 function StartTimer() {
   console.log(`presenterData ${JSON.stringify(presenterData)}`);
   setTime = getSeconds(presenterData.setTime);
-  console.log(`time ${setTime}`);
   progress.value = 0;
   progress.max = setTime;
   showName.innerHTML = presenterData.name;
@@ -64,20 +59,13 @@ function frame() {
   timeInSec = timeInSec + 1;
   progress.value = timeInSec;
   procent = parseInt((timeInSec / progress.max) * 100);
-  console.log(`procent ${procent} `);
   progress.setAttribute("data-label", procent);
-  console.log(`time ${parseInt(timeInSec)}`);
 }
 btnNext.addEventListener("click", (event) => {
-  console.log(`btnNext ${JSON.stringify(item)}`);
-  console.log(`time ${timeInSec}`);
   let array = [timeInSec, procent, item];
-  console.log(
-    ` id ${item} presenterData len ${presenterDataLen} arry ${array}`
-  );
   if (item <= presenterDataLen && item != null) {
     ipcRenderer.send("nameMsg2", array);
-    clearInterval(id);    
+    clearInterval(id);
   } else {
     progress.value = 0;
   }
@@ -89,9 +77,7 @@ ipcRenderer.on("nameReply", (event, arg) => {
 function countdown() {
   time = document.getElementById("countdown").innerHTML;
   timeArray = time.split(":");
-  console.log(`timeArray ${timeArray}`);
   seconds = Number(timeToSeconds(timeArray));
-  console.log(`seconds ${seconds}`);
   if (seconds == "") {
     temp = document.getElementById("countdown");
     var GivenTime = document.getElementById("countdown").innerHTML;
@@ -100,25 +86,24 @@ function countdown() {
     timeArray = time.split(":");
     seconds = timeToSeconds(timeArray);
   }
-  if (dirCount=="down") {
-    seconds = seconds - 1
+  if (dirCount == "down") {
+    seconds = seconds - 1;
   } else {
-    seconds=seconds+1; 
-    dirCount="up";
+    seconds = seconds + 1;
+    dirCount = "up";
   }
-  console.log(`seconds2 ${seconds}`);
   temp = document.getElementById("countdown");
   temp.innerHTML = secondsToTime(seconds);
-   timeoutMyOswego = setTimeout(countdown, 1000);
+  timeoutMyOswego = setTimeout(countdown, 1000);
   if (secondsToTime(seconds) == "00:00:00") {
-    dirCount="up"
-    temp.style.color="red"
+    dirCount = "up";
+    temp.style.color = "red";
   }
 }
 function timeToSeconds(timeArray) {
-  var hours = 60 *60* Number(timeArray[0]);
-  var minutes = 60 * Number(timeArray[1]) ;
-  var seconds = hours + minutes  + Number(timeArray[2]);
+  var hours = 60 * 60 * Number(timeArray[0]);
+  var minutes = 60 * Number(timeArray[1]);
+  var seconds = hours + minutes + Number(timeArray[2]);
   return seconds;
 }
 function secondsToTime(secs) {

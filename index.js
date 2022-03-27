@@ -2,19 +2,22 @@ const ipcRenderer = require("electron").ipcRenderer;
 const readText = require("./readText");
 const createPresenters = require("./createPresenters");
 const fs = require("fs");
+var path = require("path");
 const { remote } = require("electron");
 let today = document.getElementById("date");
 let time = document.getElementById("time");
 
 presenters = [];
 results = [];
+const absolutePath = path.resolve("./", "test.json");
+const absolutePathResults = path.resolve("./", "results.txt");
 
 let name = document.getElementById("name");
 // check if presenters are set?
-if (!fs.existsSync("./test.json")) {
+if (!fs.existsSync(absolutePath)) {
   window.location = "settings.html";
 } //else{
-readText.readText("./test.json", function (text) {
+readText.readText(absolutePath, function (text) {
   var data = JSON.parse(text);
   console.log(`dane: ${JSON.stringify(data)}`);
   const nbOfItems = data.length;
@@ -25,8 +28,8 @@ readText.readText("./test.json", function (text) {
 });
 //}
 
-if (!fs.existsSync("./results.txt")) {
-  fs.writeFile("results.txt", "", function (err) {
+if (!fs.existsSync(absolutePathResults)) {
+  fs.writeFile(absolutePathResults, "", function (err) {
     if (err) throw err;
     console.log("File is created successfully.");
   });
@@ -104,10 +107,10 @@ function updateResults(id) {
   record.push(presenters[id].setTime);
   record.push(results[id].timeSpent);
   record.push(results[id].resultProcent);
-  var data = fs.readFileSync("./results.txt").toString().split("\n");
+  var data = fs.readFileSync(absolutePathResults).toString().split("\n");
   data.splice(0, 0, record);
   var text = data.join("\n");
-  fs.writeFile("./results.txt", text, function (err) {
+  fs.writeFile(absolutePathResults, text, function (err) {
     if (err) return err;
   });
 }

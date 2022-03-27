@@ -1,17 +1,25 @@
 const { pid } = require("process");
 const fs = require("fs");
+var path = require("path");
 
 let selectElement = document.getElementById("numberOfPresenters");
 let btnAddP = document.getElementById("btnAddP");
 let p = document.getElementsByTagName("p");
 let copyData = [];
-if (!fs.existsSync("./test.json")) {
-  fs.writeFile('test.json', '[{"id":0,"name":"test","active":true,"setTime":"00:02:00"}]', function (err) {
-    if (err) throw err;
-    console.log('File is created successfully.');
-  });
-}else{
-  readTextFile("./test.json", function (text) {
+
+const absolutePath = path.resolve("./", "test.json");
+
+if (!fs.existsSync(absolutePath)) {
+  fs.writeFile(
+    "test.json",
+    '[{"id":0,"name":"test","active":true,"setTime":"00:02:00"}]',
+    function (err) {
+      if (err) throw err;
+      console.log("File is created successfully.");
+    }
+  );
+} else {
+  readTextFile(absolutePath, function (text) {
     var data = JSON.parse(text);
     console.log(`dane: ${JSON.stringify(data)}`);
     const nbOfItems = data.length;
@@ -82,7 +90,7 @@ function createListenerforP() {
   }
 }
 function writeToJson() {
-  fs.writeFile("test.json", String(JSON.stringify(copyData)), function (err) {
+  fs.writeFile(absolutePath, String(JSON.stringify(copyData)), function (err) {
     if (err) throw err;
     console.log("Saved!");
   });
