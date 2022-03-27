@@ -5,16 +5,7 @@ const btnPrev = document.getElementById("btnPrev");
 const btnNext = document.getElementById("btnNext");
 btnPrev.addEventListener("click", clickPrev);
 btnNext.addEventListener("click", clickNext);
-const handleClick = () => {
-  hamburger.classList.toggle("hamburger--active");
-  hamburger.setAttribute(
-    "aria-expanded",
-    hamburger.classList.contains("hamburger--active")
-  );
-  nav.classList.toggle("navigation--active");
-};
-hamburger.addEventListener("click", handleClick);
-//table
+
 var paginationNb = 8;
 var currentPage = 1;
 var pag;
@@ -106,4 +97,7 @@ function delTable() {
   while (el.hasChildNodes()) {
     el.removeChild(el.lastChild);
   }
+}
+function btnExit() {
+  location.href = "index.html";
 }

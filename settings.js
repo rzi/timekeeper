@@ -12,7 +12,7 @@ const absolutePath = path.resolve("./", "presenters.json");
 if (!fs.existsSync(absolutePath)) {
   fs.writeFile(
     "presenters.json",
-    '[{"id":0,"name":"test","active":true,"setTime":"00:02:00"}]',
+    '[\n{"id":0,"name":"test","active":true,"setTime":"00:02:00"}\n]', //
     function (err) {
       if (err) throw err;
       console.log("File is created successfully.");
@@ -35,7 +35,12 @@ btnAddP.addEventListener("click", function () {
   console.log(`copyDataLenght: ${nbOfObj}`);
   const addName = document.getElementById("addName").value;
   const setTime = document.getElementById("addTime").value;
-  copyData.push({ id: nbOfObj, name: addName, active: true, setTime: setTime });
+  copyData.push({
+    id: nbOfObj,
+    name: addName,
+    active: true,
+    setTime: setTime,
+  });
   console.log(`copyData2: ${JSON.stringify(copyData)}`);
   // Write to JSON
   writeToJson();

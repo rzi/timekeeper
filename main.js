@@ -10,7 +10,6 @@ function createWindow1() {
     y: 0,
     maximizable: false,
     webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
@@ -34,11 +33,8 @@ function createWindow2() {
     maximizable: false,
     // transparent: true,
     //autoHideMenuBar: true,
-
     // titleBarOverlay: true,
-
     webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
@@ -58,7 +54,6 @@ function createWindow3() {
     width: 1000,
     // height: 600,
     webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
@@ -78,7 +73,6 @@ function createWindow4() {
     width: 1000,
     // height: 600,
     webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,

@@ -1,6 +1,7 @@
 const readText = require("./readText");
 const { ipcRenderer } = require("electron");
-
+var path = require("path");
+const absolutePath = path.resolve("./", "presenters.json");
 showName = document.getElementById("presenterName");
 showResult = document.getElementById("showResult");
 progress = document.getElementById("presenter");
@@ -26,7 +27,7 @@ ipcRenderer.on("forWin2", function (event, arg) {
     item = null;
   } else {
     item = parseInt(arg);
-    readText.readText("./test.json", function (text) {
+    readText.readText(absolutePath, function (text) {
       var data = JSON.parse(text);
       presenterDataLen = Object.keys(data).length;
       presenterData = data[arg];
