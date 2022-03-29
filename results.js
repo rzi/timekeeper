@@ -6,6 +6,17 @@ const btnNext = document.getElementById("btnNext");
 btnPrev.addEventListener("click", clickPrev);
 btnNext.addEventListener("click", clickNext);
 
+//
+var windowTopBar = document.createElement('div')
+windowTopBar.style.width = "100%"
+windowTopBar.style.height = "32px"
+// windowTopBar.style.backgroundColor = "#000"
+windowTopBar.style.position = "absolute"
+windowTopBar.style.top = windowTopBar.style.left = 0
+windowTopBar.style.webkitAppRegion = "drag"
+document.body.appendChild(windowTopBar)
+//
+
 var paginationNb = 8;
 var currentPage = 1;
 var pag;

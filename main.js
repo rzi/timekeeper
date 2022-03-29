@@ -9,6 +9,7 @@ function createWindow1() {
     x: 0,
     y: 0,
     maximizable: false,
+    frame: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -26,9 +27,10 @@ function createWindow1() {
 function createWindow2() {
   window2 = new BrowserWindow({
     width: 500,
-    height: 200,
+    // height: 200,
     x: 900,
     y: 800,
+    frame: false,
     alwaysOnTop: true,
     maximizable: false,
     // transparent: true,
@@ -53,11 +55,14 @@ function createWindow3() {
   window3 = new BrowserWindow({
     width: 1000,
     // height: 600,
+    frame: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
       // devTools: false
+      frame: false,
+
     },
   });
   window3.loadURL(`file://${__dirname}/settings.html`);
@@ -72,6 +77,7 @@ function createWindow4() {
   window4 = new BrowserWindow({
     width: 1000,
     // height: 600,
+    frame: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
