@@ -4,7 +4,7 @@ const path = require("path");
 
 function createWindow1() {
   window1 = new BrowserWindow({
-    width: 700,
+    width: 800,
     // height: 500,
     x: 0,
     y: 0,
@@ -14,7 +14,7 @@ function createWindow1() {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
-      devTools: true,
+       devTools: false,
     },
   });
   window1.loadURL(`file://${__dirname}/index.html`);
@@ -27,7 +27,7 @@ function createWindow1() {
 function createWindow2() {
   window2 = new BrowserWindow({
     width: 500,
-    // height: 200,
+   height: 100,
     x: 900,
     y: 800,
     frame: false,
