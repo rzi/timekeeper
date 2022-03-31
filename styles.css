@@ -254,3 +254,8 @@ nav{
   user-select: none;
   -webkit-app-region: drag;
 }
+#help{
+  padding-left: 15px;
+  padding-right: 15px;
+
+}
