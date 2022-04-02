@@ -14,7 +14,7 @@ function createWindow1() {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
-       devTools: false,
+      devTools: true,
     },
   });
   window1.loadURL(`file://${__dirname}/index.html`);
@@ -27,7 +27,7 @@ function createWindow1() {
 function createWindow2() {
   window2 = new BrowserWindow({
     width: 500,
-   height: 100,
+    height: 100,
     x: 900,
     y: 800,
     frame: false,
@@ -62,7 +62,6 @@ function createWindow3() {
       enableRemoteModule: true,
       // devTools: false
       frame: false,
-
     },
   });
   window3.loadURL(`file://${__dirname}/settings.html`);
