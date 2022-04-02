@@ -15,6 +15,8 @@ let selectElement = document.getElementById("numberOfPresenters");
 let btnAddP = document.getElementById("btnAddP");
 let p = document.getElementsByTagName("p");
 let copyData = [];
+let conferenceName;
+const addConferenceName = document.getElementById("addConferenceName");
 
 const absolutePath = path.resolve("./", "presenters.json");
 
@@ -37,6 +39,11 @@ if (!fs.existsSync(absolutePath)) {
     copyData = [...data];
   });
 }
+addConferenceName.addEventListener("change" , function(){
+conferenceName= this.value;
+console.log(` conferenceName ${conferenceName}`)
+document.getElementById("addConferenceName").value=this.value;
+});
 btnAddP.addEventListener("click", function () {
   console.log("btn");
   console.log(`copyData: ${JSON.stringify(copyData)}`);
@@ -44,11 +51,13 @@ btnAddP.addEventListener("click", function () {
   console.log(`copyDataLenght: ${nbOfObj}`);
   const addName = document.getElementById("addName").value;
   const setTime = document.getElementById("addTime").value;
+  conferenceName = document.getElementById("addConferenceName").value;
   copyData.push({
     id: nbOfObj,
     name: addName,
     active: true,
     setTime: setTime,
+    conferenceName: conferenceName,
   });
   console.log(`copyData2: ${JSON.stringify(copyData)}`);
   // Write to JSON

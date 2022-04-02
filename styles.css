@@ -73,13 +73,13 @@ progress:before {
  
 
 }
-#today{
+#today, #conferenceName{
   padding-left: 20px;
 }
 #btnAddP{
   margin-top: 5px;
 }
-#addName{
+#addName, #addConferenceName{
   margin-bottom: 5px;
 }
 #btnExit2{

@@ -1,6 +1,7 @@
 const ipcRenderer = require("electron").ipcRenderer;
 function createPresenters(data) {
   for (i = 0; i < data.length; i++) {
+    document.getElementById("conferenceName").textContent = `Conference name: `+data[i].conferenceName;
     var div = document.createElement("div");
     div.id = "div" + i;
     div.className = "div";

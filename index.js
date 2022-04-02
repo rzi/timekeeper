@@ -94,7 +94,7 @@ function currentTime1() {
 }
 function updateResults(id) {
   console.log(
-    ` results: ${results[id].id} , ${results[id].timeSpent}, ${results[id].resultProcent} `
+    ` results: ${results[id].id} , ${results[id].timeSpent}, ${results[id].resultProcent, results[id].conferenceName} `
   );
   var index = "S" + String(id);
   console.log(`i ${id}  timespent   ${results[id].timeSpent}`);
@@ -116,6 +116,8 @@ function updateResults(id) {
   record.push(presenters[id].setTime);
   record.push(results[id].timeSpent);
   record.push(results[id].resultProcent);
+  record.push(presenters[id].conferenceName);
+console.log(`record ${record}`)
   var data = fs.readFileSync(absolutePathResults).toString().split("\n");
   data.splice(0, 0, record);
   var text = data.join("\n");
