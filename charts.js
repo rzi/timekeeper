@@ -65,7 +65,7 @@ fs.readFile("./results.txt", "utf-8", (err, file) => {
   for (i = 0; i < rowsLen; i++) {
     var item = rows[i].toString().split(",");
     if (!dataList.includes(item[0])) {
-      dataList.push(item[0]);
+       if (!(item[0]=="")) dataList.push(item[0]);
     }
     tempDataList.push({
       date: item[0],
@@ -95,6 +95,7 @@ fs.readFile("./results.txt", "utf-8", (err, file) => {
   selectedDate = selectedValue;
   document.getElementById("listDate").addEventListener("change", dropDownList);
   console.log("You selected: ", selectedDate);
+  initialvalue(selectedDate);
 });
 function btnExit() {
   location.href = "index.html";
@@ -139,3 +140,27 @@ function dropDownList() {
   console.log(`data  ${JSON.stringify(myChart.data.datasets[0].data)}`);
   myChart.update();
 }
+function initialvalue(selectedDate){
+  baseData = [];
+  myChart.data.labels = [];
+  myChart.data.datasets[0].data = [];
+  data = [];
+  labels = [];
+  total = 0;
+  for (const val of tempDataList) {
+    if (val.date == selectedDate) {
+      baseData.push({ label: val.presenter, value: val.result });
+    }
+  }
+  myChart.data.labels = baseData.map((o) => o.label).concat("Total"); // add "TOTAL at end of table"
+  for (let i = 0; i < baseData.length; i++) {
+    const vStart = total;
+    total += baseData[i].value;
+    data.push([vStart, total]);
+    console.log(`data  ${JSON.stringify(data)}`);
+  }
+  data.push(total); // calculate value of table
+  myChart.data.datasets[0].data = data;
+  myChart.update();
+}
+
