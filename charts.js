@@ -8,7 +8,8 @@ let chartColor =[];
 let selectedDate;
 let selectedConference;
 let tooltip2line;
-let sumSetTime;
+let procentTotal;
+let setTimeData =[];
 
 let labels = baseData.map((o) => o.label).concat("Total");
 let data = [];
@@ -45,14 +46,12 @@ const myChart = new Chart(ctx, {
           const v = data.datasets[0].data[tooltipItem.index];
           return Array.isArray(v) ? (v[1] - v[0]) + " min" : v +" min";
         },
-        afterLabel: function(tooltipItem, tempDataList) {
-          // console.log(`tooltipItem['index'] ${tooltipItem['index']}`)
+        afterLabel: function(tooltipItem, tempDataList,setTimeData ) {
+          var setTime2 = tooltip3line[tooltipItem['index']];
           var percent = tooltip2line[tooltipItem['index']];
-          return '(' + percent + '%)';
+          return '(' + percent + '% ) \nSetTime: '+setTime2 +' min';
         }
       },
-
-      
     },
     scales: {
       yAxes: [
@@ -60,14 +59,16 @@ const myChart = new Chart(ctx, {
           ticks: {
             beginAtZero: true,
           },
+          scaleLabel: {
+            display: true,
+            labelString: 'Time [minutes]'
+          },
         },
       ],
     },
   },
 });
-
 // console.log(`chart  ${objToString(myChart)}`);
-
 fs.readFile("./results.txt", "utf-8", (err, file) => {
   var rows = file.split("\n");
   var rowsLen = rows.length;
@@ -90,7 +91,6 @@ fs.readFile("./results.txt", "utf-8", (err, file) => {
       conferenceList: item[6],
       setTime: item[3],
     });
-
   }
   tempDataList.reverse();
   console.log(`list ${dataList}`);
@@ -223,6 +223,7 @@ function initialvalue(selectedDate, selectdConference){
   labels = [];
   chartColor =[];
   tooltip2line =[];
+  tooltip3line = [];
   total = 0;
    var toolTipTotal=0;
    var setTime1;
@@ -230,24 +231,16 @@ function initialvalue(selectedDate, selectdConference){
     console.log(`przed if ${val.date }=${selectedDate} i ${val.conferenceList}=${selectdConference} i ${val.setTime}`)
     if (val.date == selectedDate && val.conferenceList == selectdConference && !(val.setTime =="undefined")) {
       console.log(`if ${val.date }=${selectedDate} i ${val.conferenceList}=${selectdConference} i setTime=${val.setTime}`)
-      baseData.push({ label: val.presenter, value: val.result });
+      baseData.push({ label: val.presenter, value: (val.result)/60 });
       if (val.resultProcent > 100) {
         chartColor.push("red")
-        tooltip2line.push(val.resultProcent )
       }else{
         chartColor.push("green")
-        tooltip2line.push(val.resultProcent )
-      }   
-      //calc sum of setTime 00:00:05
-      const czas = val.setTime.slice(0,8);
-      console.log(`czas ${czas}`)
-      const h = parseInt(val.setTime.slice(0,2));
-      console.log(`h ${h}`)
-      const m = parseInt(val.setTime.slice(3,5));
-      console.log(`m ${m}`)
-      const s = parseInt(val.setTime.slice(6,8));
-      console.log(`s ${s}`)
-      setTime1=Number((h*60)+m+(s/60))
+      } 
+      tooltip2line.push(val.resultProcent )
+      tooltip3line.push(val.setTime)
+      console.log(`setTimeData ${setTimeData}`)  
+      setTime1=setTimeToTime(val.setTime)
     }
     console.log(`setTime ${setTime1}`)
     toolTipTotal= toolTipTotal+setTime1
@@ -258,13 +251,16 @@ function initialvalue(selectedDate, selectdConference){
   for (let i = 0; i < baseData.length; i++) {
     const vStart = total;
     total += baseData[i].value;
-    data.push([vStart, total]);
-    console.log(`data  ${JSON.stringify(data)}`);
+    data.push([(vStart).toFixed(2), (total).toFixed(2)]);
   }
-  data.push(total); // calculate value of table (total)
-  // calc sum of set time
-  tooltip2line.push(toolTipTotal.toFixed(1))
-  if (toolTipTotal.toFixed(1)<100){
+  console.log(`data  ${JSON.stringify(data)}`);
+  data.push((total).toFixed(2)); // calculate value of table (total)
+  var lastItem = data[data.length-1] ///in minute
+  procentTotal=(100*(lastItem/toolTipTotal)).toFixed(1);
+  // calc sum of settime
+  tooltip2line.push(procentTotal);
+  tooltip3line.push(lastItem)
+  if (procentTotal<100){
     chartColor.push("green")
   }else(
     chartColor.push("red")
@@ -273,4 +269,13 @@ function initialvalue(selectedDate, selectdConference){
   myChart.data.datasets[0].backgroundColor=chartColor;
   myChart.update();
 }
-
+function setTimeToTime (setTime){
+      //calc sum of setTime 00:00:05
+      const czas = setTime.slice(0,8);
+      console.log(`czas ${czas}`)
+      const h = parseInt(setTime.slice(0,2));
+      const m = parseInt(setTime.slice(3,5));
+      const s = parseInt(setTime.slice(6,8));
+      console.log(`h ${h} m ${m} s ${s}`)
+      return Number((h*60)+m+(s/60)) // return time in minutes
+}
