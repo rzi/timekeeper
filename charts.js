@@ -46,9 +46,9 @@ const myChart = new Chart(ctx, {
           const v = data.datasets[0].data[tooltipItem.index];
           var valReturn;
           if(Array.isArray(v)){
-            valReturn =(((Number(v[1]) - Number(v[0]))/60).toFixed(2) + " min" )
+            valReturn =(((Number(v[1]) - Number(v[0]))).toFixed(2) + " min" )
           }else{
-             valReturn =((Number(v)/60).toFixed(2) +" min")
+             valReturn =((Number(v)).toFixed(2) +" min")
           }
           return valReturn;
         },
