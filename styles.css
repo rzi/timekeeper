@@ -57,7 +57,7 @@ progress:before {
 .header{
   display: flex;
   align-items: center;
-  background-color: #3DCD58;
+  background-color: #3dcd58;
   justify-content: space-between;
 }
 

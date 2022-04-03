@@ -44,9 +44,15 @@ const myChart = new Chart(ctx, {
       callbacks: {
         label: (tooltipItem, data, ) => {
           const v = data.datasets[0].data[tooltipItem.index];
-          return Array.isArray(v) ? (v[1] - v[0]) + " min" : v +" min";
+          var valReturn;
+          if(Array.isArray(v)){
+            valReturn =(((Number(v[1]) - Number(v[0]))/60).toFixed(2) + " min" )
+          }else{
+             valReturn =((Number(v)/60).toFixed(2) +" min")
+          }
+          return valReturn;
         },
-        afterLabel: function(tooltipItem, tempDataList,setTimeData ) {
+        afterLabel: function(tooltipItem ) {
           var setTime2 = tooltip3line[tooltipItem['index']];
           var percent = tooltip2line[tooltipItem['index']];
           return '(' + percent + '% ) \nSetTime: '+setTime2 +' min';
@@ -225,26 +231,30 @@ function initialvalue(selectedDate, selectdConference){
   tooltip2line =[];
   tooltip3line = [];
   total = 0;
-   var toolTipTotal=0;
+   var toolTipTotal;
    var setTime1;
   for (const val of tempDataList) {
     console.log(`przed if ${val.date }=${selectedDate} i ${val.conferenceList}=${selectdConference} i ${val.setTime}`)
-    if (val.date == selectedDate && val.conferenceList == selectdConference && !(val.setTime =="undefined")) {
+    if (val.date == selectedDate && val.conferenceList == selectdConference && !(val.setTime ==undefined)) {
       console.log(`if ${val.date }=${selectedDate} i ${val.conferenceList}=${selectdConference} i setTime=${val.setTime}`)
       baseData.push({ label: val.presenter, value: (val.result)/60 });
       if (val.resultProcent > 100) {
         chartColor.push("red")
       }else{
-        chartColor.push("green")
+        chartColor.push("#3dcd58")
       } 
       tooltip2line.push(val.resultProcent )
-      tooltip3line.push(val.setTime)
-      console.log(`setTimeData ${setTimeData}`)  
       setTime1=setTimeToTime(val.setTime)
+      tooltip3line.push(setTime1) 
+      console.log(`setTime1 ${setTime1}`)
     }
-    console.log(`setTime ${setTime1}`)
+    if (!isNaN(setTime1)){
+    console.log(`setTime1 loop ${Number(setTime1)}`)
     toolTipTotal= toolTipTotal+setTime1
     console.log(`toolTipTotalLoop ${toolTipTotal}`)
+    }else{
+      toolTipTotal=0;
+    }
   }
   console.log(`toolTipTotaltotal ${toolTipTotal}`)
   myChart.data.labels = baseData.map((o) => o.label).concat("Total"); // add "TOTAL at end of table"
@@ -256,12 +266,13 @@ function initialvalue(selectedDate, selectdConference){
   console.log(`data  ${JSON.stringify(data)}`);
   data.push((total).toFixed(2)); // calculate value of table (total)
   var lastItem = data[data.length-1] ///in minute
+  console.log(`lastItem ${lastItem} tooltipTotal ${toolTipTotal}  data ${data}`)
   procentTotal=(100*(lastItem/toolTipTotal)).toFixed(1);
   // calc sum of settime
   tooltip2line.push(procentTotal);
-  tooltip3line.push(lastItem)
+  tooltip3line.push(toolTipTotal) //suma setTime
   if (procentTotal<100){
-    chartColor.push("green")
+    chartColor.push("#3dcd58")
   }else(
     chartColor.push("red")
   )

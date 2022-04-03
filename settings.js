@@ -17,7 +17,8 @@ let p = document.getElementsByTagName("p");
 let copyData = [];
 let conferenceName;
 const addConferenceName = document.getElementById("addConferenceName");
-
+addConferenceName.value= localStorage.getItem("conferenceName")
+console.log(`conferenceName ${conferenceName}`)
 const absolutePath = path.resolve("./", "presenters.json");
 
 if (!fs.existsSync(absolutePath)) {
@@ -44,14 +45,15 @@ conferenceName= this.value;
 console.log(` conferenceName ${conferenceName}`)
 document.getElementById("addConferenceName").value=this.value;
 });
-btnAddP.addEventListener("click", function () {
-  console.log("btn");
+btnAddP.addEventListener("click", function (e) {
+
   console.log(`copyData: ${JSON.stringify(copyData)}`);
   var nbOfObj = copyData.length;
   console.log(`copyDataLenght: ${nbOfObj}`);
   const addName = document.getElementById("addName").value;
   const setTime = document.getElementById("addTime").value;
   conferenceName = document.getElementById("addConferenceName").value;
+  localStorage.setItem("conferenceName",conferenceName)
   copyData.push({
     id: nbOfObj,
     name: addName,
