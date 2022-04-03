@@ -3,6 +3,7 @@ let baseData = [];
 let dataList = [];
 let conferenceList =[];
 let tempDataList = [];
+let chartColor =[];
 let selectedDate;
 let selectedConference;
 
@@ -208,12 +209,19 @@ function initialvalue(selectedDate, selectdConference){
   baseData = [];
   myChart.data.labels = [];
   myChart.data.datasets[0].data = [];
+  myChart.data.datasets[0].backgroundColor =[],
   data = [];
   labels = [];
+  chartColor =[];
   total = 0;
   for (const val of tempDataList) {
     if (val.date == selectedDate && val.conferenceList == selectdConference) {
       baseData.push({ label: val.presenter, value: val.result });
+      if (val.resultProcent > 100) {
+        chartColor.push("red")
+      }else{
+        chartColor.push("green")
+      }
     }
   }
   myChart.data.labels = baseData.map((o) => o.label).concat("Total"); // add "TOTAL at end of table"
@@ -225,6 +233,7 @@ function initialvalue(selectedDate, selectdConference){
   }
   data.push(total); // calculate value of table
   myChart.data.datasets[0].data = data;
+  myChart.data.datasets[0].backgroundColor=chartColor;
   myChart.update();
 }
 
