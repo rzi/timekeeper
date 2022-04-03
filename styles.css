@@ -82,6 +82,13 @@ progress:before {
 #addName, #addConferenceName{
   margin-bottom: 5px;
 }
+#conferenceList{
+  display: inline;
+  margin-left: 10px;
+}
+#listLine{
+  display: flex;
+}
 #btnExit2{
   background-color: #3dcd58;
   border: none;

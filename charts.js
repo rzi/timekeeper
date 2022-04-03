@@ -1,8 +1,10 @@
 const fs = require("fs");
 let baseData = [];
 let dataList = [];
+let conferenceList =[];
 let tempDataList = [];
 let selectedDate;
+let selectedConference;
 
 let labels = baseData.map((o) => o.label).concat("Total");
 let data = [];
@@ -67,13 +69,20 @@ fs.readFile("./results.txt", "utf-8", (err, file) => {
     if (!dataList.includes(item[0])) {
        if (!(item[0]=="")) dataList.push(item[0]);
     }
+    if (!conferenceList.includes(item[6])) {
+      if (!(item[6]=="") && !(item[6]==undefined)) conferenceList.push(item[6]);
+   }
+
     tempDataList.push({
       date: item[0],
       presenter: item[2],
       result: Number(item[4]),
       resultProcent: Number(item[5]),
+      conferenceList: item[6],
     });
+
   }
+  tempDataList.reverse();
   console.log(`list ${dataList}`);
   console.log(`tempDataList  ${JSON.stringify(tempDataList)}`);
   var select = document.createElement("select");
@@ -90,12 +99,34 @@ fs.readFile("./results.txt", "utf-8", (err, file) => {
   label.htmlFor = "listDate";
   document.getElementById("dateList").appendChild(label).appendChild(select);
 
+  // conference list
+  console.log(`conferenceList ${conferenceList}`);
+  var select = document.createElement("select");
+  select.name = "listConference";
+  select.id = "listConference";
+  for (const val of conferenceList) {
+    var option = document.createElement("option");
+    option.value = val;
+    option.text = val;
+    select.appendChild(option);
+  }
+  var label = document.createElement("label");
+  label.innerHTML = "and conference name  ";
+  label.htmlFor = "listConference";
+  document.getElementById("conferenceList").appendChild(label).appendChild(select);
+
   var selectedValue =
     document.getElementById("listDate").selectedOptions[0].value;
   selectedDate = selectedValue;
   document.getElementById("listDate").addEventListener("change", dropDownList);
-  console.log("You selected: ", selectedDate);
-  initialvalue(selectedDate);
+  
+  var selectedValueConference =
+    document.getElementById("listConference").selectedOptions[0].value;
+  selectedConference = selectedValueConference;
+  document.getElementById("listConference").addEventListener("change", dropDownListConference);
+ 
+  console.log("You selected: ", selectedDate, selectedConference);
+  initialvalue(selectedDate, selectedConference);
 });
 function btnExit() {
   location.href = "index.html";
@@ -140,7 +171,40 @@ function dropDownList() {
   console.log(`data  ${JSON.stringify(myChart.data.datasets[0].data)}`);
   myChart.update();
 }
-function initialvalue(selectedDate){
+function dropDownListConference() {
+  selectedConference = this.value;
+  baseData = [];
+  myChart.data.labels = [];
+  myChart.data.datasets[0].data = [];
+  data = [];
+  labels = [];
+  total = 0;
+
+  for (const val of tempDataList) {
+    if (val.conferenceList == selectedConference) {
+      baseData.push({ label: val.presenter, value: val.result });
+    }
+  }
+  console.log(`baseData1  ${JSON.stringify(baseData)}`);
+
+  myChart.data.labels = baseData.map((o) => o.label).concat("Total"); // add "TOTAL at end of table"
+
+  for (let i = 0; i < baseData.length; i++) {
+    const vStart = total;
+    total += baseData[i].value;
+    data.push([vStart, total]);
+    console.log(`data  ${JSON.stringify(data)}`);
+  }
+
+  data.push(total); // calculate value of table
+  myChart.data.datasets[0].data = data;
+
+  console.log(`labels ${JSON.stringify(myChart.data.labels)}`);
+  console.log(`baseData2  ${JSON.stringify(baseData)}`);
+  console.log(`data  ${JSON.stringify(myChart.data.datasets[0].data)}`);
+  myChart.update();
+}
+function initialvalue(selectedDate, selectdConference){
   baseData = [];
   myChart.data.labels = [];
   myChart.data.datasets[0].data = [];
@@ -148,7 +212,7 @@ function initialvalue(selectedDate){
   labels = [];
   total = 0;
   for (const val of tempDataList) {
-    if (val.date == selectedDate) {
+    if (val.date == selectedDate && val.conferenceList == selectdConference) {
       baseData.push({ label: val.presenter, value: val.result });
     }
   }
