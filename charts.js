@@ -37,6 +37,15 @@ const myChart = new Chart(ctx, {
   options: {
     responsive: true,
     maintainAspectRatio: false,
+    plugins: {
+      labels: [
+        {
+         render: (arg) => {
+            return tooltip2line[arg.index] +"%"
+          },
+        },
+      ]
+    },  
     legend: {
       display: false,
     },
@@ -52,11 +61,13 @@ const myChart = new Chart(ctx, {
           }
           return valReturn;
         },
+       
         afterLabel: function(tooltipItem ) {
           var setTime2 = tooltip3line[tooltipItem['index']];
           var percent = tooltip2line[tooltipItem['index']];
-          return '(' + percent + '% ) \nSetTime: '+setTime2 +' min';
-        }
+          return '(' + percent + '% ) \nSetTime: '+setTime2.toFixed(2) +' min';
+        },
+        
       },
     },
     scales: {
