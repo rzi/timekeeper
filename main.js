@@ -4,8 +4,8 @@ const path = require("path");
 
 function createWindow1() {
   window1 = new BrowserWindow({
-    minWidth: 600,
-    minHeight: 200,
+    width: 600,
+    height: 600,
     x: 0,
     y: 0,
     maximizable: false,
@@ -128,6 +128,12 @@ app.on("ready", () => {
     } else {
       window2.show();
     }
+  });
+  ipcMain.on("winDimmension", (event, arg) => {
+    console.log("window dimension: ", arg); // this comes form within window 1 -> and into the mainProcess
+    event.sender.send("nameReply", { not_right: false }); // sends back/replies to window 1 - "event" is a reference to this chanel.
+    console.log(`width ${arg.winWidth} x ${arg.winHeight}`)
+    window1.setSize(arg.winWidth ,arg.winHeight )
   });
   ipcMain.on("Exit", (event, arg) => {
     console.log("Exit ", arg); // this comes form within window 1 -> and into the mainProcess

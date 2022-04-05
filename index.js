@@ -166,5 +166,10 @@ function changeImage(id) {
   }
 }
 
-// var element = document.querySelector('.main1');
-// console.log(element.getAttribute('height')); //220
+// window dimension
+var winHeight=document.getElementById('main1').offsetHeight
+console.log(`winHeight ${winHeight}`);
+var winWidth =document.getElementById('main1').offsetWidth
+console.log(`winWidth ${winWidth}`);
+console.log(document.getElementById('main1').getBoundingClientRect().height)
+ipcRenderer.send("winDimmension", {winWidth,winHeight});
