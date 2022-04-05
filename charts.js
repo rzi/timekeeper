@@ -25,7 +25,7 @@ const ctx = document.getElementById("waterfall");
 const myChart = new Chart(ctx, {
   type: "bar",
   data: {
-    labels: labels,
+
     datasets: [
       {
         data: data,
@@ -37,10 +37,14 @@ const myChart = new Chart(ctx, {
   options: {
     responsive: true,
     maintainAspectRatio: false,
+    title:{
+      display: true,
+      text: " "
+    },
     plugins: {
       labels: [
         {
-         render: (arg) => {
+          render: (arg) => {
             return tooltip2line[arg.index] +"%"
           },
         },
@@ -60,8 +64,7 @@ const myChart = new Chart(ctx, {
              valReturn =((Number(v)).toFixed(2) +" min")
           }
           return valReturn;
-        },
-       
+        },     
         afterLabel: function(tooltipItem ) {
           var setTime2 = tooltip3line[tooltipItem['index']];
           var percent = tooltip2line[tooltipItem['index']];

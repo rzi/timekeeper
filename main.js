@@ -4,8 +4,8 @@ const path = require("path");
 
 function createWindow1() {
   window1 = new BrowserWindow({
-    width: 800,
-    // height: 500,
+    minWidth: 600,
+    minHeight: 200,
     x: 0,
     y: 0,
     maximizable: false,
@@ -13,12 +13,14 @@ function createWindow1() {
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
-      enableRemoteModule: true,
+      enableRemoteModule: true,    
       devTools: true,
     },
   });
   window1.loadURL(`file://${__dirname}/index.html`);
   window1.webContents.openDevTools();
+  console.log('size:', window1.getSize());
+console.log('bounds:', window1.getBounds());
   window1.on("closed", function () {
     window1 = null;
   });
@@ -27,12 +29,13 @@ function createWindow1() {
 function createWindow2() {
   window2 = new BrowserWindow({
     width: 500,
-    height: 100,
+    height: 80,
     x: 900,
     y: 800,
     frame: false,
     alwaysOnTop: true,
     maximizable: false,
+    useContentSize: true,
     // transparent: true,
     //autoHideMenuBar: true,
     // titleBarOverlay: true,

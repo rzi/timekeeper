@@ -12,6 +12,7 @@ results = [];
 const absolutePath = path.resolve("./", "presenters.json");
 const absolutePathResults = path.resolve("./", "results.txt");
 
+
 //
 var windowTopBar = document.createElement('div')
 windowTopBar.style.width = "100%"
@@ -164,3 +165,6 @@ function changeImage(id) {
       ].innerHTML = `<img name = "stop" src= ./photos/button_img3a-red.png>`;
   }
 }
+
+// var element = document.querySelector('.main1');
+// console.log(element.getAttribute('height')); //220
