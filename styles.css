@@ -70,7 +70,7 @@ progress:before {
   border-width: 3px;
   border-style: solid;
   border-color: #3DCD58;
-  height:fit-content   ;
+  height:max-content  ;
 }
 #today, #conferenceName{
   padding-left: 20px;

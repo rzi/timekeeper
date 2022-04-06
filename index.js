@@ -167,9 +167,18 @@ function changeImage(id) {
 }
 
 // window dimension
-var winHeight=document.getElementById('main1').offsetHeight
-console.log(`winHeight ${winHeight}`);
-var winWidth =document.getElementById('main1').offsetWidth
+//var winHeight=document.getElementById('main1').clientHeight
+const list = document.getElementsByTagName("main1");
+console.log(`winHeight ${objToString(list)}`);
+var winWidth =document.getElementById('main1').clientWidth
 console.log(`winWidth ${winWidth}`);
 console.log(document.getElementById('main1').getBoundingClientRect().height)
-ipcRenderer.send("winDimmension", {winWidth,winHeight});
+
+//ipcRenderer.send("winDimmension", {winWidth,winHeight});
+function objToString(obj) {
+  let str = "";
+  for (const [p, val] of Object.entries(obj)) {
+    str += `${p}::${val}\n`;
+  }
+  return str;
+}
