@@ -1,6 +1,8 @@
 const { pid } = require("process");
 const fs = require("fs");
 var path = require("path");
+var refreshView = require("./refreshView");
+
 //
 var windowTopBar = document.createElement('div')
 windowTopBar.style.width = "100%"
@@ -46,7 +48,6 @@ console.log(` conferenceName ${conferenceName}`)
 document.getElementById("addConferenceName").value=this.value;
 });
 btnAddP.addEventListener("click", function (e) {
-
   console.log(`copyData: ${JSON.stringify(copyData)}`);
   var nbOfObj = copyData.length;
   console.log(`copyDataLenght: ${nbOfObj}`);
@@ -126,3 +127,8 @@ function btnExit() {
     alert("Add presenter");
   }
 }
+// window dimensions
+window.addEventListener('DOMContentLoaded', (event) => {
+  console.log( "listner")
+  refreshView.refreshView("main1");
+  });

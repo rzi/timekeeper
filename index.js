@@ -1,18 +1,16 @@
 const ipcRenderer = require("electron").ipcRenderer;
 const readText = require("./readText");
 const createPresenters = require("./createPresenters");
+const refreshView = require("./refreshView");
 const fs = require("fs");
 var path = require("path");
 const { remote } = require("electron");
 let today = document.getElementById("date");
 let time = document.getElementById("time");
-
 presenters = [];
 results = [];
 const absolutePath = path.resolve("./", "presenters.json");
 const absolutePathResults = path.resolve("./", "results.txt");
-
-
 //
 var windowTopBar = document.createElement('div')
 windowTopBar.style.width = "100%"
@@ -50,12 +48,12 @@ ipcRenderer.on("nameReply", (event, arg) => {
 let btnSettings = document.getElementById("btnSettings");
 btnSettings.addEventListener("click", function () {
   window.location.href = "./settings.html";
-  updateDimmension();
+  refreshView("main1")
 });
 let btnShow = document.getElementById("btnShow");
 btnShow.addEventListener("click", function () {
   ipcRenderer.send("showProgress", "showProgress");
-  updateDimmension();
+  refreshView("main1")
 });
 let btnExit = document.getElementById("btnExit");
 btnExit.addEventListener("click", function () {
@@ -73,7 +71,7 @@ ipcRenderer.on("forWin1Stop", function (event, arg) {
     resultProcent: `${resultProcent}`,
   };
   updateResults(id);
-  updateDimmension();
+  refreshView("main1")
 });
 ipcRenderer.on("forWin1", function (event, arg) {
   console.log(`from win1  ${arg}`);
@@ -88,7 +86,7 @@ ipcRenderer.on("forWin1", function (event, arg) {
   updateResults(id);
   nextAction(id);
   changeImage(id);
-  updateDimmension();
+  refreshView("main1")
 });
 var timer = setInterval(currentTime1, 1000);
 function currentTime1() {
@@ -169,19 +167,10 @@ function changeImage(id) {
       ].innerHTML = `<img name = "stop" src= ./photos/button_img3a-red.png>`;
   }
 }
-
 // window dimensions
 window.addEventListener('DOMContentLoaded', (event) => {
-updateDimmension();
+refreshView.refreshView("presenter")
 });
-
-function updateDimmension(){
-  var winHeight=document.getElementById('main1').offsetHeight
-  var winWidth =document.getElementById('main1').offsetWidth
-  winHeight=winHeight+20
-  ipcRenderer.send("winDimmension", {winWidth,winHeight});
-}
-
 function objToString(obj) {
   let str = "";
   for (const [p, val] of Object.entries(obj)) {

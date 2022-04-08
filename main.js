@@ -5,7 +5,7 @@ const path = require("path");
 function createWindow1() {
   window1 = new BrowserWindow({
     width: 600,
-    height: 600,
+    height: 800,
     x: 0,
     y: 0,
     maximizable: false,
@@ -14,7 +14,7 @@ function createWindow1() {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,    
-      devTools: false,
+      devTools: true,
     },
   });
   window1.loadURL(`file://${__dirname}/index.html`);
@@ -56,18 +56,20 @@ function createWindow2() {
 }
 function createWindow3() {
   window3 = new BrowserWindow({
-    width: 1000,
-    // height: 600,
+    width: 600,
+    height: 800,
     frame: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
-      // devTools: false
-      frame: false,
+      devTools: true,
+      frame: true,
     },
   });
   window3.loadURL(`file://${__dirname}/settings.html`);
+  console.log('size:', window1.getSize());
+  console.log('bounds:', window1.getBounds());
   window3.webContents.openDevTools();
   window3.on("closed", function () {
     window3 = null;
@@ -77,17 +79,19 @@ function createWindow3() {
 }
 function createWindow4() {
   window4 = new BrowserWindow({
-    width: 1000,
-    // height: 600,
-    frame: false,
+    width: 600,
+    height: 800,
+    frame: true,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
-      // devTools: false
+      devTools: true
     },
   });
   window4.loadURL(`file://${__dirname}/results.html`);
+  console.log('Rsize:', window1.getSize());
+  console.log('Rbounds:', window1.getBounds());
   window4.webContents.openDevTools();
   window4.on("closed", function () {
     window4 = null;

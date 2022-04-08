@@ -1,4 +1,5 @@
 const fs = require("fs");
+var refreshView = require("./refreshView");
 const hamburger = document.querySelector(".hamburger");
 const nav = document.querySelector(".navigation");
 const btnPrev = document.getElementById("btnPrev");
@@ -118,3 +119,7 @@ function delTable() {
 function btnExit() {
   location.href = "index.html";
 }
+// window dimensions
+window.addEventListener('DOMContentLoaded', (event) => {
+  refreshView.refreshView("main1")
+});
