@@ -50,10 +50,12 @@ ipcRenderer.on("nameReply", (event, arg) => {
 let btnSettings = document.getElementById("btnSettings");
 btnSettings.addEventListener("click", function () {
   window.location.href = "./settings.html";
+  updateDimmension();
 });
 let btnShow = document.getElementById("btnShow");
 btnShow.addEventListener("click", function () {
   ipcRenderer.send("showProgress", "showProgress");
+  updateDimmension();
 });
 let btnExit = document.getElementById("btnExit");
 btnExit.addEventListener("click", function () {
@@ -71,6 +73,7 @@ ipcRenderer.on("forWin1Stop", function (event, arg) {
     resultProcent: `${resultProcent}`,
   };
   updateResults(id);
+  updateDimmension();
 });
 ipcRenderer.on("forWin1", function (event, arg) {
   console.log(`from win1  ${arg}`);
@@ -85,6 +88,7 @@ ipcRenderer.on("forWin1", function (event, arg) {
   updateResults(id);
   nextAction(id);
   changeImage(id);
+  updateDimmension();
 });
 var timer = setInterval(currentTime1, 1000);
 function currentTime1() {
@@ -166,15 +170,18 @@ function changeImage(id) {
   }
 }
 
-// window dimension
-//var winHeight=document.getElementById('main1').clientHeight
-const list = document.getElementsByTagName("main1");
-console.log(`winHeight ${objToString(list)}`);
-var winWidth =document.getElementById('main1').clientWidth
-console.log(`winWidth ${winWidth}`);
-console.log(document.getElementById('main1').getBoundingClientRect().height)
+// window dimensions
+window.addEventListener('DOMContentLoaded', (event) => {
+updateDimmension();
+});
 
-//ipcRenderer.send("winDimmension", {winWidth,winHeight});
+function updateDimmension(){
+  var winHeight=document.getElementById('main1').offsetHeight
+  var winWidth =document.getElementById('main1').offsetWidth
+  winHeight=winHeight+20
+  ipcRenderer.send("winDimmension", {winWidth,winHeight});
+}
+
 function objToString(obj) {
   let str = "";
   for (const [p, val] of Object.entries(obj)) {
