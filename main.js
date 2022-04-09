@@ -1,3 +1,4 @@
+
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, webContents, ipcMain } = require("electron");
 const path = require("path");
@@ -28,10 +29,10 @@ function createWindow1() {
 }
 function createWindow2() {
   window2 = new BrowserWindow({
-    width: 500,
+    width: 900,
     height: 80,
     x: 900,
-    y: 800,
+    y: 100,
     frame: false,
     alwaysOnTop: true,
     maximizable: false,
@@ -43,13 +44,24 @@ function createWindow2() {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
-      devTools: false,
+      devTools: true,
     },
   });
   window2.loadURL(`file://${__dirname}/progressBar.html`);
   window2.webContents.openDevTools();
   window2.on("closed", function () {
     window2 = null;
+  });
+  window2.on("focus", function(){
+    console.log("focus")
+    console.log (`Visible ${window2.isVisible()} is focus ${window2.isFocused()}`)
+    window2.show();
+    window2.focus();
+  });
+  window2.on("blur", function(){
+    console.log("blur")
+    console.log (`Visible ${window2.isVisible()} is focus ${window2.isFocused()}`)
+
   });
   return window2;
 }

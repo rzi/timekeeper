@@ -6,7 +6,7 @@ const absolutePath = path.resolve("./", "presenters.json");
 showName = document.getElementById("presenterName");
 showResult = document.getElementById("showResult");
 progress = document.getElementById("presenter");
-btnNext = document.getElementById("btnNext");
+let btnNext = document.getElementById("btnNext");
 let item = null,
   id,
   procent,
@@ -64,6 +64,7 @@ function frame() {
   progress.setAttribute("data-label", procent);
 }
 btnNext.addEventListener("click", (event) => {
+  console.log("click")
   let array = [timeInSec, procent, item];
   if (item <= presenterDataLen && item != null) {
     ipcRenderer.send("nameMsg2", array);
@@ -72,7 +73,9 @@ btnNext.addEventListener("click", (event) => {
     progress.value = 0;
   }
   clearTimeout(timeoutMyOswego);
-});
+});         
+
+
 ipcRenderer.on("nameReply", (event, arg) => {
   console.log(` name reply arg ${JSON.stringify(arg)}`); // why/what is not right..
 });
@@ -117,6 +120,6 @@ function secondsToTime(secs) {
   var divisor_for_seconds = divisor_for_minutes % 60;
   var seconds = Math.ceil(divisor_for_seconds);
   seconds = seconds < 10 ? "0" + seconds : seconds;
-  console.log(`time2: ${hours + ":" + minutes + ":" + seconds}`);
+  // console.log(`time2: ${hours + ":" + minutes + ":" + seconds}`);
   return hours + ":" + minutes + ":" + seconds;
 }

@@ -9,4 +9,4 @@ const ipcRenderer = require("electron").ipcRenderer;
     winWidth=winWidth+15
     ipcRenderer.send("winDimmension", {winWidth,winHeight});
   }
-  exports.refreshView = refreshView
+  exports.refreshView = refreshView         
