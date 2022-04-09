@@ -19,7 +19,7 @@
   "scripts": {
     "start": "electron .",
     "build-all": "electron-builder -mwl",
-    "build-w" :"electron-builder -w"
+    "build-w": "electron-builder -w"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -34,5 +34,8 @@
   "devDependencies": {
     "electron": "^16.0.5",
     "electron-builder": "^22.14.13"
+  },
+  "dependencies": {
+    "chart.js": "^2.9.3"
   }
 }

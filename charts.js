@@ -1,5 +1,8 @@
 const fs = require("fs");
 const { parse } = require("path");
+const { start } = require("repl");
+// const Chart = require('chart.js');
+
 var refreshView = require("./refreshView");
 
 let baseData = [];
@@ -12,10 +15,11 @@ let selectedConference;
 let tooltip2line=[];
 let procentTotal;
 let setTimeData =[];
-
-let labels = baseData.map((o) => o.label).concat("Total");
 let data = [];
 let total = 0;
+
+let labels = baseData.map((o) => o.label).concat("Total");
+
 for (let i = 0; i < baseData.length; i++) {
   const vStart = total;
   total += baseData[i].value;
@@ -90,7 +94,6 @@ const myChart = new Chart(ctx, {
     },
   },
 });
-// console.log(`chart  ${objToString(myChart)}`);
 fs.readFile("./results.txt", "utf-8", (err, file) => {
   var rows = file.split("\n");
   //add date to selcets
