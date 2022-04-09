@@ -2,17 +2,9 @@ const { pid } = require("process");
 const fs = require("fs");
 var path = require("path");
 var refreshView = require("./refreshView");
+const windowTopBar = require("./windowTopBar");
 
-//
-var windowTopBar = document.createElement('div')
-windowTopBar.style.width = "100%"
-windowTopBar.style.height = "32px"
-// windowTopBar.style.backgroundColor = "#000"
-windowTopBar.style.position = "absolute"
-windowTopBar.style.top = windowTopBar.style.left = 0
-windowTopBar.style.webkitAppRegion = "drag"
-document.body.appendChild(windowTopBar)
-//
+windowTopBar.windowTopBar();
 let selectElement = document.getElementById("numberOfPresenters");
 let btnAddP = document.getElementById("btnAddP");
 let p = document.getElementsByTagName("p");

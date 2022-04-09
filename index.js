@@ -5,22 +5,14 @@ const refreshView = require("./refreshView");
 const fs = require("fs");
 var path = require("path");
 const { remote } = require("electron");
+const windowTopBar  = require("./windowTopBar");
 let today = document.getElementById("date");
 let time = document.getElementById("time");
 presenters = [];
 results = [];
 const absolutePath = path.resolve("./", "presenters.json");
 const absolutePathResults = path.resolve("./", "results.txt");
-//
-var windowTopBar = document.createElement('div')
-windowTopBar.style.width = "100%"
-windowTopBar.style.height = "32px"
-// windowTopBar.style.backgroundColor = "#000"
-windowTopBar.style.position = "absolute"
-windowTopBar.style.top = windowTopBar.style.left = 0
-windowTopBar.style.webkitAppRegion = "drag"
-document.body.appendChild(windowTopBar)
-//
+windowTopBar.windowTopBar();
 let name = document.getElementById("name");
 // check if presenters are set?
 if (!fs.existsSync(absolutePath)) {
@@ -48,12 +40,12 @@ ipcRenderer.on("nameReply", (event, arg) => {
 let btnSettings = document.getElementById("btnSettings");
 btnSettings.addEventListener("click", function () {
   window.location.href = "./settings.html";
-  refreshView("main1")
+  refreshView.refreshView("main1")
 });
 let btnShow = document.getElementById("btnShow");
 btnShow.addEventListener("click", function () {
   ipcRenderer.send("showProgress", "showProgress");
-  refreshView("main1")
+  refreshView.refreshView("main1")
 });
 let btnExit = document.getElementById("btnExit");
 btnExit.addEventListener("click", function () {
@@ -71,7 +63,7 @@ ipcRenderer.on("forWin1Stop", function (event, arg) {
     resultProcent: `${resultProcent}`,
   };
   updateResults(id);
-  refreshView("main1")
+  refreshView.refreshView("main1")
 });
 ipcRenderer.on("forWin1", function (event, arg) {
   console.log(`from win1  ${arg}`);
@@ -86,7 +78,7 @@ ipcRenderer.on("forWin1", function (event, arg) {
   updateResults(id);
   nextAction(id);
   changeImage(id);
-  refreshView("main1")
+  refreshView.refreshView("main1")
 });
 var timer = setInterval(currentTime1, 1000);
 function currentTime1() {
