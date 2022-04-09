@@ -1,5 +1,7 @@
 const fs = require("fs");
 const { parse } = require("path");
+var refreshView = require("./refreshView");
+
 let baseData = [];
 let dataList = [];
 let conferenceList =[];
@@ -239,3 +241,7 @@ function objToString(obj) {
   }
   return str;
 }
+// window dimensions
+window.addEventListener('DOMContentLoaded', (event) => {
+  refreshView.refreshView("main1");
+});

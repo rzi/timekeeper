@@ -9,36 +9,38 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
   </head>
-  <body class="main1">
-    <div class="header">
-      <div class="main_header" id="green_banner">
-        <span></span>
-        <div class="appImage">
-          <img
-            src="./photos/SE_logo_white_.jpg"
-            alt="support@Schneider"
-            role="presentation"
-          />
+  <body>
+    <div id ="main1" class="main1">
+      <div class="header">
+        <div class="main_header" id="green_banner">
+          <span></span>
+          <div class="appImage">
+            <img
+              src="./photos/SE_logo_white_.jpg"
+              alt="support@Schneider"
+              role="presentation"
+            />
+          </div>
+        </div>
+        <div class="title">
+          <h2>Waterfall</h2>
+        </div>
+        <div class="MenuButton">
+          <button id="btnExit2" onclick="btnExit()">X</button>
         </div>
       </div>
-      <div class="title">
-        <h2>Waterfall</h2>
-      </div>
-      <div class="MenuButton">
-        <button id="btnExit2" onclick="btnExit()">X</button>
-      </div>
-    </div>
 
-    <div id="presenters">
-      <h3>Last results</h3>
-      <div id=listLine>
-        <div id="dateList"></div> <div id=conferenceList></div>
+      <div id="presenters">
+        <h3>Last results</h3>
+        <div id=listLine>
+          <div id="dateList"></div> <div id=conferenceList></div>
+        </div>
+        
+        <br>
+        <canvas id="waterfall" height="200"></canvas>
       </div>
-      
-      <br>
-      <canvas id="waterfall" height="200"></canvas>
+      <br />
     </div>
-    <br />
     <script src="./charts.js"></script>
   </body>
 </html>

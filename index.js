@@ -169,7 +169,8 @@ function changeImage(id) {
 }
 // window dimensions
 window.addEventListener('DOMContentLoaded', (event) => {
-refreshView.refreshView("presenter")
+refreshView.refreshView("main1")
+// document.getElementById("sticky").style.width=550
 });
 function objToString(obj) {
   let str = "";

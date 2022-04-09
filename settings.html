@@ -10,44 +10,46 @@
     <link href="./styles.css" rel="stylesheet" />
     <title>Settings</title>
   </head>
-  <body class="main1">
-    <div id=main1>
-      <div class="header">
-        <div class="main_header" id="green_banner">
-          <span></span>
-          <div class="appImage">
-            <img
-              src="./photos/SE_logo_white_.jpg"
-              alt="support@Schneider"
-              role="presentation"
-            />
+  <body >
+    <div id ="main1" class=main1>
+      <div class="sticky">
+        <div class="header">
+          <div class="main_header" id="green_banner">
+            <span></span>
+            <div class="appImage">
+              <img
+                src="./photos/SE_logo_white_.jpg"
+                alt="support@Schneider"
+                role="presentation"
+              />
+            </div>
+          </div>
+          <div class="title">
+            <h2>Settings</h2>
+          </div>
+          <div class="MenuButton">
+            <button id="btnExit2" onclick="btnExit()">X</button>
           </div>
         </div>
-        <div class="title">
-          <h2>Settings</h2>
+        <div id="addPresenter">
+          <h3>Add presenters:</h3>
+          <label for="addConferenceName">Conference name</label>
+          <input id="addConferenceName" type="text" name="addConferenceName" /><br />
+          <label for="addName">Presenter name</label>
+          <input id="addName" type="text" name="addName" /><br />
+          <label for="addTime">Presentation time</label>
+          <input
+            id="addTime"
+            type="time"
+            name="addTime"
+            value="00:05:00"
+            min="00:00:10"
+            max="23:59:00"
+          /><br />
+          <button id="btnAddP" type="button">Add</button>
         </div>
-        <div class="MenuButton">
-          <button id="btnExit2" onclick="btnExit()">X</button>
-        </div>
+        <h3 id="today">List of presenters:</h3>
       </div>
-      <div id="addPresenter">
-        <h3>Add presenters:</h3>
-        <label for="addConferenceName">Conference name</label>
-        <input id="addConferenceName" type="text" name="addConferenceName" /><br />
-        <label for="addName">Presenter name</label>
-        <input id="addName" type="text" name="addName" /><br />
-        <label for="addTime">Presentation time</label>
-        <input
-          id="addTime"
-          type="time"
-          name="addTime"
-          value="00:05:00"
-          min="00:00:10"
-          max="23:59:00"
-        /><br />
-        <button id="btnAddP" type="button">Add</button>
-      </div>
-      <h3 id="today">List of presenters:</h3>
       <div id="presenters"></div>
       <br />
     </div>

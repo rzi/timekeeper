@@ -129,6 +129,5 @@ function btnExit() {
 }
 // window dimensions
 window.addEventListener('DOMContentLoaded', (event) => {
-  console.log( "listner")
   refreshView.refreshView("main1");
-  });
+});

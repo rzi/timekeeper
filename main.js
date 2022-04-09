@@ -4,8 +4,8 @@ const path = require("path");
 
 function createWindow1() {
   window1 = new BrowserWindow({
-    width: 600,
-    height: 800,
+    // width: 600,
+    // height: 800,
     x: 0,
     y: 0,
     maximizable: false,
@@ -20,7 +20,7 @@ function createWindow1() {
   window1.loadURL(`file://${__dirname}/index.html`);
   window1.webContents.openDevTools();
   console.log('size:', window1.getSize());
-console.log('bounds:', window1.getBounds());
+  console.log('bounds:', window1.getBounds());
   window1.on("closed", function () {
     window1 = null;
   });
@@ -54,51 +54,51 @@ function createWindow2() {
   });
   return window2;
 }
-function createWindow3() {
-  window3 = new BrowserWindow({
-    width: 600,
-    height: 800,
-    frame: false,
-    webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
-      enableRemoteModule: true,
-      devTools: true,
-      frame: true,
-    },
-  });
-  window3.loadURL(`file://${__dirname}/settings.html`);
-  console.log('size:', window1.getSize());
-  console.log('bounds:', window1.getBounds());
-  window3.webContents.openDevTools();
-  window3.on("closed", function () {
-    window3 = null;
-  });
-  window3.hide();
-  return window3;
-}
-function createWindow4() {
-  window4 = new BrowserWindow({
-    width: 600,
-    height: 800,
-    frame: true,
-    webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
-      enableRemoteModule: true,
-      devTools: true
-    },
-  });
-  window4.loadURL(`file://${__dirname}/results.html`);
-  console.log('Rsize:', window1.getSize());
-  console.log('Rbounds:', window1.getBounds());
-  window4.webContents.openDevTools();
-  window4.on("closed", function () {
-    window4 = null;
-  });
-  window4.hide();
-  return window4;
-}
+// function createWindow3() {
+//   window3 = new BrowserWindow({
+//     width: 600,
+//     height: 800,
+//     frame: false,
+//     webPreferences: {
+//       nodeIntegration: true,
+//       contextIsolation: false,
+//       enableRemoteModule: true,
+//       devTools: true,
+//       frame: true,
+//     },
+//   });
+//   window3.loadURL(`file://${__dirname}/settings.html`);
+//   console.log('size:', window1.getSize());
+//   console.log('bounds:', window1.getBounds());
+//   window3.webContents.openDevTools();
+//   window3.on("closed", function () {
+//     window3 = null;
+//   });
+//   window3.hide();
+//   return window3;
+// }
+// function createWindow4() {
+//   window4 = new BrowserWindow({
+//     width: 600,
+//     height: 800,
+//     frame: true,
+//     webPreferences: {
+//       nodeIntegration: true,
+//       contextIsolation: false,
+//       enableRemoteModule: true,
+//       devTools: true
+//     },
+//   });
+//   window4.loadURL(`file://${__dirname}/results.html`);
+//   console.log('Rsize:', window1.getSize());
+//   console.log('Rbounds:', window1.getBounds());
+//   window4.webContents.openDevTools();
+//   window4.on("closed", function () {
+//     window4 = null;
+//   });
+//   window4.hide();
+//   return window4;
+// }
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -107,8 +107,8 @@ app.on("ready", () => {
   //window1.setMenuBarVisibility(false);
   window2 = createWindow2();
   window2.setMenuBarVisibility(false);
-  window3 = createWindow3();
-  window4 = createWindow4();
+  // window3 = createWindow3();
+  // window4 = createWindow4();
   ipcMain.on("nameMsg", (event, arg) => {
     console.log("name inside main process is: ", arg); // this comes form within window 1 -> and into the mainProcess
     event.sender.send("nameReply", { not_right: false }); // sends back/replies to window 1 - "event" is a reference to this chanel.
