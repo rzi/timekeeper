@@ -9,7 +9,7 @@ let tempDataList = [];
 let chartColor =[];
 let selectedDate;
 let selectedConference;
-let tooltip2line;
+let tooltip2line=[];
 let procentTotal;
 let setTimeData =[];
 

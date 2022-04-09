@@ -132,7 +132,7 @@ app.on("ready", () => {
     } else {
       window2.show();
     }
-  });
+  }); 
   ipcMain.on("winDimmension", (event, arg) => {
     console.log("window dimension: ", arg); // this comes form within window 1 -> and into the mainProcess
     event.sender.send("nameReply", { not_right: false }); // sends back/replies to window 1 - "event" is a reference to this chanel.
