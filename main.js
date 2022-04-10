@@ -34,8 +34,11 @@ function createWindow1() {
 }
 function createWindow2() {
   window2 = new BrowserWindow({
-    // width: 900,
-    // height: 60,
+    minWidth: 600,
+    minHeight: 60,
+    maxHeight: 60,
+    width: 700,
+    height: 60,
     x: 900,
     y: 900,
     frame: false,
@@ -62,7 +65,7 @@ function createWindow2() {
     // console.log (`Visible ${window2.isVisible()} is focus ${window2.isFocused()}`)
     window2.show();
     window2.focus();
-    window2.setSize(600, 60);
+    window2.setSize(700, 60);
     //document.getElementById("linia").style.borderTopColor='red';
   });
   // window2.on("blur", function(){
