@@ -26,7 +26,7 @@ h2{
   display: flex;
   justify-content: center;
   align-items: center;
-  width: max-content;
+  width: 100%;
 }
 .progress {
   font-size: larger;
@@ -81,7 +81,7 @@ progress:before {
   width: inherit;
 }
 #linia{
-  width:auto;
+  width:100%;
   border: #3dcd58 solid 1px;
 }
 #resultTable{

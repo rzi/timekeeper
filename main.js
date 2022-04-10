@@ -1,5 +1,11 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, webContents, ipcMain, autoUpdater } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  webContents,
+  ipcMain,
+  autoUpdater,
+} = require("electron");
 const path = require("path");
 
 function createWindow1() {
@@ -13,14 +19,14 @@ function createWindow1() {
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
-      enableRemoteModule: true,    
+      enableRemoteModule: true,
       devTools: false,
     },
   });
   window1.loadURL(`file://${__dirname}/index.html`);
   window1.webContents.openDevTools();
-  console.log('size:', window1.getSize());
-  console.log('bounds:', window1.getBounds());
+  console.log("size:", window1.getSize());
+  console.log("bounds:", window1.getBounds());
   window1.on("closed", function () {
     window1 = null;
   });
@@ -28,8 +34,8 @@ function createWindow1() {
 }
 function createWindow2() {
   window2 = new BrowserWindow({
-    width: "maxContent",
-    height: 60,
+    // width: 900,
+    // height: 60,
     x: 900,
     y: 900,
     frame: false,
@@ -51,11 +57,12 @@ function createWindow2() {
   window2.on("closed", function () {
     window2 = null;
   });
-  window2.on("focus", function(){
+  window2.on("focus", function () {
     // console.log("focus")
     // console.log (`Visible ${window2.isVisible()} is focus ${window2.isFocused()}`)
     window2.show();
     window2.focus();
+    window2.setSize(600, 60);
     //document.getElementById("linia").style.borderTopColor='red';
   });
   // window2.on("blur", function(){
@@ -95,12 +102,12 @@ app.on("ready", () => {
     } else {
       window2.show();
     }
-  }); 
+  });
   ipcMain.on("winDimmension", (event, arg) => {
     console.log("window dimension: ", arg); // this comes form within window 1 -> and into the mainProcess
     event.sender.send("nameReply", { not_right: false }); // sends back/replies to window 1 - "event" is a reference to this chanel.
-    console.log(`width ${arg.winWidth} x ${arg.winHeight}`)
-    window1.setSize(arg.winWidth ,arg.winHeight )
+    console.log(`width ${arg.winWidth} x ${arg.winHeight}`);
+    window1.setSize(arg.winWidth, arg.winHeight);
   });
   ipcMain.on("Exit", (event, arg) => {
     console.log("Exit ", arg); // this comes form within window 1 -> and into the mainProcess
