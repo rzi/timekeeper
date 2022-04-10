@@ -43,7 +43,7 @@ function createWindow2() {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
-      devTools: true,
+      devTools: false,
     },
   });
   window2.loadURL(`file://${__dirname}/progressBar.html`);
@@ -52,17 +52,16 @@ function createWindow2() {
     window2 = null;
   });
   window2.on("focus", function(){
-    console.log("focus")
-    console.log (`Visible ${window2.isVisible()} is focus ${window2.isFocused()}`)
+    // console.log("focus")
+    // console.log (`Visible ${window2.isVisible()} is focus ${window2.isFocused()}`)
     window2.show();
     window2.focus();
     //document.getElementById("linia").style.borderTopColor='red';
   });
-  window2.on("blur", function(){
-    console.log("blur")
-    console.log (`Visible ${window2.isVisible()} is focus ${window2.isFocused()}`)
-    //document.getElementById("linia").style.borderTopColor='black';
-  });
+  // window2.on("blur", function(){
+  //   console.log("blur")
+  //   console.log (`Visible ${window2.isVisible()} is focus ${window2.isFocused()}`)
+  // });
   return window2;
 }
 // This method will be called when Electron has finished
