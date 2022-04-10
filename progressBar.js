@@ -14,7 +14,8 @@ let item = null,
   setTime,
   presenterDataLen,
   timeoutMyOswego,
-  dirCount;
+  dirCount, 
+  sign;
 let timeInSec = 0;
 var seconds;
 var temp;
@@ -39,7 +40,9 @@ ipcRenderer.on("forWin2", function (event, arg) {
       document.getElementById("countdown").innerHTML = presenterData.setTime;
       console.log(`presenterData.setTime ${presenterData.setTime}`);
       dirCount = "down";
+      sign =" ";
       document.getElementById("countdown").style.color = "black";
+      document.getElementById("sign").innerText = " ";
       countdown();
     });
   }
@@ -98,10 +101,13 @@ function countdown() {
   }
   temp = document.getElementById("countdown");
   temp.innerHTML = secondsToTime(seconds);
+  sign =document.getElementById("sign");
   timeoutMyOswego = setTimeout(countdown, 1000);
   if (secondsToTime(seconds) == "00:00:00") {
     dirCount = "up";
     temp.style.color = "red";
+    sign.innerText = " -";
+    sign.style.color= "red"
   }
 }
 function timeToSeconds(timeArray) {
