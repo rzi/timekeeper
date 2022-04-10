@@ -1,6 +1,5 @@
-
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, webContents, ipcMain } = require("electron");
+const { app, BrowserWindow, webContents, ipcMain, autoUpdater } = require("electron");
 const path = require("path");
 
 function createWindow1() {
@@ -15,7 +14,7 @@ function createWindow1() {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,    
-      devTools: true,
+      devTools: false,
     },
   });
   window1.loadURL(`file://${__dirname}/index.html`);
@@ -29,10 +28,10 @@ function createWindow1() {
 }
 function createWindow2() {
   window2 = new BrowserWindow({
-    width: 900,
-    height: 80,
+    width: "maxContent",
+    height: 60,
     x: 900,
-    y: 100,
+    y: 900,
     frame: false,
     alwaysOnTop: true,
     maximizable: false,
@@ -57,11 +56,12 @@ function createWindow2() {
     console.log (`Visible ${window2.isVisible()} is focus ${window2.isFocused()}`)
     window2.show();
     window2.focus();
+    //document.getElementById("linia").style.borderTopColor='red';
   });
   window2.on("blur", function(){
     console.log("blur")
     console.log (`Visible ${window2.isVisible()} is focus ${window2.isFocused()}`)
-
+    //document.getElementById("linia").style.borderTopColor='black';
   });
   return window2;
 }

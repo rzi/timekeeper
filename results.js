@@ -7,7 +7,7 @@ const btnPrev = document.getElementById("btnPrev");
 const btnNext = document.getElementById("btnNext");
 btnPrev.addEventListener("click", clickPrev);
 btnNext.addEventListener("click", clickNext);
-var paginationNb = 8;
+var paginationNb = 10;
 var currentPage = 1;
 var pag;
 windowTopBar.windowTopBar();
@@ -60,7 +60,7 @@ function loadTable() {
     var tbody = document.createElement("tbody");
     var tbodyTd = {};
     var td;
-    var rows = file.split("\n");
+    var rows = file.split("\n").reverse();
     var rowsLen = rows.length;
     console.log(`rowsLen ${rowsLen}`);
     if (rowsLen<paginationNb) paginationNb=rowsLen;

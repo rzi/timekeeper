@@ -3,9 +3,9 @@ const { ipcRenderer } = require("electron");
 var path = require("path");
 const  windowTopBar  = require("./windowTopBar");
 const absolutePath = path.resolve("./", "presenters.json");
-showName = document.getElementById("presenterName");
-showResult = document.getElementById("showResult");
-progress = document.getElementById("presenter");
+let showName = document.getElementById("presenterName");
+let showResult = document.getElementById("showResult");
+let progress = document.getElementById("presenter");
 let btnNext = document.getElementById("btnNext");
 let item = null,
   id,
@@ -66,6 +66,7 @@ function frame() {
 btnNext.addEventListener("click", (event) => {
   console.log("click")
   let array = [timeInSec, procent, item];
+  console.log(`item=${item } presenterDataLen=${presenterDataLen} `)
   if (item <= presenterDataLen && item != null) {
     ipcRenderer.send("nameMsg2", array);
     clearInterval(id);
@@ -74,8 +75,6 @@ btnNext.addEventListener("click", (event) => {
   }
   clearTimeout(timeoutMyOswego);
 });         
-
-
 ipcRenderer.on("nameReply", (event, arg) => {
   console.log(` name reply arg ${JSON.stringify(arg)}`); // why/what is not right..
 });
@@ -120,6 +119,13 @@ function secondsToTime(secs) {
   var divisor_for_seconds = divisor_for_minutes % 60;
   var seconds = Math.ceil(divisor_for_seconds);
   seconds = seconds < 10 ? "0" + seconds : seconds;
-  // console.log(`time2: ${hours + ":" + minutes + ":" + seconds}`);
   return hours + ":" + minutes + ":" + seconds;
-}
+};
+window.addEventListener('focus', (event) => {
+  console.log ("focus in")
+  document.getElementById("linia").style.border="#3dcd58 solid 2px"
+},true);
+window.addEventListener('blur', (event) => {
+  console.log ("focus out")
+  document.getElementById("linia").style.border="#3dcd58  solid 1px"
+},true);

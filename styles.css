@@ -24,10 +24,12 @@ h2{
 }                                              
 .main {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
+  width: max-content;
 }
 .progress {
+  font-size: larger;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,9 +43,8 @@ progress{
   margin-left: 5px;
 }
 progress:before {
-  content: 'Value is ' attr(data-label) " %";
+  content: '' attr(data-label) " %";
   position:relative;
-  /* top:5px; */
 }
 .unique:before {
   content: attr(data-label);
@@ -78,6 +79,13 @@ progress:before {
   z-index: 100;
   background-color: white;
   width: inherit;
+}
+#linia{
+  width:auto;
+  border: #3dcd58 solid 1px;
+}
+#resultTable{
+  padding-left: 20px;
 }
 #today, #conferenceName{
   padding-left: 20px;

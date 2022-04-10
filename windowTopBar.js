@@ -1,6 +1,6 @@
 function windowTopBar (){
     var windowTopBar = document.createElement('div')
-    windowTopBar.style.width = "100%"
+    windowTopBar.style.width = "auto"
     windowTopBar.style.height = "32px"
     windowTopBar.style.position = "absolute"
     windowTopBar.style.top = windowTopBar.style.left = 0
