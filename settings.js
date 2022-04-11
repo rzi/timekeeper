@@ -97,8 +97,13 @@ function createListenerforP() {
         for (let i = 0; i < copyData.length; i++) {
           const el = copyData[i];
           if (el.id == e.target.id) {
-            copyData.splice(i, 1);
-            writeToJson();
+            if (confirm("Are you sure to delete item?")) {
+              copyData.splice(i, 1);
+              writeToJson();
+            } else {
+              txt = "You pressed Cancel!";
+            }
+
           }
         }
         location.reload();
