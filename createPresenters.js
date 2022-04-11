@@ -1,7 +1,14 @@
 const ipcRenderer = require("electron").ipcRenderer;
+const setTimeToTime = require("./setTimeToTime");
 function createPresenters(data) {
-  for (i = 0; i < data.length; i++) {
-    document.getElementById("conferenceName").textContent = `Conference name: `+data[i].conferenceName;
+  var sumSetTime=0;
+  for (i = 0; i < data.length; i++) {  
+    
+    var timetoTime = setTimeToTime.setTimeToTime(data[i].setTime)
+    console.log( `timeToTime ${timetoTime}`)
+     sumSetTime = sumSetTime + timetoTime   
+     console.log( `sum ${sumSetTime}`)
+    document.getElementById("conferenceName").textContent = `Conference name: `+data[i].conferenceName +", meeting time is " + sumSetTime.toFixed(1)  +" min.";
     var div = document.createElement("div");
     div.id = "div" + i;
     div.className = "div";
