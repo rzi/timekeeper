@@ -91,24 +91,18 @@ function createListenerforP() {
   for (let i = 0; i < count; i++) {
     const p = p_array[i];
     p.addEventListener("click", function (e) {
-
-      if (confirm("Are you sure to delete item?")) {
-        if (e.target && e.target.nodeName == "P" && e.target.id.length) {
-          console.log("Remove item ", e.target.id.replace("post-"));
-          var pId = e.target.id;
-          for (let i = 0; i < copyData.length; i++) {
-            const el = copyData[i];
-            if (el.id == e.target.id) {
-              copyData.splice(i, 1);
-              writeToJson();
+          if (e.target && e.target.nodeName == "P" && e.target.id.length) {
+            console.log("Remove item ", e.target.id.replace("post-"));
+            var pId = e.target.id;
+            for (let i = 0; i < copyData.length; i++) {
+              const el = copyData[i];
+              if (el.id == e.target.id) {
+                copyData.splice(i, 1);
+                writeToJson();
+              }
             }
+            location.reload();
           }
-          location.reload();
-        }
-      } else {
-      console.log("You pressed Cancel for felete!");
-      
-      }
     });
   }
 }
