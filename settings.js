@@ -10,9 +10,12 @@ let btnAddP = document.getElementById("btnAddP");
 let p = document.getElementsByTagName("p");
 let copyData = [];
 let conferenceName;
+let marked = 0;
 const addConferenceName = document.getElementById("addConferenceName");
-addConferenceName.value= localStorage.getItem("conferenceName")
-console.log(`conferenceName ${conferenceName}`)
+var edit = document.getElementById("edit");
+var del = document.getElementById("delete");
+addConferenceName.value = localStorage.getItem("conferenceName");
+console.log(`conferenceName ${conferenceName}`);
 const absolutePath = path.resolve("./", "presenters.json");
 
 if (!fs.existsSync(absolutePath)) {
@@ -34,10 +37,10 @@ if (!fs.existsSync(absolutePath)) {
     copyData = [...data];
   });
 }
-addConferenceName.addEventListener("change" , function(){
-conferenceName= this.value;
-console.log(` conferenceName ${conferenceName}`)
-document.getElementById("addConferenceName").value=this.value;
+addConferenceName.addEventListener("change", function () {
+  conferenceName = this.value;
+  console.log(` conferenceName ${conferenceName}`);
+  document.getElementById("addConferenceName").value = this.value;
 });
 btnAddP.addEventListener("click", function (e) {
   console.log(`copyData: ${JSON.stringify(copyData)}`);
@@ -46,7 +49,7 @@ btnAddP.addEventListener("click", function (e) {
   const addName = document.getElementById("addName").value;
   const setTime = document.getElementById("addTime").value;
   conferenceName = document.getElementById("addConferenceName").value;
-  localStorage.setItem("conferenceName",conferenceName)
+  localStorage.setItem("conferenceName", conferenceName);
   copyData.push({
     id: nbOfObj,
     name: addName,
@@ -91,19 +94,24 @@ function createListenerforP() {
   for (let i = 0; i < count; i++) {
     const p = p_array[i];
     p.addEventListener("click", function (e) {
-      console.log(`target ${objToString(e.target)} targetNode ${e.target.nodeName} target lenghr ${e.target.id.length}`)
-          // if (e.target && e.target.nodeName == "P" && e.target.id.length) {
-          //   console.log("Remove item ", e.target.id.replace("post-"));
-          //   var pId = e.target.id;
-          //   for (let i = 0; i < copyData.length; i++) {
-          //     const el = copyData[i];
-          //     if (el.id == e.target.id) {
-          //       copyData.splice(i, 1);
-          //       writeToJson();
-          //     }
-          //   }
-          //   location.reload();
-          // }
+      if (e.target && e.target.nodeName == "P" && e.target.id.length) {
+        const el = copyData[i];
+        divNb = e.target.id;
+        console.log(`id=${divNb}`);
+        for (j = 0; j < copyData.length; j++) {
+          console.log(
+            `copyData[i].id=${copyData[j].id} e.target.id=${e.target.id}`
+          );
+          if (copyData[j].id == e.target.id) {
+            document.getElementById(j).style.fontWeight = "bold";
+            console.log(`bold divNb=${divNb}`);
+            marked = j;
+          } else {
+            document.getElementById(j).style.fontWeight = "normal";
+            console.log("normal");
+          }
+        }
+      }
     });
   }
 }
@@ -121,7 +129,7 @@ function btnExit() {
   }
 }
 // window dimensions
-window.addEventListener('DOMContentLoaded', (event) => {
+window.addEventListener("DOMContentLoaded", (event) => {
   refreshView.refreshView("main1");
 });
 function objToString(obj) {
@@ -130,4 +138,19 @@ function objToString(obj) {
     str += `${p}::${val}\n`;
   }
   return str;
-} 
+}
+
+edit.addEventListener("click", function () {
+  if (marked == 0) {
+    alert("Click item to edit");
+  } else {
+    // edit
+  }
+});
+del.addEventListener("click", function () {
+  if (marked == 0) {
+    alert("Click ietem to delete");
+  } else {
+    // edit
+  }
+});
