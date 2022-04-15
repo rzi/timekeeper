@@ -91,18 +91,19 @@ function createListenerforP() {
   for (let i = 0; i < count; i++) {
     const p = p_array[i];
     p.addEventListener("click", function (e) {
-          if (e.target && e.target.nodeName == "P" && e.target.id.length) {
-            console.log("Remove item ", e.target.id.replace("post-"));
-            var pId = e.target.id;
-            for (let i = 0; i < copyData.length; i++) {
-              const el = copyData[i];
-              if (el.id == e.target.id) {
-                copyData.splice(i, 1);
-                writeToJson();
-              }
-            }
-            location.reload();
-          }
+      console.log(`target ${objToString(e.target)} targetNode ${e.target.nodeName} target lenghr ${e.target.id.length}`)
+          // if (e.target && e.target.nodeName == "P" && e.target.id.length) {
+          //   console.log("Remove item ", e.target.id.replace("post-"));
+          //   var pId = e.target.id;
+          //   for (let i = 0; i < copyData.length; i++) {
+          //     const el = copyData[i];
+          //     if (el.id == e.target.id) {
+          //       copyData.splice(i, 1);
+          //       writeToJson();
+          //     }
+          //   }
+          //   location.reload();
+          // }
     });
   }
 }
@@ -123,3 +124,10 @@ function btnExit() {
 window.addEventListener('DOMContentLoaded', (event) => {
   refreshView.refreshView("main1");
 });
+function objToString(obj) {
+  let str = "";
+  for (const [p, val] of Object.entries(obj)) {
+    str += `${p}::${val}\n`;
+  }
+  return str;
+} 
