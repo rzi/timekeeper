@@ -55,6 +55,17 @@ progress:before {
   margin-top: 10px;  
   width: fit-content;
 }
+#msg{
+  display: block;
+  margin: 0;
+}
+#message{
+  display: flex;
+  padding-left: 20px;
+}
+#btnSend{
+display: inline;
+}
 .header{  
   display: flex;
   align-items: center;

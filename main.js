@@ -35,10 +35,10 @@ function createWindow1() {
 function createWindow2() {
   window2 = new BrowserWindow({
     minWidth: 600,
-    minHeight: 60,
-    maxHeight: 60,
+    minHeight: 80,
+    maxHeight: 920,
     width: 700,
-    height: 60,
+    height: 80,
     x: 900,
     y: 900,
     frame: false,
@@ -52,7 +52,7 @@ function createWindow2() {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
-      devTools: false,
+      devTools: true,
     },
   });
   window2.loadURL(`file://${__dirname}/progressBar.html`);
@@ -96,6 +96,11 @@ app.on("ready", () => {
     console.log("stop inside main process is: ", arg); // this comes form within window 1 -> and into the mainProcess
     event.sender.send("nameReply", { not_right: false }); // sends back/replies to window 1 - "event" is a reference to this chanel.
     window1.webContents.send("forWin1Stop", arg); // sends the stuff from Window1 to Window2.
+  });
+  ipcMain.on("message", (event, arg) => {
+    console.log(" message inside main process is: ", arg); // this comes form within window 1 -> and into the mainProcess
+    event.sender.send("nameReply", { not_right: false }); // sends back/replies to window 1 - "event" is a reference to this chanel.
+    window2.webContents.send("message", arg); // sends the stuff from Window1 to Window2.
   });
   ipcMain.on("showProgress", (event, arg) => {
     console.log("showProgress inside main process is: ", arg); // this comes form within window 1 -> and into the mainProcess

@@ -20,6 +20,11 @@ let timeInSec = 0;
 var seconds;
 var temp;
 windowTopBar.windowTopBar();
+ipcRenderer.on("message", function (event, arg) {
+  console.log(`message=${arg}`)
+document.getElementById("msg").textContent="Msg: "+arg
+window.setTimeout(clearMsg, 10000);
+});
 ipcRenderer.on("forWin2", function (event, arg) {
   if (parseInt(arg) == item) {
     var tempAray = [timeInSec, procent, item];
@@ -135,3 +140,6 @@ window.addEventListener('blur', (event) => {
   console.log ("focus out")
   document.getElementById("linia").style.border="#3dcd58  solid 1px"
 },true);
+function clearMsg(){
+  document.getElementById("msg").textContent=""
+}

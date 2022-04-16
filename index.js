@@ -171,3 +171,8 @@ function objToString(obj) {
   }
   return str;
 }
+function btnSend() {
+  var msg = document.getElementById("msg").value;
+      console.log(`msg=${msg} `)
+      ipcRenderer.send("message", msg);
+  }
