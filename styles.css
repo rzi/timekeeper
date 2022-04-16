@@ -64,6 +64,13 @@ progress:before {
   margin-top: 10px;  
   width: fit-content;
 }
+#charts{
+  display: block;
+  padding-left: 20px;
+  margin-top: 10px; 
+  padding-right: 20px; 
+  width: 100%;
+}
 #msg{
   display: block;
   margin: 0;

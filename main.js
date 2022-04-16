@@ -52,7 +52,7 @@ function createWindow2() {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
-      devTools: true,
+      devTools: false,
     },
   });
   window2.loadURL(`file://${__dirname}/progressBar.html`);
