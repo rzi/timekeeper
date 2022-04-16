@@ -41,14 +41,23 @@ progress{
   height: 48px;
   line-height: 48px; 
   margin-left: 5px;
+  /* background-color: #3dcd58; */
+  /* background: red; */
+  accent-color:  #3dcd3d;
+  color:white;
 }
+
+
 progress:before {
   content: '' attr(data-label) " %";
-  position:relative;
+  position:relative;   
+  
 }
+
 .unique:before {
   content: attr(data-label);
 }
+
 #presenters{
   display: block;
   padding-left: 20px;

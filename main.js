@@ -36,7 +36,7 @@ function createWindow2() {
   window2 = new BrowserWindow({
     minWidth: 600,
     minHeight: 80,
-    maxHeight: 920,
+    maxHeight: 1120,
     width: 700,
     height: 80,
     x: 900,
