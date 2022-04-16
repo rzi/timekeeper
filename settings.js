@@ -3,14 +3,14 @@ const fs = require("fs");
 var path = require("path");
 var refreshView = require("./refreshView");
 const windowTopBar = require("./windowTopBar");
-
+var modal = document.getElementById("myModal");
 windowTopBar.windowTopBar();
 let selectElement = document.getElementById("numberOfPresenters");
 let btnAddP = document.getElementById("btnAddP");
 let p = document.getElementsByTagName("p");
 let copyData = [];
 let conferenceName;
-let marked = 0;
+let marked = null;
 const addConferenceName = document.getElementById("addConferenceName");
 var edit = document.getElementById("edit");
 var del = document.getElementById("delete");
@@ -35,6 +35,7 @@ if (!fs.existsSync(absolutePath)) {
     console.log(`data0 ${nbOfItems}`);
     createPresenters(parseInt(nbOfItems), data);
     copyData = [...data];
+    document.getElementById('nbPresenters').textContent=copyData.length
   });
 }
 addConferenceName.addEventListener("change", function () {
@@ -104,10 +105,12 @@ function createListenerforP() {
           );
           if (copyData[j].id == e.target.id) {
             document.getElementById(j).style.fontWeight = "bold";
+            document.getElementById(j).style.backgroundColor= "yellow";
             console.log(`bold divNb=${divNb}`);
             marked = j;
           } else {
             document.getElementById(j).style.fontWeight = "normal";
+            document.getElementById(j).style.backgroundColor= "white";
             console.log("normal");
           }
         }
@@ -139,18 +142,72 @@ function objToString(obj) {
   }
   return str;
 }
-
-edit.addEventListener("click", function () {
-  if (marked == 0) {
+del.addEventListener("click", function () {
+  if (marked == null) {
+    alert("Click ietem to delete");
+  } else {
+    // delete
+    for (let i = 0; i < copyData.length; i++) {
+      const el = copyData[i];
+      if (el.id == marked) {
+        copyData.splice(i, 1);
+        writeToJson();
+        marked=null;
+      }
+    }
+    location.reload();
+  }
+});
+//modal
+// Get the modal
+var modal = document.getElementById("myModal");
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  if (marked == null) {
     alert("Click item to edit");
   } else {
     // edit
+    modal.style.display = "block";
+    document.getElementById("editId").value=copyData[marked].id;
+    document.getElementById("editPresenterName").value=copyData[marked].name;
+    document.getElementById("editTime").value=copyData[marked].setTime;
   }
-});
-del.addEventListener("click", function () {
-  if (marked == 0) {
-    alert("Click ietem to delete");
-  } else {
-    // edit
+}
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
   }
+}
+// save modal
+var editSave = document.getElementById("editSave");
+editSave.addEventListener("click", function(){
+  var id= document.getElementById("editId").value;
+  var name= document.getElementById("editPresenterName").value; 
+  var setTime =document.getElementById("editTime").value
+  for (i=0 ; i< copyData.length; i++){
+    console.log(`copyData[i].id= ${copyData[i].id} , id=${id} i=${i}`)
+    if (copyData[i].id ==id){
+      copyData[i].id = Number(id)
+      copyData[i].name = name
+      copyData[i].setTime = setTime
+      console.log(`id ${copyData[i].id}
+      name= ${copyData[i].name}
+      setTime= ${copyData[i].setTime}
+      `)
+    }
+  }
+  // Write to JSON
+  writeToJson();
+  //refresh
+  location.reload();
+  console.log('saved');
 });

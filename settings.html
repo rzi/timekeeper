@@ -49,10 +49,26 @@
           <button id="btnAddP" type="button">Add</button>
         </div>
         <hr id="linia">
-        <h3 id="today">List of presenters:</h3>
-        <button id="edit">Edit</button>
+        <h3 id="today">List of presenters: <span id="nbPresenters">()</span></h3>
+        <!-- <button id="edit">Edit</button> -->
+        <!-- Trigger/Open The Modal -->
+        <button id="myBtn">Edit</button>
         <button id="delete">Delete</button>
-
+      </div>
+      <!-- The Modal -->
+      <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <p>Edit presenter:</p>
+          Id: <input type="text" id="editId" disabled> <br><br>
+          Presenter name: <input type="text" id="editPresenterName"><br><br>
+          time: <input type="time" id="editTime" min="00:00:10"
+          max="23:59:00"><br><br>
+          <button id="editSave">Save</button>
+          <br>
+          <br>
+        </div>
       </div>
       <div id="presenters"></div>
       <br />
