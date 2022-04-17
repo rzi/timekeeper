@@ -1,14 +1,18 @@
 const ipcRenderer = require("electron").ipcRenderer;
 const setTimeToTime = require("./setTimeToTime");
 function createPresenters(data) {
-  var sumSetTime=0;
-  for (i = 0; i < data.length; i++) {  
-    
-    var timetoTime = setTimeToTime.setTimeToTime(data[i].setTime)
-    console.log( `timeToTime ${timetoTime}`)
-     sumSetTime = sumSetTime + timetoTime   
-     console.log( `sum ${sumSetTime}`)
-    document.getElementById("conferenceName").textContent = `Conference name: `+data[i].conferenceName +", meeting time is " + sumSetTime.toFixed(1)  +" min.";
+  var sumSetTime = 0;
+  for (i = 0; i < data.length; i++) {
+    var timetoTime = setTimeToTime.setTimeToTime(data[i].setTime);
+    console.log(`timeToTime ${timetoTime}`);
+    sumSetTime = sumSetTime + timetoTime;
+    // console.log( `sum ${sumSetTime}`)
+    document.getElementById("conferenceName").textContent =
+      `Conference name: ` +
+      data[i].conferenceName +
+      ", meeting time is " +
+      sumSetTime.toFixed(1) +
+      " min.";
     var div = document.createElement("div");
     div.id = "div" + i;
     div.className = "div";
@@ -51,7 +55,7 @@ function createPresenters(data) {
 function createListenerforP(data) {
   const p_array = document.getElementsByTagName("p");
   const count = p_array.length;
-  console.log(`count ${count}`);
+  // console.log(`count ${count}`);
   //loop through a list of elements.
   for (let i = 0; i < count; i++) {
     const p = p_array[i];

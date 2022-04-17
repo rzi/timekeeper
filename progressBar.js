@@ -4,7 +4,6 @@ var path = require("path");
 const windowTopBar = require("./windowTopBar");
 const absolutePath = path.resolve("./", "presenters.json");
 let showName = document.getElementById("presenterName");
-let showResult = document.getElementById("showResult");
 let progress = document.getElementById("presenter");
 let btnNext = document.getElementById("btnNext");
 let item = null,
@@ -138,7 +137,6 @@ function countdown() {
     temp.style.color = "red";
     sign.innerText = " -";
     sign.style.color = "red";
-    // tada100.play();
   }
 }
 function timeToSeconds(timeArray) {

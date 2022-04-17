@@ -1,23 +1,18 @@
 const fs = require("fs");
-const { parse } = require("path");
-const { start } = require("repl");
-// const Chart = require('chart.js');
-
 var refreshView = require("./refreshView");
 
 let baseData = [];
 let dataList = [];
-let conferenceList =[];
+let conferenceList = [];
 let tempDataList = [];
-let chartColor =[];
+let chartColor = [];
 let selectedDate;
 let selectedConference;
-let tooltip2line=[];
+let tooltip2line = [];
 let procentTotal;
-let setTimeData =[];
+let setTimeData = [];
 let data = [];
 let total = 0;
-
 let labels = baseData.map((o) => o.label).concat("Total");
 
 for (let i = 0; i < baseData.length; i++) {
@@ -26,12 +21,10 @@ for (let i = 0; i < baseData.length; i++) {
   data.push([vStart, total]);
 }
 data.push(total);
-
 const ctx = document.getElementById("waterfall");
 const myChart = new Chart(ctx, {
   type: "bar",
   data: {
-
     datasets: [
       {
         data: data,
@@ -43,40 +36,41 @@ const myChart = new Chart(ctx, {
   options: {
     responsive: true,
     maintainAspectRatio: false,
-    title:{
+    title: {
       display: true,
-      text: " "
+      text: " ",
     },
     plugins: {
       labels: [
         {
           render: (arg) => {
-            return tooltip2line[arg.index] +"%"
+            return tooltip2line[arg.index] + "%";
           },
         },
-      ]
-    },  
+      ],
+    },
     legend: {
       display: false,
     },
     tooltips: {
       callbacks: {
-        label: (tooltipItem, data, ) => {
+        label: (tooltipItem, data) => {
           const v = data.datasets[0].data[tooltipItem.index];
           var valReturn;
-          if(Array.isArray(v)){
-            valReturn =(((Number(v[1]) - Number(v[0]))).toFixed(2) + " min" )
-          }else{
-             valReturn =((Number(v)).toFixed(2) +" min")
+          if (Array.isArray(v)) {
+            valReturn = (Number(v[1]) - Number(v[0])).toFixed(2) + " min";
+          } else {
+            valReturn = Number(v).toFixed(2) + " min";
           }
           return valReturn;
-        },     
-        afterLabel: function(tooltipItem ) {
-          var setTime2 = tooltip3line[tooltipItem['index']];
-          var percent = tooltip2line[tooltipItem['index']];
-          return '(' + percent + '% ) \nSetTime: '+setTime2.toFixed(2) +' min';
         },
-        
+        afterLabel: function (tooltipItem) {
+          var setTime2 = tooltip3line[tooltipItem["index"]];
+          var percent = tooltip2line[tooltipItem["index"]];
+          return (
+            "(" + percent + "% ) \nSetTime: " + setTime2.toFixed(2) + " min"
+          );
+        },
       },
     },
     scales: {
@@ -87,7 +81,7 @@ const myChart = new Chart(ctx, {
           },
           scaleLabel: {
             display: true,
-            labelString: 'Time [minutes]'
+            labelString: "Time [minutes]",
           },
         },
       ],
@@ -100,10 +94,11 @@ fs.readFile("./results.txt", "utf-8", (err, file) => {
   for (i = 0; i < rows.length; i++) {
     var item = rows[i].toString().split(",");
     if (!dataList.includes(item[0])) {
-       if (!(item[0]=="")) dataList.push(item[0]);
+      if (!(item[0] == "")) dataList.push(item[0]);
     }
     if (!conferenceList.includes(item[6])) {
-      if (!(item[6]=="") && !(item[6]==undefined)) conferenceList.push(item[6]);
+      if (!(item[6] == "") && !(item[6] == undefined))
+        conferenceList.push(item[6]);
     }
     tempDataList.push({
       date: item[0],
@@ -144,93 +139,101 @@ fs.readFile("./results.txt", "utf-8", (err, file) => {
   var label = document.createElement("label");
   label.innerHTML = "and conference name  ";
   label.htmlFor = "listConference";
-  document.getElementById("conferenceList").appendChild(label).appendChild(select);
-
+  document
+    .getElementById("conferenceList")
+    .appendChild(label)
+    .appendChild(select);
   selectedDate = document.getElementById("listDate").selectedOptions[0].value;
   document.getElementById("listDate").addEventListener("change", dropDownList);
-  selectedConference = document.getElementById("listConference").selectedOptions[0].value;
-  document.getElementById("listConference").addEventListener("change", dropDownListConference);
+  selectedConference =
+    document.getElementById("listConference").selectedOptions[0].value;
+  document
+    .getElementById("listConference")
+    .addEventListener("change", dropDownListConference);
   console.log("You selected: ", selectedDate, selectedConference);
   initialvalue(selectedDate, selectedConference);
 });
 function dropDownList() {
   selectedDate = this.value;
-  initialvalue(selectedDate,selectedConference)
+  initialvalue(selectedDate, selectedConference);
 }
 function dropDownListConference() {
   selectedConference = this.value;
-  initialvalue(selectedDate,selectedConference)
+  initialvalue(selectedDate, selectedConference);
 }
-function initialvalue(selectedDate, selectdConference){
-   var toolTipTotal=0;
-   var setTime1;
-   initChart();
+function initialvalue(selectedDate, selectdConference) {
+  var toolTipTotal = 0;
+  var setTime1;
+  initChart();
   for (const val of tempDataList) {
     // console.log(`przed if ${val.date }=${selectedDate} i ${val.conferenceList}=${selectdConference} i ${val.setTime}`)
-    if (val.date == selectedDate && val.conferenceList == selectdConference && !(val.setTime ==undefined)) {
+    if (
+      val.date == selectedDate &&
+      val.conferenceList == selectdConference &&
+      !(val.setTime == undefined)
+    ) {
       // console.log(`if ${val.date }=${selectedDate} i ${val.conferenceList}=${selectdConference} i setTime=${val.setTime}`)
-      baseData.push({ label: val.presenter, value: (val.result)/60 });
+      baseData.push({ label: val.presenter, value: val.result / 60 });
       if (val.resultProcent > 100) {
-        chartColor.push("red")
-      }else{
-        chartColor.push("#3dcd58")
-      } 
-      tooltip2line.push(val.resultProcent )
-      setTime1=setTimeToTime(val.setTime)
-      tooltip3line.push(setTime1) 
+        chartColor.push("red");
+      } else {
+        chartColor.push("#3dcd58");
+      }
+      tooltip2line.push(val.resultProcent);
+      setTime1 = setTimeToTime(val.setTime);
+      tooltip3line.push(setTime1);
       // console.log(`setTime1 ${setTime1}`)
     }
-    if (!isNaN(setTime1)){
-    // console.log(`setTime1 loop ${Number(setTime1)}`)
-    toolTipTotal= toolTipTotal+setTime1
-    // console.log(`toolTipTotalLoop ${toolTipTotal}`)
-    }else{
-      toolTipTotal=0;
+    if (!isNaN(setTime1)) {
+      // console.log(`setTime1 loop ${Number(setTime1)}`)
+      toolTipTotal = toolTipTotal + setTime1;
+      // console.log(`toolTipTotalLoop ${toolTipTotal}`)
+    } else {
+      toolTipTotal = 0;
     }
   }
-  console.log(`toolTipTotaltotal ${toolTipTotal}`)
+  console.log(`toolTipTotaltotal ${toolTipTotal}`);
   myChart.data.labels = baseData.map((o) => o.label).concat("Total"); // add "TOTAL at end of table"
   for (let i = 0; i < baseData.length; i++) {
     const vStart = total;
     total += baseData[i].value;
-    data.push([(vStart).toFixed(2), (total).toFixed(2)]);
+    data.push([vStart.toFixed(2), total.toFixed(2)]);
   }
   console.log(`data  ${JSON.stringify(data)}`);
-  data.push((total).toFixed(2)); // calculate value of table (total)
-  var lastItem = data[data.length-1] ///in minute
-  console.log(`lastItem ${lastItem} tooltipTotal ${toolTipTotal}  data ${data}`)
-  procentTotal=(100*(lastItem/toolTipTotal)).toFixed(1);
+  data.push(total.toFixed(2)); // calculate value of table (total)
+  var lastItem = data[data.length - 1]; ///in minute
+  console.log(
+    `lastItem ${lastItem} tooltipTotal ${toolTipTotal}  data ${data}`
+  );
+  procentTotal = (100 * (lastItem / toolTipTotal)).toFixed(1);
   // calc sum of settime
   tooltip2line.push(procentTotal);
-  tooltip3line.push(toolTipTotal) //suma setTime
-  if (procentTotal<100){
-    chartColor.push("#3dcd58")
-  }else(
-    chartColor.push("red")
-  )
+  tooltip3line.push(toolTipTotal); //suma setTime
+  if (procentTotal < 100) {
+    chartColor.push("#3dcd58");
+  } else chartColor.push("red");
   myChart.data.datasets[0].data = data;
-  myChart.data.datasets[0].backgroundColor=chartColor;
+  myChart.data.datasets[0].backgroundColor = chartColor;
   myChart.update();
 }
-function setTimeToTime (setTime){
-      //calc sum of setTime 00:00:05
-      const czas = setTime.slice(0,8);
-      // console.log(`czas ${czas}`)
-      const h = parseInt(setTime.slice(0,2));
-      const m = parseInt(setTime.slice(3,5));
-      const s = parseInt(setTime.slice(6,8));
-      // console.log(`h ${h} m ${m} s ${s}`)
-      return Number((h*60)+m+(s/60)) // return time in minutes
+function setTimeToTime(setTime) {
+  //calc sum of setTime 00:00:05
+  const czas = setTime.slice(0, 8);
+  // console.log(`czas ${czas}`)
+  const h = parseInt(setTime.slice(0, 2));
+  const m = parseInt(setTime.slice(3, 5));
+  const s = parseInt(setTime.slice(6, 8));
+  // console.log(`h ${h} m ${m} s ${s}`)
+  return Number(h * 60 + m + s / 60); // return time in minutes
 }
-function initChart(){
+function initChart() {
   baseData = [];
   myChart.data.labels = [];
   myChart.data.datasets[0].data = [];
-  myChart.data.datasets[0].backgroundColor =[],
-  data = [];
+  (myChart.data.datasets[0].backgroundColor = []), (data = []);
   labels = [];
-  chartColor =[];
-  tooltip2line =[];
+  chartColor = [];
+  tooltip2line = [];
   tooltip3line = [];
   total = 0;
 }
@@ -245,6 +248,6 @@ function objToString(obj) {
   return str;
 }
 // window dimensions
-window.addEventListener('DOMContentLoaded', (event) => {
+window.addEventListener("DOMContentLoaded", (event) => {
   refreshView.refreshView("main1");
 });

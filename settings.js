@@ -15,7 +15,7 @@ const addConferenceName = document.getElementById("addConferenceName");
 var edit = document.getElementById("edit");
 var del = document.getElementById("delete");
 addConferenceName.value = localStorage.getItem("conferenceName");
-console.log(`conferenceName ${conferenceName}`);
+// console.log(`conferenceName ${conferenceName}`);
 const absolutePath = path.resolve("./", "presenters.json");
 
 if (!fs.existsSync(absolutePath)) {
@@ -35,7 +35,7 @@ if (!fs.existsSync(absolutePath)) {
     console.log(`data0 ${nbOfItems}`);
     createPresenters(parseInt(nbOfItems), data);
     copyData = [...data];
-    document.getElementById('nbPresenters').textContent=copyData.length
+    document.getElementById("nbPresenters").textContent = copyData.length;
   });
 }
 addConferenceName.addEventListener("change", function () {
@@ -90,7 +90,7 @@ function readTextFile(file, callback) {
 function createListenerforP() {
   const p_array = document.getElementsByTagName("p");
   const count = p_array.length;
-  console.log(`count ${count}`);
+  // console.log(`count ${count}`);
   //loop through a list of elements.
   for (let i = 0; i < count; i++) {
     const p = p_array[i];
@@ -100,18 +100,18 @@ function createListenerforP() {
         divNb = e.target.id;
         console.log(`id=${divNb}`);
         for (j = 0; j < copyData.length; j++) {
-          console.log(
-            `copyData[i].id=${copyData[j].id} e.target.id=${e.target.id}`
-          );
+          // console.log(
+          //   `copyData[i].id=${copyData[j].id} e.target.id=${e.target.id}`
+          // );
           if (copyData[j].id == e.target.id) {
             document.getElementById(j).style.fontWeight = "bold";
-            document.getElementById(j).style.backgroundColor= "yellow";
-            console.log(`bold divNb=${divNb}`);
+            document.getElementById(j).style.backgroundColor = "yellow";
+            // console.log(`bold divNb=${divNb}`);
             marked = j;
           } else {
             document.getElementById(j).style.fontWeight = "normal";
-            document.getElementById(j).style.backgroundColor= "white";
-            console.log("normal");
+            document.getElementById(j).style.backgroundColor = "white";
+            // console.log("normal");
           }
         }
       }
@@ -152,7 +152,7 @@ del.addEventListener("click", function () {
       if (el.id == marked) {
         copyData.splice(i, 1);
         writeToJson();
-        marked=null;
+        marked = null;
       }
     }
     location.reload();
@@ -165,49 +165,49 @@ var modal = document.getElementById("myModal");
 var btn = document.getElementById("myBtn");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
+// When the user clicks the button, open the modal
+btn.onclick = function () {
   if (marked == null) {
     alert("Click item to edit");
   } else {
     // edit
     modal.style.display = "block";
-    document.getElementById("editId").value=copyData[marked].id;
-    document.getElementById("editPresenterName").value=copyData[marked].name;
-    document.getElementById("editTime").value=copyData[marked].setTime;
+    document.getElementById("editId").value = copyData[marked].id;
+    document.getElementById("editPresenterName").value = copyData[marked].name;
+    document.getElementById("editTime").value = copyData[marked].setTime;
   }
-}
+};
 // When the user clicks on <span> (x), close the modal
-span.onclick = function() {
+span.onclick = function () {
   modal.style.display = "none";
-}
+};
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
+window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
-}
+};
 // save modal
 var editSave = document.getElementById("editSave");
-editSave.addEventListener("click", function(){
-  var id= document.getElementById("editId").value;
-  var name= document.getElementById("editPresenterName").value; 
-  var setTime =document.getElementById("editTime").value
-  for (i=0 ; i< copyData.length; i++){
-    console.log(`copyData[i].id= ${copyData[i].id} , id=${id} i=${i}`)
-    if (copyData[i].id ==id){
-      copyData[i].id = Number(id)
-      copyData[i].name = name
-      copyData[i].setTime = setTime
-      console.log(`id ${copyData[i].id}
-      name= ${copyData[i].name}
-      setTime= ${copyData[i].setTime}
-      `)
+editSave.addEventListener("click", function () {
+  var id = document.getElementById("editId").value;
+  var name = document.getElementById("editPresenterName").value;
+  var setTime = document.getElementById("editTime").value;
+  for (i = 0; i < copyData.length; i++) {
+    // console.log(`copyData[i].id= ${copyData[i].id} , id=${id} i=${i}`);
+    if (copyData[i].id == id) {
+      copyData[i].id = Number(id);
+      copyData[i].name = name;
+      copyData[i].setTime = setTime;
+      // console.log(`id ${copyData[i].id}
+      // name= ${copyData[i].name}
+      // setTime= ${copyData[i].setTime}
+      // `);
     }
   }
   // Write to JSON
   writeToJson();
   //refresh
   location.reload();
-  console.log('saved');
+  console.log("saved");
 });

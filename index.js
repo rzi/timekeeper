@@ -5,7 +5,7 @@ const refreshView = require("./refreshView");
 const fs = require("fs");
 var path = require("path");
 const { remote } = require("electron");
-const windowTopBar  = require("./windowTopBar");
+const windowTopBar = require("./windowTopBar");
 let today = document.getElementById("date");
 let time = document.getElementById("time");
 presenters = [];
@@ -40,12 +40,12 @@ ipcRenderer.on("nameReply", (event, arg) => {
 let btnSettings = document.getElementById("btnSettings");
 btnSettings.addEventListener("click", function () {
   window.location.href = "./settings.html";
-  refreshView.refreshView("main1")
+  refreshView.refreshView("main1");
 });
 let btnShow = document.getElementById("btnShow");
 btnShow.addEventListener("click", function () {
   ipcRenderer.send("showProgress", "showProgress");
-  refreshView.refreshView("main1")
+  refreshView.refreshView("main1");
 });
 let btnExit = document.getElementById("btnExit");
 btnExit.addEventListener("click", function () {
@@ -63,7 +63,7 @@ ipcRenderer.on("forWin1Stop", function (event, arg) {
     resultProcent: `${resultProcent}`,
   };
   updateResults(id);
-  refreshView.refreshView("main1")
+  refreshView.refreshView("main1");
 });
 ipcRenderer.on("forWin1", function (event, arg) {
   console.log(`from win1  ${arg}`);
@@ -78,7 +78,7 @@ ipcRenderer.on("forWin1", function (event, arg) {
   updateResults(id);
   nextAction(id);
   changeImage(id);
-  refreshView.refreshView("main1")
+  refreshView.refreshView("main1");
 });
 var timer = setInterval(currentTime1, 1000);
 function currentTime1() {
@@ -89,7 +89,9 @@ function currentTime1() {
 }
 function updateResults(id) {
   console.log(
-    ` results: ${results[id].id} , ${results[id].timeSpent}, ${results[id].resultProcent, results[id].conferenceName} `
+    ` results: ${results[id].id} , ${results[id].timeSpent}, ${
+      (results[id].resultProcent, results[id].conferenceName)
+    } `
   );
   var index = "S" + String(id);
   console.log(`i ${id}  timespent   ${results[id].timeSpent}`);
@@ -112,7 +114,7 @@ function updateResults(id) {
   record.push(results[id].timeSpent);
   record.push(results[id].resultProcent);
   record.push(presenters[id].conferenceName);
-console.log(`record ${record}`)
+  console.log(`record ${record}`);
   var data = fs.readFileSync(absolutePathResults).toString().split("\n");
   data.splice(0, 0, record);
   var text = data.join("\n");
@@ -160,9 +162,9 @@ function changeImage(id) {
   }
 }
 // window dimensions
-window.addEventListener('DOMContentLoaded', (event) => {
-refreshView.refreshView("main1")
-// document.getElementById("sticky").style.width=550
+window.addEventListener("DOMContentLoaded", (event) => {
+  refreshView.refreshView("main1");
+  // document.getElementById("sticky").style.width=550
 });
 function objToString(obj) {
   let str = "";
@@ -173,6 +175,6 @@ function objToString(obj) {
 }
 function btnSend() {
   var msg = document.getElementById("msg").value;
-      console.log(`msg=${msg} `)
-      ipcRenderer.send("message", msg);
-  }
+  console.log(`msg=${msg} `);
+  ipcRenderer.send("message", msg);
+}

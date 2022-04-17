@@ -10,8 +10,8 @@
     <link href="./styles.css" rel="stylesheet" />
     <title>Settings</title>
   </head>
-  <body >
-    <div id ="main1" class=main1>
+  <body>
+    <div id="main1" class="main1">
       <div class="sticky">
         <div class="header">
           <div class="main_header" id="green_banner">
@@ -34,7 +34,11 @@
         <div id="addPresenter">
           <h3>Add presenters:</h3>
           <label for="addConferenceName">Conference name</label>
-          <input id="addConferenceName" type="text" name="addConferenceName" /><br />
+          <input
+            id="addConferenceName"
+            type="text"
+            name="addConferenceName"
+          /><br />
           <label for="addName">Presenter name</label>
           <input id="addName" type="text" name="addName" /><br />
           <label for="addTime">Presentation time</label>
@@ -48,8 +52,10 @@
           /><br />
           <button id="btnAddP" type="button">Add</button>
         </div>
-        <hr id="linia">
-        <h3 id="today">List of presenters: <span id="nbPresenters">()</span></h3>
+        <hr id="linia" />
+        <h3 id="today">
+          List of presenters: <span id="nbPresenters">()</span>
+        </h3>
         <!-- <button id="edit">Edit</button> -->
         <!-- Trigger/Open The Modal -->
         <button id="myBtn">Edit</button>
@@ -60,14 +66,21 @@
         <!-- Modal content -->
         <div class="modal-content">
           <span class="close">&times;</span>
+          <hr id="linia" />
           <p>Edit presenter:</p>
-          Id: <input type="text" id="editId" disabled> <br><br>
-          Presenter name: <input type="text" id="editPresenterName"><br><br>
-          time: <input type="time" id="editTime" min="00:00:10"
-          max="23:59:00"><br><br>
+          Id: <input type="text" id="editId" disabled /> <br /><br />
+          Presenter name:
+          <input type="text" id="editPresenterName" /><br /><br />
+          time:
+          <input
+            type="time"
+            id="editTime"
+            min="00:00:10"
+            max="23:59:00"
+          /><br /><br />
           <button id="editSave">Save</button>
-          <br>
-          <br>
+          <br />
+          <br />
         </div>
       </div>
       <div id="presenters"></div>
