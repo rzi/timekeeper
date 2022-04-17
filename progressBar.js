@@ -1,7 +1,7 @@
 const readText = require("./readText");
 const { ipcRenderer } = require("electron");
 var path = require("path");
-const  windowTopBar  = require("./windowTopBar");
+const windowTopBar = require("./windowTopBar");
 const absolutePath = path.resolve("./", "presenters.json");
 let showName = document.getElementById("presenterName");
 let showResult = document.getElementById("showResult");
@@ -14,16 +14,25 @@ let item = null,
   setTime,
   presenterDataLen,
   timeoutMyOswego,
-  dirCount, 
+  dirCount,
   sign;
+var sound80 = false,
+  sound90 = false,
+  sound100 = false,
+  sound120 = false;
 let timeInSec = 0;
 var seconds;
 var temp;
+var ding75 = new Audio("./sounds/Ding 75.wav");
+var gang85 = new Audio("./sounds/gang 85.wav");
+var tada100 = new Audio("./sounds/tada 100.wav");
+var error120 = new Audio("./sounds/error 120.wav");
+
 windowTopBar.windowTopBar();
 ipcRenderer.on("message", function (event, arg) {
-  console.log(`message=${arg}`)
-document.getElementById("msg").textContent="Msg: "+arg
-window.setTimeout(clearMsg, 10000);
+  // console.log(`message=${arg}`);
+  document.getElementById("msg").textContent = "Msg: " + arg;
+  window.setTimeout(clearMsg, 10000);
 });
 ipcRenderer.on("forWin2", function (event, arg) {
   if (parseInt(arg) == item) {
@@ -39,13 +48,14 @@ ipcRenderer.on("forWin2", function (event, arg) {
       presenterDataLen = Object.keys(data).length;
       presenterData = data[arg];
       timeInSec = 0;
+      setSound();
       clearInterval(id);
       clearTimeout(timeoutMyOswego);
       StartTimer();
       document.getElementById("countdown").innerHTML = presenterData.setTime;
-      console.log(`presenterData.setTime ${presenterData.setTime}`);
+      // console.log(`presenterData.setTime ${presenterData.setTime}`);
       dirCount = "down";
-      sign =" ";
+      sign = " ";
       document.getElementById("countdown").style.color = "black";
       document.getElementById("sign").innerText = " ";
       countdown();
@@ -58,7 +68,7 @@ function getSeconds(time) {
   return Date.UTC(1970, 0, 1, ts[0], ts[1], ts[2]) / 1000;
 }
 function StartTimer() {
-  console.log(`presenterData ${JSON.stringify(presenterData)}`);
+  // console.log(`presenterData ${JSON.stringify(presenterData)}`);
   setTime = getSeconds(presenterData.setTime);
   progress.value = 0;
   progress.max = setTime;
@@ -70,11 +80,26 @@ function frame() {
   progress.value = timeInSec;
   procent = parseInt((timeInSec / progress.max) * 100);
   progress.setAttribute("data-label", procent);
+  // console.log(`procent=${procent}`);
+  if (procent > 80 && sound80) {
+    ding75.play();
+    sound80 = false;
+  } else if (procent > 90 && sound90) {
+    gang85.play();
+    sound90 = false;
+  } else if (procent > 100 && sound100) {
+    tada100.play();
+    sound100 = false;
+  } else if (procent > 150 && sound120) {
+    error120.play();
+    sound120 = false;
+  }
 }
 btnNext.addEventListener("click", (event) => {
-  console.log("click")
+  console.log("click");
+  setSound();
   let array = [timeInSec, procent, item];
-  console.log(`item=${item } presenterDataLen=${presenterDataLen} `)
+  console.log(`item=${item} presenterDataLen=${presenterDataLen} `);
   if (item <= presenterDataLen && item != null) {
     ipcRenderer.send("nameMsg2", array);
     clearInterval(id);
@@ -82,7 +107,7 @@ btnNext.addEventListener("click", (event) => {
     progress.value = 0;
   }
   clearTimeout(timeoutMyOswego);
-});         
+});
 ipcRenderer.on("nameReply", (event, arg) => {
   console.log(` name reply arg ${JSON.stringify(arg)}`); // why/what is not right..
 });
@@ -106,13 +131,14 @@ function countdown() {
   }
   temp = document.getElementById("countdown");
   temp.innerHTML = secondsToTime(seconds);
-  sign =document.getElementById("sign");
+  sign = document.getElementById("sign");
   timeoutMyOswego = setTimeout(countdown, 1000);
   if (secondsToTime(seconds) == "00:00:00") {
     dirCount = "up";
     temp.style.color = "red";
     sign.innerText = " -";
-    sign.style.color= "red"
+    sign.style.color = "red";
+    // tada100.play();
   }
 }
 function timeToSeconds(timeArray) {
@@ -131,15 +157,35 @@ function secondsToTime(secs) {
   var seconds = Math.ceil(divisor_for_seconds);
   seconds = seconds < 10 ? "0" + seconds : seconds;
   return hours + ":" + minutes + ":" + seconds;
-};
-window.addEventListener('focus', (event) => {
-  console.log ("focus in")
-  document.getElementById("linia").style.border="#3dcd58 solid 2px"
-},true);
-window.addEventListener('blur', (event) => {
-  console.log ("focus out")
-  document.getElementById("linia").style.border="#3dcd58  solid 1px"
-},true);
-function clearMsg(){
-  document.getElementById("msg").textContent=""
+}
+window.addEventListener(
+  "focus",
+  (event) => {
+    console.log("focus in");
+    document.getElementById("linia").style.border = "#3dcd58 solid 2px";
+  },
+  true
+);
+window.addEventListener(
+  "blur",
+  (event) => {
+    console.log("focus out");
+    document.getElementById("linia").style.border = "#3dcd58  solid 1px";
+  },
+  true
+);
+function clearMsg() {
+  document.getElementById("msg").textContent = "";
+}
+function setSound() {
+  sound90 = true;
+  sound80 = true;
+  sound100 = true;
+  sound120 = true;
+}
+function clearSound() {
+  sound90 = false;
+  sound80 = false;
+  sound100 = false;
+  sound120 = false;
 }

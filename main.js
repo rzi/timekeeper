@@ -20,7 +20,7 @@ function createWindow1() {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
-      devTools: true,
+      devTools: false,
     },
   });
   window1.loadURL(`file://${__dirname}/index.html`);
