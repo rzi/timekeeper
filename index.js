@@ -177,4 +177,5 @@ function btnSend() {
   var msg = document.getElementById("msg").value;
   //consolele.log(`msg=${msg} `);
   ipcRenderer.send("message", msg);
+  document.getElementById("msg").value = "";
 }
