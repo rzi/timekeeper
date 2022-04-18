@@ -29,7 +29,7 @@ readText.readText(absolutePath, function (text) {
 });
 //}
 if (!fs.existsSync(absolutePathResults)) {
-  fs.writeFile(absolutePathResults, "", function (err) {
+  fs.writeFileSync(absolutePathResults, "", function (err) {
     if (err) throw err;
     //consolele.log("File is created successfully.");
   });
@@ -118,7 +118,7 @@ function updateResults(id) {
   var data = fs.readFileSync(absolutePathResults).toString().split("\n");
   data.splice(0, 0, record);
   var text = data.join("\n");
-  fs.writeFile(absolutePathResults, text, function (err) {
+  fs.writeFileSync(absolutePathResults, text, function (err) {
     if (err) return err;
   });
 }

@@ -26,8 +26,8 @@ function createWindow1() {
   });
   window1.loadURL(`file://${__dirname}/index.html`);
   window1.webContents.openDevTools();
-  console.log("size:", window1.getSize());
-  console.log("bounds:", window1.getBounds());
+  // console.log("size:", window1.getSize());
+  // console.log("bounds:", window1.getBounds());
   window1.on("closed", function () {
     window1 = null;
   });
@@ -114,9 +114,9 @@ app.on("ready", () => {
     }
   });
   ipcMain.on("winDimmension", (event, arg) => {
-    console.log("window dimension: ", arg); // this comes form within window 1 -> and into the mainProcess
+    // console.log("window dimension: ", arg); // this comes form within window 1 -> and into the mainProcess
     event.sender.send("nameReply", { not_right: false }); // sends back/replies to window 1 - "event" is a reference to this chanel.
-    console.log(`width ${arg.winWidth} x ${arg.winHeight}`);
+    // console.log(`width ${arg.winWidth} x ${arg.winHeight}`);
     window1.setSize(arg.winWidth, arg.winHeight);
   });
   ipcMain.on("Exit", (event, arg) => {

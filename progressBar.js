@@ -102,9 +102,12 @@ btnNext.addEventListener("click", (event) => {
   if (item <= presenterDataLen && item != null) {
     ipcRenderer.send("nameMsg2", array);
     clearInterval(id);
+    progress.setAttribute("data-label", 0);
   } else {
     progress.value = 0;
   }
+  item = null;
+  showName.innerHTML = "";
   clearTimeout(timeoutMyOswego);
 });
 ipcRenderer.on("nameReply", (event, arg) => {
