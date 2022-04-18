@@ -29,7 +29,7 @@ var error120 = new Audio("./sounds/error 120.wav");
 
 windowTopBar.windowTopBar();
 ipcRenderer.on("message", function (event, arg) {
-  // console.log(`message=${arg}`);
+  // //consolele.log(`message=${arg}`);
   document.getElementById("msg").textContent = "Msg: " + arg;
   window.setTimeout(clearMsg, 10000);
 });
@@ -52,7 +52,7 @@ ipcRenderer.on("forWin2", function (event, arg) {
       clearTimeout(timeoutMyOswego);
       StartTimer();
       document.getElementById("countdown").innerHTML = presenterData.setTime;
-      // console.log(`presenterData.setTime ${presenterData.setTime}`);
+      // //consolele.log(`presenterData.setTime ${presenterData.setTime}`);
       dirCount = "down";
       sign = " ";
       document.getElementById("countdown").style.color = "black";
@@ -61,13 +61,13 @@ ipcRenderer.on("forWin2", function (event, arg) {
     });
   }
 });
-console.log("I'm Window2");
+//consolele.log("I'm Window2");
 function getSeconds(time) {
   var ts = time.split(":");
   return Date.UTC(1970, 0, 1, ts[0], ts[1], ts[2]) / 1000;
 }
 function StartTimer() {
-  // console.log(`presenterData ${JSON.stringify(presenterData)}`);
+  // //consolele.log(`presenterData ${JSON.stringify(presenterData)}`);
   setTime = getSeconds(presenterData.setTime);
   progress.value = 0;
   progress.max = setTime;
@@ -79,7 +79,7 @@ function frame() {
   progress.value = timeInSec;
   procent = parseInt((timeInSec / progress.max) * 100);
   progress.setAttribute("data-label", procent);
-  // console.log(`procent=${procent}`);
+  // //consolele.log(`procent=${procent}`);
   if (procent > 80 && sound80) {
     ding75.play();
     sound80 = false;
@@ -95,10 +95,10 @@ function frame() {
   }
 }
 btnNext.addEventListener("click", (event) => {
-  console.log("click");
+  //consolele.log("click");
   setSound();
   let array = [timeInSec, procent, item];
-  console.log(`item=${item} presenterDataLen=${presenterDataLen} `);
+  //consolele.log(`item=${item} presenterDataLen=${presenterDataLen} `);
   if (item <= presenterDataLen && item != null) {
     ipcRenderer.send("nameMsg2", array);
     clearInterval(id);
@@ -108,7 +108,7 @@ btnNext.addEventListener("click", (event) => {
   clearTimeout(timeoutMyOswego);
 });
 ipcRenderer.on("nameReply", (event, arg) => {
-  console.log(` name reply arg ${JSON.stringify(arg)}`); // why/what is not right..
+  //consolele.log(` name reply arg ${JSON.stringify(arg)}`); // why/what is not right..
 });
 function countdown() {
   time = document.getElementById("countdown").innerHTML;
@@ -159,7 +159,7 @@ function secondsToTime(secs) {
 window.addEventListener(
   "focus",
   (event) => {
-    console.log("focus in");
+    //consolele.log("focus in");
     document.getElementById("linia").style.border = "#3dcd58 solid 2px";
   },
   true
@@ -167,7 +167,7 @@ window.addEventListener(
 window.addEventListener(
   "blur",
   (event) => {
-    console.log("focus out");
+    //consolele.log("focus out");
     document.getElementById("linia").style.border = "#3dcd58  solid 1px";
   },
   true

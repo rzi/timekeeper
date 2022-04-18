@@ -110,7 +110,7 @@ display: inline;
 }
 #linia{
   width:100%;
-  border: #3dcd58 solid 1px;
+  border: rgb(61, 205, 88) solid 1px;
 }
 #resultTable{
   padding-left: 20px;
