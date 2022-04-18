@@ -29,9 +29,7 @@ if (!fs.existsSync(absolutePath)) {
 } else {
   readTextFile(absolutePath, function (text) {
     var data = JSON.parse(text);
-    console.log(`dane: ${JSON.stringify(data)}`);
     const nbOfItems = data.length;
-    console.log(`data0 ${nbOfItems}`);
     createPresenters(parseInt(nbOfItems), data);
     copyData = [...data];
     document.getElementById("nbPresenters").textContent = copyData.length;
@@ -42,9 +40,7 @@ addConferenceName.addEventListener("change", function () {
   document.getElementById("addConferenceName").value = this.value;
 });
 btnAddP.addEventListener("click", function (e) {
-  console.log(`copyData: ${JSON.stringify(copyData)}`);
   var nbOfObj = copyData.length;
-  console.log(`copyDataLenght: ${nbOfObj}`);
   const addName = document.getElementById("addName").value;
   const setTime = document.getElementById("addTime").value;
   conferenceName = document.getElementById("addConferenceName").value;
@@ -56,7 +52,6 @@ btnAddP.addEventListener("click", function (e) {
     setTime: setTime,
     conferenceName: conferenceName,
   });
-  console.log(`copyData2: ${JSON.stringify(copyData)}`);
   writeToJson();
   //refresh
   location.reload();
@@ -87,28 +82,20 @@ function readTextFile(file, callback) {
 function createListenerforP() {
   const p_array = document.getElementsByTagName("p");
   const count = p_array.length;
-  // console.log(`count ${count}`);
-  //loop through a list of elements.
   for (let i = 0; i < count; i++) {
     const p = p_array[i];
     p.addEventListener("click", function (e) {
       if (e.target && e.target.nodeName == "P" && e.target.id.length) {
         const el = copyData[i];
         divNb = e.target.id;
-        console.log(`id=${divNb}`);
         for (j = 0; j < copyData.length; j++) {
-          // console.log(
-          //   `copyData[i].id=${copyData[j].id} e.target.id=${e.target.id}`
-          // );
           if (copyData[j].id == e.target.id) {
             document.getElementById(j).style.fontWeight = "bold";
             document.getElementById(j).style.backgroundColor = "yellow";
-            // console.log(`bold divNb=${divNb}`);
             marked = j;
           } else {
             document.getElementById(j).style.fontWeight = "normal";
             document.getElementById(j).style.backgroundColor = "white";
-            // console.log("normal");
           }
         }
       }
@@ -150,7 +137,6 @@ del.addEventListener("click", function () {
     // delete
     for (let i = 0; i < copyData.length; i++) {
       const el = copyData[i];
-      console.log(`el=${el}`);
       if (el.id == marked) {
         copyData.splice(i, 1);
         writeToJson();
@@ -201,20 +187,14 @@ editSave.addEventListener("click", function () {
   var name = document.getElementById("editPresenterName").value;
   var setTime = document.getElementById("editTime").value;
   for (i = 0; i < copyData.length; i++) {
-    // console.log(`copyData[i].id= ${copyData[i].id} , id=${id} i=${i}`);
     if (copyData[i].id == id) {
       copyData[i].id = Number(id);
       copyData[i].name = name;
       copyData[i].setTime = setTime;
-      // console.log(`id ${copyData[i].id}
-      // name= ${copyData[i].name}
-      // setTime= ${copyData[i].setTime}
-      // `);
     }
   }
   // Write to JSON
   writeToJson();
   //refresh
   location.reload();
-  console.log("saved");
 });

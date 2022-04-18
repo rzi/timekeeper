@@ -20,22 +20,22 @@ if (!fs.existsSync(absolutePath)) {
 } //else{
 readText.readText(absolutePath, function (text) {
   var data = JSON.parse(text);
-  console.log(`dane: ${JSON.stringify(data)}`);
+  ////consolele.log(`dane: ${JSON.stringify(data)}`);
   const nbOfItems = data.length;
-  console.log(`data0 ${nbOfItems}`);
+  //consolele.log(`data0 ${nbOfItems}`);
   presenters = [...data];
-  console.log(`nb of presenters ${presenters.length}`);
+  //consolele.log(`nb of presenters ${presenters.length}`);
   createPresenters.createPresenters(presenters);
 });
 //}
 if (!fs.existsSync(absolutePathResults)) {
   fs.writeFile(absolutePathResults, "", function (err) {
     if (err) throw err;
-    console.log("File is created successfully.");
+    //consolele.log("File is created successfully.");
   });
 }
 ipcRenderer.on("nameReply", (event, arg) => {
-  console.log(` name reply arg ${JSON.stringify(arg)}`); // why/what is not right..
+  //consolele.log(` name reply arg ${JSON.stringify(arg)}`); // why/what is not right..
 });
 let btnSettings = document.getElementById("btnSettings");
 btnSettings.addEventListener("click", function () {
@@ -53,7 +53,7 @@ btnExit.addEventListener("click", function () {
   ipcRenderer.send("Exit", "exit");
 });
 ipcRenderer.on("forWin1Stop", function (event, arg) {
-  console.log(`stop`);
+  //consolele.log(`stop`);
   var id = arg[2];
   var timeSpent = arg[0];
   var resultProcent = arg[1];
@@ -66,7 +66,7 @@ ipcRenderer.on("forWin1Stop", function (event, arg) {
   refreshView.refreshView("main1");
 });
 ipcRenderer.on("forWin1", function (event, arg) {
-  console.log(`from win1  ${arg}`);
+  //consolele.log(`from win1  ${arg}`);
   var id = arg[2];
   var timeSpent = arg[0];
   var resultProcent = arg[1];
@@ -88,18 +88,18 @@ function currentTime1() {
   });
 }
 function updateResults(id) {
-  console.log(
-    ` results: ${results[id].id} , ${results[id].timeSpent}, ${
-      (results[id].resultProcent, results[id].conferenceName)
-    } `
-  );
+  // consolele.log(
+  //   ` results: ${results[id].id} , ${results[id].timeSpent}, ${
+  //     (results[id].resultProcent, results[id].conferenceName)
+  //   } `
+  // );
   var index = "S" + String(id);
-  console.log(`i ${id}  timespent   ${results[id].timeSpent}`);
+  //consolele.log(`i ${id}  timespent   ${results[id].timeSpent}`);
   document.getElementById(`R${id}`).style.visibility = "visible";
   document.getElementById(index).innerHTML = results[id].resultProcent + "%";
   var indexa = "Sa" + String(id);
-  console.log(`indexa   ${indexa}`);
-  console.log(`results[i]a   ${results[id].timeSpent}`);
+  //consolele.log(`indexa   ${indexa}`);
+  //consolele.log(`results[i]a   ${results[id].timeSpent}`);
   document.getElementById(indexa).innerHTML = Number(
     results[id].timeSpent / 60
   ).toFixed(1);
@@ -114,7 +114,7 @@ function updateResults(id) {
   record.push(results[id].timeSpent);
   record.push(results[id].resultProcent);
   record.push(presenters[id].conferenceName);
-  console.log(`record ${record}`);
+  //consolele.log(`record ${record}`);
   var data = fs.readFileSync(absolutePathResults).toString().split("\n");
   data.splice(0, 0, record);
   var text = data.join("\n");
@@ -123,7 +123,7 @@ function updateResults(id) {
   });
 }
 function nextAction(id) {
-  console.log(`before id ${id}, result.len ${results.length}`);
+  //consolele.log(`before id ${id}, result.len ${results.length}`);
   var nextId = Number(id) + 1;
   if (presenters.length > nextId) {
     ipcRenderer.send("nameMsg", nextId);
@@ -143,15 +143,15 @@ hamburger.addEventListener("click", handleClick);
 function changeImage(id) {
   var img = document.getElementsByTagName("img")[id + 1].getAttribute("name");
   var images = document.getElementsByTagName("image");
-  console.log(`image ${images} id ${id} img ${img}`);
+  //consolele.log(`image ${images} id ${id} img ${img}`);
   var nextId = Number(id) + 1;
   if (img == `play`) {
-    console.log(`jestem w if `);
+    //consolele.log(`jestem w if `);
     images[
       id
     ].innerHTML = `<img name = "stop" src= ./photos/button_img3a-red.png>`;
   } else if (img == `stop`) {
-    console.log(`jestem w else `);
+    //consolele.log(`jestem w else `);
     images[
       id
     ].innerHTML = `<img name = "play"  src= ./photos/button_img2a-green.png>`;
@@ -175,6 +175,6 @@ function objToString(obj) {
 }
 function btnSend() {
   var msg = document.getElementById("msg").value;
-  console.log(`msg=${msg} `);
+  //consolele.log(`msg=${msg} `);
   ipcRenderer.send("message", msg);
 }

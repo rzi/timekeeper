@@ -1,6 +1,6 @@
 const fs = require("fs");
 var refreshView = require("./refreshView");
-const  windowTopBar  = require("./windowTopBar");
+const windowTopBar = require("./windowTopBar");
 const hamburger = document.querySelector(".hamburger");
 const nav = document.querySelector(".navigation");
 const btnPrev = document.getElementById("btnPrev");
@@ -15,7 +15,7 @@ loadTable();
 function clickPrev() {
   if (currentPage > 1) {
     currentPage--;
-    console.log(`currentPage ${currentPage}`);
+    //consolele.log(`currentPage ${currentPage}`);
     document.getElementById(
       "pagination"
     ).innerHTML = ` ${currentPage} / ${pag} `;
@@ -26,7 +26,7 @@ function clickPrev() {
 function clickNext() {
   if (currentPage < pag) {
     currentPage++;
-    console.log(`currentPage ${currentPage}`);
+    //consolele.log(`currentPage ${currentPage}`);
     document.getElementById(
       "pagination"
     ).innerHTML = ` ${currentPage} / ${pag} `;
@@ -62,29 +62,29 @@ function loadTable() {
     var td;
     var rows = file.split("\n").reverse();
     var rowsLen = rows.length;
-    console.log(`rowsLen ${rowsLen}`);
-    if (rowsLen<paginationNb) paginationNb=rowsLen;
-    console.log(`paginationNb=${paginationNb}`)
+    //consolele.log(`rowsLen ${rowsLen}`);
+    if (rowsLen < paginationNb) paginationNb = rowsLen;
+    //consolele.log(`paginationNb=${paginationNb}`)
     pag = Math.ceil(rowsLen / paginationNb);
-    console.log(`panination ${currentPage} / ${pag}`);
+    //consolele.log(`panination ${currentPage} / ${pag}`);
     document.getElementById(
       "pagination"
     ).innerHTML = ` ${currentPage} / ${pag} `;
-    for (var a = 0; a <= paginationNb-1; a++) {
-      console.log(`LoopPaginationNb=${paginationNb}`)
+    for (var a = 0; a <= paginationNb - 1; a++) {
+      //consolele.log(`LoopPaginationNb=${paginationNb}`)
       var tbodyTr = document.createElement("tr");
-      console.log(`rows ${(currentPage - 1) * paginationNb + a}`)
+      //consolele.log(`rows ${(currentPage - 1) * paginationNb + a}`)
       var myRow = rows[(currentPage - 1) * paginationNb + a];
-      if (!(myRow==undefined )) {
+      if (!(myRow == undefined)) {
         for (var j = 0; j < 6; j++) {
-          console.log(`myRowA ${myRow} j=${j} a=${a}`);
+          //consolele.log(`myRowA ${myRow} j=${j} a=${a}`);
           myCol = myRow.toString().split(",");
-          if (myCol[j]==""  || myCol[j]==undefined) {
-          }else{
+          if (myCol[j] == "" || myCol[j] == undefined) {
+          } else {
             tbodyTd[a] = document.createElement("td");
             if (j == 4) {
-              tbodyTd[a].innerText = Number((myCol[j]) / 60).toFixed(1);
-            } else if (j == 5){
+              tbodyTd[a].innerText = Number(myCol[j] / 60).toFixed(1);
+            } else if (j == 5) {
               tbodyTd[a].innerText = myCol[j] + "%";
             } else {
               tbodyTd[a].innerText = myCol[j];
@@ -110,6 +110,6 @@ function btnExit() {
   location.href = "index.html";
 }
 // window dimensions
-window.addEventListener('DOMContentLoaded', (event) => {
-  refreshView.refreshView("main1")
+window.addEventListener("DOMContentLoaded", (event) => {
+  refreshView.refreshView("main1");
 });
