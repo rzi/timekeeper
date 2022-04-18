@@ -39,6 +39,7 @@ function loadTable() {
     var theadData = [
       "Date",
       "Time",
+      "Name",
       "Presenter",
       "Set time",
       "Result [min]",
@@ -76,16 +77,22 @@ function loadTable() {
       //consolele.log(`rows ${(currentPage - 1) * paginationNb + a}`)
       var myRow = rows[(currentPage - 1) * paginationNb + a];
       if (!(myRow == undefined)) {
-        for (var j = 0; j < 6; j++) {
+        for (var j = 0; j < 7; j++) {
           //consolele.log(`myRowA ${myRow} j=${j} a=${a}`);
           myCol = myRow.toString().split(",");
           if (myCol[j] == "" || myCol[j] == undefined) {
           } else {
             tbodyTd[a] = document.createElement("td");
-            if (j == 4) {
-              tbodyTd[a].innerText = Number(myCol[j] / 60).toFixed(1);
+            if (j == 2) {
+              tbodyTd[a].innerText = myCol[6];
+            } else if (j == 3) {
+              tbodyTd[a].innerText = myCol[2];
+            } else if (j == 4) {
+              tbodyTd[a].innerText = myCol[3];
             } else if (j == 5) {
-              tbodyTd[a].innerText = myCol[j] + "%";
+              tbodyTd[a].innerText = Number(myCol[4] / 60).toFixed(1);
+            } else if (j == 6) {
+              tbodyTd[a].innerText = myCol[5] + "%";
             } else {
               tbodyTd[a].innerText = myCol[j];
             }
