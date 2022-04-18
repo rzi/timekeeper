@@ -39,7 +39,6 @@ if (!fs.existsSync(absolutePath)) {
 }
 addConferenceName.addEventListener("change", function () {
   conferenceName = this.value;
-  console.log(` conferenceName ${conferenceName}`);
   document.getElementById("addConferenceName").value = this.value;
 });
 btnAddP.addEventListener("click", function (e) {
@@ -117,10 +116,14 @@ function createListenerforP() {
   }
 }
 function writeToJson() {
-  fs.writeFile(absolutePath, String(JSON.stringify(copyData)), function (err) {
-    if (err) throw err;
-    console.log("Saved!");
-  });
+  fs.writeFileSync(
+    absolutePath,
+    String(JSON.stringify(copyData)),
+    function (err) {
+      if (err) throw err;
+      console.log("Saved!");
+    }
+  );
 }
 function btnExit() {
   if (copyData.length) {
@@ -147,12 +150,18 @@ del.addEventListener("click", function () {
     // delete
     for (let i = 0; i < copyData.length; i++) {
       const el = copyData[i];
+      console.log(`el=${el}`);
       if (el.id == marked) {
         copyData.splice(i, 1);
         writeToJson();
         marked = null;
       }
     }
+    //renumering id
+    for (let j = 0; j < copyData.length; j++) {
+      copyData[j].id = j;
+    }
+    writeToJson();
     location.reload();
   }
 });
