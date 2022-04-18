@@ -16,6 +16,8 @@ var edit = document.getElementById("edit");
 var del = document.getElementById("delete");
 addConferenceName.value = localStorage.getItem("conferenceName");
 const absolutePath = path.resolve("./", "presenters.json");
+console.log(`absolutePath=${absolutePath}`)
+console.log(path.dirname);
 if (!fs.existsSync(absolutePath)) {
   fs.writeFileSync(
     "presenters.json",

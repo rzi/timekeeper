@@ -15,7 +15,7 @@
         }
       ]
     },
-    "icon": "/photos/timer.png",
+    "icon": "./photos/timer.png",
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
@@ -25,7 +25,8 @@
   "scripts": {
     "start": "electron .",
     "build-all": "electron-builder -mwl",
-    "build-w": "electron-builder -w"
+    "build-w": "electron-builder -w",
+    "build-m":"electron-builder -m"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
