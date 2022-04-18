@@ -4,9 +4,9 @@ function createPresenters(data) {
   var sumSetTime = 0;
   for (i = 0; i < data.length; i++) {
     var timetoTime = setTimeToTime.setTimeToTime(data[i].setTime);
-    console.log(`timeToTime ${timetoTime}`);
+    //consolele.log(`timeToTime ${timetoTime}`);
     sumSetTime = sumSetTime + timetoTime;
-    // console.log( `sum ${sumSetTime}`)
+    // //consolele.log( `sum ${sumSetTime}`)
     document.getElementById("conferenceName").textContent =
       `Conference name: ` +
       data[i].conferenceName +
@@ -44,7 +44,7 @@ function createPresenters(data) {
     var t5 = document.createTextNode(` minutes. `);
     para2.appendChild(t5);
     var nb = "div" + i;
-    console.log(`div ${nb}`);
+    //consolele.log(`div ${nb}`);
     document.getElementById("presenters").appendChild(div);
     document.getElementById(nb).appendChild(btn);
     document.getElementById(nb).appendChild(para);
@@ -55,19 +55,19 @@ function createPresenters(data) {
 function createListenerforP(data) {
   const p_array = document.getElementsByTagName("p");
   const count = p_array.length;
-  // console.log(`count ${count}`);
+  // //consolele.log(`count ${count}`);
   //loop through a list of elements.
   for (let i = 0; i < count; i++) {
     const p = p_array[i];
     p.addEventListener("click", function (e) {
       if (e.target && e.target.nodeName == "P" && e.target.id.length) {
-        console.log("Reset item ", e.target.id.replace("post-"));
+        //consolele.log("Reset item ", e.target.id.replace("post-"));
         var pId = e.target.id;
         for (let i = 0; i < data.length; i++) {
           const el = data[i];
           if (el.id == e.target.id) {
             data.splice(i, 1);
-            console.log(`data ${JSON.stringify(data)}`);
+            //consolele.log(`data ${JSON.stringify(data)}`);
             // writeToJson();
           }
         }
@@ -78,17 +78,17 @@ function createListenerforP(data) {
 }
 function btnFn(btn) {
   var id = Number(btn) + 1;
-  console.log(`id:${id}`);
+  //consolele.log(`id:${id}`);
   var img = document.getElementsByTagName("img")[id].getAttribute("name");
-  console.log(`image ${img}`);
+  //consolele.log(`image ${img}`);
   var images = document.getElementsByTagName("image");
   if (img == `play`) {
-    console.log(`jestem w if `);
+    //consolele.log(`jestem w if `);
     images[
       btn
     ].innerHTML = `<img name = "stop" src= ./photos/button_img3a-red.png>`;
   } else {
-    console.log(`jestem w else `);
+    //consolele.log(`jestem w else `);
     images[
       btn
     ].innerHTML = `<img name = "play"  src= ./photos/button_img2a-green.png>`;
