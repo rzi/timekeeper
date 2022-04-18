@@ -15,18 +15,17 @@ const addConferenceName = document.getElementById("addConferenceName");
 var edit = document.getElementById("edit");
 var del = document.getElementById("delete");
 addConferenceName.value = localStorage.getItem("conferenceName");
-// console.log(`conferenceName ${conferenceName}`);
 const absolutePath = path.resolve("./", "presenters.json");
-
 if (!fs.existsSync(absolutePath)) {
-  fs.writeFile(
+  fs.writeFileSync(
     "presenters.json",
-    '[{"id":0,"name":"Presenter1 ","active":true,"setTime":"00:01:00"},{"id":1,"name":"Presenter2 ","active":true,"setTime":"00:02:00"},{"id":2,"name":"Presenter3 ","active":true,"setTime":"00:03:00"}]',
+    '[{"id":0,"name":"Presenter1 ","active":true,"setTime":"00:01:00","conferenceName":"test"},{"id":1,"name":"Presenter2 ","active":true,"setTime":"00:02:00","conferenceName":"test"},{"id":2,"name":"Presenter3 ","active":true,"setTime":"00:03:00","conferenceName":"test"}]',
     function (err) {
       if (err) throw err;
       console.log("File is created successfully.");
     }
   );
+  location.href = "index.html";
 } else {
   readTextFile(absolutePath, function (text) {
     var data = JSON.parse(text);
@@ -59,7 +58,6 @@ btnAddP.addEventListener("click", function (e) {
     conferenceName: conferenceName,
   });
   console.log(`copyData2: ${JSON.stringify(copyData)}`);
-  // Write to JSON
   writeToJson();
   //refresh
   location.reload();

@@ -16,11 +16,12 @@ function createWindow1() {
     y: 0,
     maximizable: false,
     frame: false,
+    icon: __dirname + "/photos/timer.png",
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
-      devTools: false,
+      devTools: true,
     },
   });
   window1.loadURL(`file://${__dirname}/index.html`);
@@ -45,6 +46,7 @@ function createWindow2() {
     alwaysOnTop: true,
     maximizable: false,
     useContentSize: true,
+    icon: __dirname + "/photos/timer.png",
     // transparent: true,
     //autoHideMenuBar: true,
     // titleBarOverlay: true,
