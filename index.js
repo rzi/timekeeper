@@ -65,6 +65,10 @@ ipcRenderer.on("forWin1Stop", function (event, arg) {
   updateResults(id);
   refreshView.refreshView("main1");
 });
+ipcRenderer.on("focus", function (event, arg) {
+  document.getElementById("btnSend").focus();
+  //console.log("focus Window1");
+});
 ipcRenderer.on("forWin1", function (event, arg) {
   //consolele.log(`from win1  ${arg}`);
   var id = arg[2];

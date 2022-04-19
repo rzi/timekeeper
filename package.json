@@ -17,8 +17,7 @@
     },
     "icon": "./photos/timer.png",
     "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true,
+      "oneClick": true,
       "createStartMenuShortcut": true
     }
   },

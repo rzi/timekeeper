@@ -33,6 +33,11 @@ ipcRenderer.on("message", function (event, arg) {
   document.getElementById("msg").textContent = "Msg: " + arg;
   window.setTimeout(clearMsg, 10000);
 });
+ipcRenderer.on("focus", function (event, arg) {
+  // //consolele.log(`message=${arg}`);
+  document.getElementById("linia").style.border = "#3dcd58 solid 2px";
+  document.getElementById("btnNext").focus();
+});
 ipcRenderer.on("forWin2", function (event, arg) {
   if (parseInt(arg) == item) {
     var tempAray = [timeInSec, procent, item];
@@ -164,6 +169,7 @@ window.addEventListener(
   (event) => {
     //consolele.log("focus in");
     document.getElementById("linia").style.border = "#3dcd58 solid 2px";
+    document.getElementById("btnNext").focus();
   },
   true
 );

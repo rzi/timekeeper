@@ -16,7 +16,7 @@ var edit = document.getElementById("edit");
 var del = document.getElementById("delete");
 addConferenceName.value = localStorage.getItem("conferenceName");
 const absolutePath = path.resolve("./", "presenters.json");
-console.log(`absolutePath=${absolutePath}`)
+console.log(`absolutePath=${absolutePath}`);
 console.log(path.dirname);
 if (!fs.existsSync(absolutePath)) {
   fs.writeFileSync(
@@ -124,6 +124,7 @@ function btnExit() {
 // window dimensions
 window.addEventListener("DOMContentLoaded", (event) => {
   refreshView.refreshView("main1");
+  document.getElementById("addName").focus();
 });
 function objToString(obj) {
   let str = "";
@@ -170,6 +171,7 @@ btn.onclick = function () {
     document.getElementById("editId").value = copyData[marked].id;
     document.getElementById("editPresenterName").value = copyData[marked].name;
     document.getElementById("editTime").value = copyData[marked].setTime;
+    document.getElementById("editPresenterName").focus();
   }
 };
 // When the user clicks on <span> (x), close the modal

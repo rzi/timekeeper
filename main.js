@@ -21,13 +21,18 @@ function createWindow1() {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
-      devTools: true,
+      devTools: false,
     },
   });
   window1.loadURL(`file://${__dirname}/index.html`);
   window1.webContents.openDevTools();
-  // console.log("size:", window1.getSize());
-  // console.log("bounds:", window1.getBounds());
+  window1.on("focus", function () {
+    // console.log("Window1.focus");
+    // console.log(
+    //   `Visible ${window2.isVisible()} is focus ${window2.isFocused()}`
+    // );
+    window1.webContents.send("focus", { status: 1 });
+  });
   window1.on("closed", function () {
     window1 = null;
   });
@@ -63,17 +68,14 @@ function createWindow2() {
     window2 = null;
   });
   window2.on("focus", function () {
-    // console.log("focus")
+    //console.log("focus");
     // console.log (`Visible ${window2.isVisible()} is focus ${window2.isFocused()}`)
-    window2.show();
-    window2.focus();
-    window2.setSize(700, 60);
-    //document.getElementById("linia").style.borderTopColor='red';
+    window2.webContents.send("focus", { status: 1 });
   });
-  // window2.on("blur", function(){
-  //   console.log("blur")
-  //   console.log (`Visible ${window2.isVisible()} is focus ${window2.isFocused()}`)
-  // });
+  window2.on("blur", function () {
+    // console.log("blur");
+    // window2.blur();
+  });
   return window2;
 }
 // This method will be called when Electron has finished
