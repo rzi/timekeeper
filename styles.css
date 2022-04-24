@@ -90,6 +90,8 @@ display: inline;
 }
 .title{
   padding-left: -50px;
+  text-align: center;
+  width: 100%;
 }
 .main1{
   background-color: white;
