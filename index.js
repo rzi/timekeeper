@@ -145,7 +145,7 @@ const handleClick = () => {
 };
 hamburger.addEventListener("click", handleClick);
 function changeImage(id) {
-  var img = document.getElementsByTagName("img")[id + 1].getAttribute("name");
+  var img = document.getElementsByTagName("img")[id].getAttribute("name");
   var images = document.getElementsByTagName("image");
   //consolele.log(`image ${images} id ${id} img ${img}`);
   var nextId = Number(id) + 1;
