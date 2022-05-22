@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' "
+    />
+    <link href="./styles.css" rel="stylesheet" />
+    <title>Statistic</title>
+  </head>
+  <body>
+    <div id="main1" class="main1">
+      <nav>
+        <div class="header">
+          <div class="main_header" id="green_banner">
+            <span></span>
+            <div class="appImage">
+              <img
+                src="./photos/SE_logo_white_.jpg"
+                alt="support@Schneider"
+                role="presentation"
+              />
+            </div>
+          </div>
+          <div class="title">
+            <h2>Statistic</h2>
+          </div>
+          <div class="MenuButton">
+            <button id="btnExit2" onclick="btnExit()">X</button>
+          </div>
+        </div>
+      </nav>
+      <div id="stat">
+        <h1> Statistic</h1> 
+        <h3>What?</h3>
+        <h3>Why?</h3>
+        <h3>When?</h3>
+        <h3>...</h3>
+
+      </div>
+      <br />
+      <button hidden type="button" id="btnSettings">Settings</button>
+    </div>
+    <script src="./stat.js"></script>
+  </body>

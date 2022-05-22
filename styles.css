@@ -337,3 +337,7 @@ nav{
   text-decoration: none;
   cursor: pointer;
 }
+
+#stat{
+  margin-left: 20px;
+}
